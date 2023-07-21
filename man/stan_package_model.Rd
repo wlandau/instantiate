@@ -39,7 +39,8 @@ was installed. In this case, the path to CmdStan is not inside
 and does not depend on the current value of
 \code{Sys.getenv("CMDSTAN")} at runtime.
 \item \code{"cmdstanr"}: Let the \code{cmdstanr::cmdstan_path()} decide where
-to look for CmdStan.
+to look for CmdStan. The \code{cmdstanr} package must be installed. If it
+is not installed, the function returns the empty string \code{""}.
 \item \code{""} (default): Try all 3 options in the order above to find a valid
 installed copy of CmdStan.
 }}

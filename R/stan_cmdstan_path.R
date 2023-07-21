@@ -22,7 +22,8 @@
 #'     and does not depend on the current value of
 #'     `Sys.getenv("CMDSTAN")` at runtime.
 #'   3. `"cmdstanr"`: Let the `cmdstanr::cmdstan_path()` decide where
-#'     to look for CmdStan.
+#'     to look for CmdStan. The `cmdstanr` package must be installed. If it
+#'     is not installed, the function returns the empty string `""`.
 #'   4. `""` (default): Try all 3 options in the order above to find a valid
 #'     installed copy of CmdStan.
 #' @examples
@@ -42,10 +43,13 @@ stan_cmdstan_path <- function(
     out <- .Call(c_cmdstan_path)
   }
   if (identical(install, "cmdstanr") || path_next(install, out)) {
-    stan_assert_cmdstanr()
-    out <- tryCatch(
-      suppressWarnings(cmdstanr::cmdstan_path()),
-      error = function(e) ""
+    out <- if_any(
+      rlang::is_installed("cmdstanr"),
+      tryCatch(
+        suppressWarnings(cmdstanr::cmdstan_path()),
+        error = function(e) ""
+      ),
+      ""
     )
   }
   # nocov end
