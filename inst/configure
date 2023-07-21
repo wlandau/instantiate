@@ -2,7 +2,7 @@
 # Delete or reconfigure the -falign-functions=1 line below if you get
 # the error "Default alignment for functions differs in PCH file vs. current file".
 CXXFLAGS="$CXXFLAGS -falign-functions=1"
-$R_HOME/bin/Rscript --vanilla -e "instantiate::stan_package_compile()"
+$R_HOME/bin/Rscript -e "instantiate::stan_package_compile()"
 if [ $? -ne 0 ]; then
   echo "Could not compile Stan models." >&2
   exit 1
