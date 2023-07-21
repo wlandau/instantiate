@@ -37,23 +37,16 @@ stan_cmdstan_path <- function(
   install <- stan_cmdstan_install(cmdstan_install)
   if (identical(install, "internal") || identical(install, "")) {
     parent <- system.file("cmdstan", package = "instantiate", mustWork = FALSE)
-    out <- file.path(parent, list.files(parent))
+    out <- file.path(parent, list.files(parent)) %||% ""
   }
   if (identical(install, "fixed") || path_next(install, out)) {
     out <- .Call(c_cmdstan_path)
   }
   if (identical(install, "cmdstanr") || path_next(install, out)) {
-    out <- if_any(
-      rlang::is_installed("cmdstanr"),
-      tryCatch(
-        suppressWarnings(cmdstanr::cmdstan_path()),
-        error = function(e) ""
-      ),
-      ""
-    )
+    out <- cmdstanr_path()
   }
   # nocov end
-  out %||% ""
+  out
 }
 
 path_next <- function(install, out) {

@@ -60,8 +60,10 @@ stan_package_compile <- function(
     stan_message("No Stan models found.")
     return(invisible())
   }
-  path_old <- cmdstanr::cmdstan_path()
-  on.exit(suppressMessages(cmdstanr::set_cmdstan_path(path = path_old)))
+  path_old <- cmdstanr_path()
+  if (cmdstan_valid(path_old)) {
+    on.exit(suppressMessages(cmdstanr::set_cmdstan_path(path = path_old)))
+  }
   path_new <- stan_cmdstan_path(cmdstan_install = cmdstan_install)
   suppressMessages(cmdstanr::set_cmdstan_path(path = path_new))
   lapply(

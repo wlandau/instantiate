@@ -9,10 +9,11 @@
 stan_cmdstan_exists <- function(
   cmdstan_install = Sys.getenv("CMDSTAN_INSTALL")
 ) {
-  path <- tryCatch(
-    stan_cmdstan_path(cmdstan_install = cmdstan_install),
-    error = function(condition) ""
-  )
+  path <- stan_cmdstan_path(cmdstan_install = cmdstan_install)
+  cmdstan_valid(path)
+}
+
+cmdstan_valid <- function(path) {
   length(path) > 0L &&
     nzchar(path) &&
     dir.exists(path) &&
