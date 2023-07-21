@@ -169,6 +169,7 @@ settings under `with:` in `setup-r`):
         shell: Rscript {0}
         run: |
           install.packages("cmdstanr")
+          cmdstanr::check_cmdstan_toolchain(fix = TRUE)
           cmdstanr::install_cmdstan()
 ```
 

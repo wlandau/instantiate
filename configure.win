@@ -2,3 +2,8 @@
 # Adapted from https://github.com/kevinushey/configure/blob/master/configure.win
 # under the MIT license
 "${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" inst/cmdstan.R
+if [ $? -ne 0 ]; then
+  echo "Could not install CmdStan." >&2
+  exit 1
+fi
+exit 0

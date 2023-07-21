@@ -40,8 +40,8 @@ jobs:
       - name: Install CmdStan
         shell: Rscript {0}
         run: |
-          cmdstanr::check_cmdstan_toolchain(fix = TRUE)
           install.packages("cmdstanr")
+          cmdstanr::check_cmdstan_toolchain(fix = TRUE)
           cmdstanr::install_cmdstan()
 
       - uses: r-lib/actions/setup-r-dependencies@v2
