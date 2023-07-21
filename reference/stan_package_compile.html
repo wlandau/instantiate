@@ -110,12 +110,9 @@ than usual.</p></dd>
 
 
 <dt>pedantic</dt>
-<dd><p>(logical) Should pedantic mode be turned on? The default is
-<code>FALSE</code>. Pedantic mode attempts to warn you about potential issues in your
-Stan program beyond syntax errors. For details see the <a href="https://mc-stan.org/docs/reference-manual/pedantic-mode.html" class="external-link"><em>Pedantic mode</em> chapter</a> in
-the Stan Reference Manual. <strong>Note:</strong> to do a pedantic check for a model
-without compiling it or for a model that is already compiled the
-<code><a href="https://mc-stan.org/cmdstanr/reference/model-method-check_syntax.html" class="external-link">$check_syntax()</a></code> method can be used instead.</p></dd>
+<dd><p>Logical of length 1, whether to activate pedantic
+mode when compiling the Stan models. See the <code>cmdstanr</code> documentation
+for details.</p></dd>
 
 
 <dt>include_paths</dt>
