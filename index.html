@@ -144,7 +144,7 @@
 <div class="section level2">
 <h2 id="internal-installation">Internal installation<a class="anchor" aria-label="anchor" href="#internal-installation"></a>
 </h2>
-<p>This approach installs <a href="https://mc-stan.org/users/interfaces/cmdstan" class="external-link"><code>CmdStan</code></a> inside the installed file system of <code>instantiate</code> when the <code>instantiate</code> package installs. This approach is useful for centrally maintained R installations where many users share a common set of R packages and system libraries, as is common in highly regulated industries. The procedure may be slower complete than the other options, but it is the least complicated when it works. Steps:</p>
+<p>This approach installs <a href="https://mc-stan.org/users/interfaces/cmdstan" class="external-link"><code>CmdStan</code></a> inside the installed file system of <code>instantiate</code> when the <code>instantiate</code> package installs. This approach is useful for centrally maintained R installations where many users share a common set of R packages and system libraries, as is common in highly regulated industries. The procedure may be slower complete than the other options, and it is not amenable to <a href="https://github.com/features/actions" class="external-link">GitHub Actions</a> workflows which upload R package libraries as archives, but it is the least complicated approach when it works. Steps:</p>
 <ol style="list-style-type: decimal">
 <li>Set the <code>CMDSTAN_INSTALL</code> environment variable to <code>"internal"</code>.</li>
 <li>Install <code>instantiate</code> using <code>install.packages("instantiate")</code> or similar.</li>
@@ -161,16 +161,33 @@
 <p>Beyond this point, you can change or unset the <code>CMDSTAN</code> environment variable without changing where <code>instantiate</code> looks for <a href="https://mc-stan.org/users/interfaces/cmdstan" class="external-link"><code>CmdStan</code></a>. To redirect <code>instantiate</code> to a different <a href="https://mc-stan.org/users/interfaces/cmdstan" class="external-link"><code>CmdStan</code></a> path, set <code>CMDSTAN</code> to the new path and then run <code>install.packages("instantiate")</code> again.</p>
 </div>
 <div class="section level2">
-<h2 id="cmdstanr-installation">cmdstanr installation<a class="anchor" aria-label="anchor" href="#cmdstanr-installation"></a>
+<h2 id="cmdstanr-installation">
+<code>cmdstanr</code> installation<a class="anchor" aria-label="anchor" href="#cmdstanr-installation"></a>
 </h2>
-<p>For maximum flexibility, <code>instantiate</code> can let <a href="https://mc-stan.org/cmdstanr/" class="external-link"><code>cmdstanr</code></a> control the path to <a href="https://mc-stan.org/users/interfaces/cmdstan" class="external-link"><code>CmdStan</code></a>. This choice may be suitable for personal installations for individual users. The easiest way to set this up is:</p>
+<p>For maximum flexibility, <code>instantiate</code> can let <a href="https://mc-stan.org/cmdstanr/" class="external-link"><code>cmdstanr</code></a> control the path to <a href="https://mc-stan.org/users/interfaces/cmdstan" class="external-link"><code>CmdStan</code></a>. This choice is the most practical approach for individual users and continuous integration workflows such as those on <a href="https://github.com/features/actions" class="external-link">GitHub Actions</a>. The easiest way to set this up is:</p>
 <ol style="list-style-type: decimal">
 <li>Unset the <code>CMDSTAN</code> environment variable.</li>
 <li>Install <code>instantiate</code> using <code>install.packages("instantiate")</code> or similar.</li>
 </ol>
 <!-- --><ol style="list-style-type: decimal">
-<li>is not strictly necessary if you set <code>CMDSTAN_INSTALL=cmdstanr</code> at runtime.</li>
+<li>is not strictly necessary if you set <code>CMDSTAN_INSTALL=cmdstanr</code> at runtime (after installation).</li>
 </ol>
+<p>To install <code>instantiate</code> as part of a <a href="https://github.com/r-lib/actions" class="external-link">GitHub Actions package check workflow</a>,</p>
+<ol style="list-style-type: decimal">
+<li>Generate your <a href="https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions" class="external-link">workflow YAML file</a> the usual way, e.g. <a href="https://usethis.r-lib.org/reference/github_actions.html" class="external-link"><code>use_github_action("check-standard")</code></a> for package checks or <a href="https://usethis.r-lib.org/reference/github_actions.html" class="external-link"><code>use_github_action("test-coverage")</code></a> for test coverage. See <a href="https://github.com/r-lib/actions" class="external-link uri">https://github.com/r-lib/actions</a> for a list of workflow archetypes.</li>
+<li>Add <code>extra-repositories: 'https://mc-stan.org/r-packages/'</code> under <code>with:</code> inside the <code>uses: r-lib/actions/setup-r</code> step. This is necessary while <a href="https://github.com/stan-dev/cmdstanr" class="external-link"><code>cmdstanr</code></a> is not on CRAN.</li>
+<li>Add a manual workflow step to after between <a href="https://github.com/r-lib/actions/tree/v2-branch/setup-r" class="external-link">R setup</a> and <a href="https://github.com/r-lib/actions/tree/v2-branch/setup-r-dependencies" class="external-link">package dependency setup</a> to install <a href="https://mc-stan.org/cmdstanr/" class="external-link"><code>cmdstanr</code></a> and <a href="https://mc-stan.org/users/interfaces/cmdstan" class="external-link"><code>CmdStan</code></a>.</li>
+</ol>
+<p>The inserted YAML may look like this (although typically with more settings under <code>with:</code> in <code>setup-r</code>):</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-lib/actions/setup-r@v2</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">extra-repositories</span><span class="kw">:</span><span class="at"> </span><span class="st">'https://mc-stan.org/r-packages/'</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install CmdStan</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">shell</span><span class="kw">:</span><span class="at"> Rscript {0}</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>          install.packages("cmdstanr")</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>          cmdstanr::install_cmdstan()</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="choosing-the-installation">Choosing the installation<a class="anchor" aria-label="anchor" href="#choosing-the-installation"></a>
@@ -186,11 +203,11 @@
 <h2 id="structure">Structure<a class="anchor" aria-label="anchor" href="#structure"></a>
 </h2>
 <p>Begin with an R package with one or more Stan model files inside the <code>inst/stan/</code> directory. <code><a href="reference/stan_package_create.html">stan_package_create()</a></code> is a convenient way to start.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/stan_package_create.html">stan_package_create</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"package_folder"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Example package named "example" created at "package_folder". Run stan_package_configure(path = "package_folder") so that the built-in Stan model will compile when the package installs.</span></span></code></pre></div>
 <p>At minimum the package file structure should look something like this:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html" class="external-link">dir_tree</a></span><span class="op">(</span><span class="st">"package_folder"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; package_folder</span></span>
 <span><span class="co">#&gt; ├── DESCRIPTION</span></span>
@@ -202,9 +219,9 @@
 <h2 id="configuration">Configuration<a class="anchor" aria-label="anchor" href="#configuration"></a>
 </h2>
 <p>Configure the package so the Stan models compile during installation. <code><a href="reference/stan_package_configure.html">stan_package_configure()</a></code> writes scripts <code>configure</code> and <code>configure.win</code> for this.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/stan_package_configure.html">stan_package_configure</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"package_folder"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/stan_package_configure.html">stan_package_configure</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"package_folder"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html" class="external-link">dir_tree</a></span><span class="op">(</span><span class="st">"package_folder"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; package_folder</span></span>
 <span><span class="co">#&gt; ├── DESCRIPTION</span></span>
@@ -218,14 +235,14 @@
 <h2 id="installation-1">Installation<a class="anchor" aria-label="anchor" href="#installation-1"></a>
 </h2>
 <p>Install the package at <code>package_folder</code> just like you would any other R package.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"package_folder"</span>, type <span class="op">=</span> <span class="st">"source"</span>, repos <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="models">Models<a class="anchor" aria-label="anchor" href="#models"></a>
 </h2>
 <p>A user can now run a model from the package without any additional compilation. See the documentation of <a href="https://mc-stan.org/cmdstanr/index.html" class="external-link"><code>CmdStanR</code></a> to learn how to use <a href="https://mc-stan.org/cmdstanr/index.html" class="external-link"><code>CmdStanR</code></a> model objects.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">example</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/stan_package_model.html">stan_package_model</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"bernoulli"</span>, package <span class="op">=</span> <span class="st">"example"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span> <span class="co"># CmdStanR model object</span></span>
@@ -263,19 +280,7 @@
 <span><span class="co">#&gt;   &lt;chr&gt;     &lt;num&gt;  &lt;num&gt; &lt;num&gt; &lt;num&gt;  &lt;num&gt;  &lt;num&gt; &lt;num&gt;    &lt;num&gt;    &lt;num&gt;</span></span>
 <span><span class="co">#&gt; 1 lp__     -8.15  -7.87  0.725 0.317 -9.60  -7.64   1.00    7365.    8498.</span></span>
 <span><span class="co">#&gt; 2 theta     0.333  0.324 0.130 0.134  0.137  0.563  1.00    6229.    7560.</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="development">Development<a class="anchor" aria-label="anchor" href="#development"></a>
-</h2>
-<ol style="list-style-type: decimal">
-<li>In your package <code>DESCRIPTION</code> file, list <a href="https://mc-stan.org/r-packages/" class="external-link uri">https://mc-stan.org/r-packages/</a> in the <code>Additional_repositories:</code> field (<a href="https://github.com/paul-buerkner/brms/blob/5c09251daabd5416e3d47004cc6c62816dc53cfa/DESCRIPTION#L95-L96" class="external-link">example in <code>brms</code></a>). This step is only necessary while <a href="https://mc-stan.org/cmdstanr/" class="external-link"><code>cmdstanr</code></a> is not yet on CRAN.</li>
-</ol>
-<!-- --><div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Additional_repositories<span class="sc">:</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    https<span class="sc">:</span><span class="er">//</span>mc<span class="sc">-</span>stan.org<span class="sc">/</span>r<span class="sc">-</span>packages<span class="sc">/</span></span></code></pre></div>
-<ol start="2" style="list-style-type: decimal">
-<li>In your package <code>DESCRIPTION</code> and <code>NAMESPACE</code> files, import the <code>instantiate</code> and functions such as <code><a href="reference/stan_package_model.html">stan_package_model()</a></code>.</li>
-<li>Write user-side statistical modeling functions which call the models in your package. Here is an example you might consider for the demo package above. Save the script below in a package source file such as <code>R/run_bernoulli_model.R</code>.</li>
-</ol>
+<p>You can write an exported user-side function in your R package to access the model. For example, you might store this code in a <code>R/model.R</code> file in the package:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @title Fit the Bernoulli model.</span></span>
 <span><span class="co">#' @export</span></span>
@@ -295,10 +300,21 @@
 <span>  <span class="va">fit</span> <span class="op">&lt;-</span> <span class="va">model</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>N <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
 <span>  <span class="va">fit</span><span class="op">$</span><span class="fu">summary</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<ol start="4" style="list-style-type: decimal">
+</div>
+<div class="section level2">
+<h2 id="development">Development<a class="anchor" aria-label="anchor" href="#development"></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>In your package <code>DESCRIPTION</code> file, list <a href="https://mc-stan.org/r-packages/" class="external-link uri">https://mc-stan.org/r-packages/</a> in the <code>Additional_repositories:</code> field (<a href="https://github.com/paul-buerkner/brms/blob/5c09251daabd5416e3d47004cc6c62816dc53cfa/DESCRIPTION#L95-L96" class="external-link">example in <code>brms</code></a>). This step is only necessary while <a href="https://mc-stan.org/cmdstanr/" class="external-link"><code>cmdstanr</code></a> is not yet on CRAN.</li>
+</ol>
+<!-- --><div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Additional_repositories<span class="sc">:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    https<span class="sc">:</span><span class="er">//</span>mc<span class="sc">-</span>stan.org<span class="sc">/</span>r<span class="sc">-</span>packages<span class="sc">/</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>In your package <code>DESCRIPTION</code> and <code>NAMESPACE</code> files, import the <code>instantiate</code> package and function <code><a href="reference/stan_package_model.html">stan_package_model()</a></code>.</li>
+<li>Write user-side statistical modeling functions which call the models in your package as mentioned above.</li>
 <li>
 <a href="https://mc-stan.org/users/interfaces/cmdstan" class="external-link"><code>CmdStan</code></a> is too big for <a href="https://cran.r-project.org" class="external-link">CRAN</a>, so <code>instantiate</code> will not be able to access it there. So if you plan to submit your package to CRAN, please skip the appropriate code in your examples, vignettes, and tests when <code><a href="reference/stan_cmdstan_exists.html">instantiate::stan_cmdstan_exists()</a></code> is <code>FALSE</code>. Explicit <code>if()</code> statements like the above one in the <a href="https://roxygen2.r-lib.org/" class="external-link"><code>roxygen2</code></a> <code>@examples</code> work for examples and vignettes. For tests, it is convenient to use <a href="https://testthat.r-lib.org/reference/skip.html" class="external-link"><code>testthat::skip_if_not()</code></a>, e.g. <code>skip_if_not(stan_cmdstan_exists())</code>.</li>
-<li>For <a href="https://devguide.ropensci.org/ci.html" class="external-link">continuous integration</a> (e.g. on <a href="https://github.com/r-lib/actions" class="external-link">GitHub Actions</a>), it is convenient to use internal installation for <a href="https://mc-stan.org/users/interfaces/cmdstan" class="external-link"><code>CmdStan</code></a>. Set <code>CMDSTAN_INSTALL: "internal"</code> in the <code>env:</code> section of your workflow YAML file.</li>
+<li>For <a href="https://devguide.ropensci.org/ci.html" class="external-link">continuous integration</a> (e.g. on <a href="https://github.com/r-lib/actions" class="external-link">GitHub Actions</a>), please use <a href="https://mc-stan.org/cmdstanr/" class="external-link"><code>cmdstanr</code></a>-based installation as explained above, and tweak your workflow YAML files as explained in that section.</li>
 <li>For general information on R package development, please consult the free online book <a href="https://r-pkgs.org/" class="external-link">R Packages (2e)</a> by <a href="https://github.com/hadley" class="external-link">Hadley Wickham</a> and <a href="https://github.com/jennybc" class="external-link">Jennifer Bryan</a>, as well as the official manual on <a href="https://cran.r-project.org/doc/manuals/R-exts.html" class="external-link">Writing R Extensions</a> by the R Core Team.</li>
 </ol>
 </div>
@@ -311,20 +327,20 @@
 <div class="section level1">
 <h1 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h1>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>To cite package ‘instantiate’ <span class="cf">in</span> publications use<span class="sc">:</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  Landau <span class="fu">WM</span> (<span class="dv">2023</span>). _instantiate<span class="sc">:</span> A Minimal CmdStan Client <span class="cf">for</span> R Packages_.</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  https<span class="sc">:</span><span class="er">//</span>wlandau.github.io<span class="sc">/</span>instantiate<span class="sc">/</span>, https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>wlandau<span class="sc">/</span>instantiate.</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="sc">@</span>Manual{,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    title <span class="ot">=</span> {instantiate<span class="sc">:</span> A Minimal CmdStan Client <span class="cf">for</span> R Packages},</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    author <span class="ot">=</span> {William Michael Landau},</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2023</span>},</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    note <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>wlandau.github.io<span class="sc">/</span>instantiate<span class="sc">/</span>,</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>wlandau<span class="sc">/</span>instantiate},</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>To cite package ‘instantiate’ <span class="cf">in</span> publications use<span class="sc">:</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  Landau <span class="fu">WM</span> (<span class="dv">2023</span>). _instantiate<span class="sc">:</span> A Minimal CmdStan Client <span class="cf">for</span> R Packages_.</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  https<span class="sc">:</span><span class="er">//</span>wlandau.github.io<span class="sc">/</span>instantiate<span class="sc">/</span>, https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>wlandau<span class="sc">/</span>instantiate.</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="sc">@</span>Manual{,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    title <span class="ot">=</span> {instantiate<span class="sc">:</span> A Minimal CmdStan Client <span class="cf">for</span> R Packages},</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    author <span class="ot">=</span> {William Michael Landau},</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2023</span>},</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    note <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>wlandau.github.io<span class="sc">/</span>instantiate<span class="sc">/</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>wlandau<span class="sc">/</span>instantiate},</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
 </div>
 
   </div>
