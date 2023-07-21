@@ -1,7 +1,4 @@
-@echo off
-"%R_HOME%\bin\Rscript.exe" "inst\cmdstan.R"
-if errorlevel 1 (
-  echo "Could not install CmdStan." >&2
-  exit /b 1
-)
-exit /b 0
+#!/usr/bin/env sh
+# Adapted from https://github.com/kevinushey/configure/blob/master/configure.win
+# under the MIT license
+"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" inst/cmdstan.R

@@ -89,6 +89,7 @@ The inserted YAML may look like this (although typically with more settings unde
       - name: Install CmdStan
         shell: Rscript {0}
         run: |
+          cmdstanr::check_cmdstan_toolchain(fix = TRUE)
           install.packages("cmdstanr")
           cmdstanr::install_cmdstan()
 ```
