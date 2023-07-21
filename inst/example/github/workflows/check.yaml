@@ -20,7 +20,6 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       NOT_CRAN: true
       R_KEEP_PKG_SOURCE: yes
-      CMDSTAN_INSTALL: "internal" # Important for installing CmdStan.
 
     steps:
       - uses: actions/checkout@v3
@@ -33,6 +32,12 @@ jobs:
           extra-repositories: 'https://mc-stan.org/r-packages/'
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
+
+      - name: Install CmdStan
+        shell: Rscript {0}
+        run: |
+          install.packages("cmdstanr")
+          cmdstanr::install_cmdstan()
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:

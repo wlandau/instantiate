@@ -10,7 +10,6 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       NOT_CRAN: true
-      CMDSTAN_INSTALL: "internal"
 
     steps:
       - uses: actions/checkout@v3
