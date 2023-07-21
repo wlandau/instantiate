@@ -1,0 +1,7 @@
+@echo off
+"%R_HOME%\bin\Rscript.exe" "inst\cmdstan.R"
+if errorlevel 1 (
+  echo "Could not install CmdStan." >&2
+  exit /b 1
+)
+exit /b 0

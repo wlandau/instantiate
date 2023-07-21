@@ -1,0 +1,9 @@
+#!/bin/sh
+# Delete or reconfigure the -falign-functions=1 line below if you get
+# the error "Default alignment for functions differs in PCH file vs. current file".
+$R_HOME/bin/Rscript --vanilla inst/cmdstan.R
+if [ $? -ne 0 ]; then
+  echo "Could not install CmdStan." >&2
+  exit 1
+fi
+exit 0

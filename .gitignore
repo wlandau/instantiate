@@ -1,0 +1,17 @@
+*~
+*.out
+*.Rout
+*.o
+*.so
+.gittargets
+.DS_Store
+.future
+.Rapp.history
+.RData
+.Rhistory
+.Rproj.user
+docs
+inst/doc
+vignettes/*.html
+revdep
+cmdstan

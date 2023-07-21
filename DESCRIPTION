@@ -1,0 +1,57 @@
+Package: instantiate
+Title: Pre-Compiled CmdStan Models in R packages
+Description: Similar to 'rstantools' for 'rstan',
+  the `instantiate` package builds pre-compiled
+  'CmdStan' models into CRAN-ready statistical modeling R packages.
+  The models compile once during installation,
+  the executables live inside the file systems of their respective packages,
+  and users have the full power and convenience of
+  'cmdstanr' without any additional compilation.
+  This approach saves time, allows R package developers
+  to migrate from 'rstan' to the more modern
+  'cmdstanr', and fits well with centrally maintained
+  R installations where users have trouble installing
+  their own packages, diagnosing compilation errors,
+  and setting environment variables.
+  Packages 'rstantools', 'cmdstanr', 'stannis', and
+  'stanapi' are similar Stan clients with different objectives.
+Version: 0.0.1
+License: MIT + file LICENSE
+URL: https://wlandau.github.io/instantiate/,
+  https://github.com/wlandau/instantiate
+BugReports: https://github.com/wlandau/instantiate/issues
+Authors@R: c(
+  person(
+    given = c("William", "Michael"),
+    family = "Landau",
+    role = c("aut", "cre"),
+    email = "will.landau@gmail.com",
+    comment = c(ORCID = "0000-0003-1878-3253")
+  ),
+  person(
+    family = "Eli Lilly and Company",
+    role = c("cph", "fnd")
+  ))
+Depends:
+  R (>= 4.0.0)
+Imports:
+  fs,
+  processx,
+  rlang,
+  utils
+Suggests:
+  cmdstanr,
+  knitr (>= 1.30),
+  markdown (>= 1.1),
+  rmarkdown (>= 2.4),
+  testthat (>= 3.0.0),
+  withr
+Additional_repositories:
+  https://mc-stan.org/r-packages/
+SystemRequirements: CmdStan (https://mc-stan.org/users/interfaces/cmdstan)
+Encoding: UTF-8
+Language: en-US
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
