@@ -1,5 +1,5 @@
 Package: instantiate
-Title: Pre-Compiled CmdStan Models in R packages
+Title: Pre-Compiled CmdStan Models in R Packages
 Description: Similar to 'rstantools' for 'rstan',
   the `instantiate` package builds pre-compiled
   'CmdStan' models into CRAN-ready statistical modeling R packages.
@@ -51,7 +51,6 @@ Additional_repositories:
 SystemRequirements: CmdStan (https://mc-stan.org/users/interfaces/cmdstan)
 Encoding: UTF-8
 Language: en-US
-VignetteBuilder: knitr
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
