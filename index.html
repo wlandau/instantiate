@@ -187,7 +187,8 @@
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">shell</span><span class="kw">:</span><span class="at"> Rscript {0}</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>          install.packages("cmdstanr")</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>          cmdstanr::install_cmdstan()</span></code></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>          cmdstanr::check_cmdstan_toolchain(fix = TRUE)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>          cmdstanr::install_cmdstan()</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="choosing-the-installation">Choosing the installation<a class="anchor" aria-label="anchor" href="#choosing-the-installation"></a>
