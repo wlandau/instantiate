@@ -52,12 +52,9 @@ output.}
 \code{cmdstanr_verbose} global option to print more compiler messages
 than usual.}
 
-\item{pedantic}{(logical) Should pedantic mode be turned on? The default is
-\code{FALSE}. Pedantic mode attempts to warn you about potential issues in your
-Stan program beyond syntax errors. For details see the \href{https://mc-stan.org/docs/reference-manual/pedantic-mode.html}{\emph{Pedantic mode} chapter} in
-the Stan Reference Manual. \strong{Note:} to do a pedantic check for a model
-without compiling it or for a model that is already compiled the
-\code{\link[cmdstanr:model-method-check_syntax]{$check_syntax()}} method can be used instead.}
+\item{pedantic}{Logical of length 1, whether to activate pedantic
+mode when compiling the Stan models. See the \code{cmdstanr} documentation
+for details.}
 
 \item{include_paths}{(character vector) Paths to directories where Stan
 should look for files specified in \verb{#include} directives in the Stan

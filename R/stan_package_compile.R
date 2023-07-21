@@ -15,6 +15,9 @@
 #' @param verbose Logical of length 1, whether to set the
 #'   `cmdstanr_verbose` global option to print more compiler messages
 #'   than usual.
+#' @param pedantic Logical of length 1, whether to activate pedantic
+#'   mode when compiling the Stan models. See the `cmdstanr` documentation
+#'   for details.
 #' @examples
 #' if (identical(Sys.getenv("INSTANTIATE_EXAMPLES"), "true")) {
 #' # Compilation happens automatically when the package installs.

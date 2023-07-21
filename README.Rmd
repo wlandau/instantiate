@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 
 # instantiate: pre-compiled CmdStan models in R packages
 
-[![CRAN](https://www.r-pkg.org/badges/version/instantiate)](https://CRAN.R-project.org/package=instantiate)
+<!--[![CRAN](https://www.r-pkg.org/badges/version/instantiate)](https://CRAN.R-project.org/package=instantiate)-->
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![check](https://github.com/wlandau/instantiate/workflows/check/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Acheck)
 [![codecov](https://codecov.io/gh/wlandau/instantiate/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://app.codecov.io/gh/wlandau/instantiate)
@@ -82,16 +82,16 @@ To install `instantiate` as part of a [GitHub Actions package check workflow](ht
 The inserted YAML may look like this (although typically with more settings under `with:` in `setup-r`):
 
 ```yaml
-      - uses: r-lib/actions/setup-r@v2
-        with:
-          extra-repositories: 'https://mc-stan.org/r-packages/'
+- uses: r-lib/actions/setup-r@v2
+  with:
+    extra-repositories: 'https://mc-stan.org/r-packages/'
 
-      - name: Install CmdStan
-        shell: Rscript {0}
-        run: |
-          install.packages("cmdstanr")
-          cmdstanr::check_cmdstan_toolchain(fix = TRUE)
-          cmdstanr::install_cmdstan()
+- name: Install CmdStan
+  shell: Rscript {0}
+  run: |
+    install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
+    cmdstanr::check_cmdstan_toolchain(fix = TRUE)
+    cmdstanr::install_cmdstan()
 ```
 
 ## Choosing the installation
