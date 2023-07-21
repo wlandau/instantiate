@@ -90,7 +90,8 @@ was installed. In this case, the path to CmdStan is not inside
 and does not depend on the current value of
 <code>Sys.getenv("CMDSTAN")</code> at runtime.</p></li>
 <li><p><code>"cmdstanr"</code>: Let the <code><a href="https://mc-stan.org/cmdstanr/reference/set_cmdstan_path.html" class="external-link">cmdstanr::cmdstan_path()</a></code> decide where
-to look for CmdStan.</p></li>
+to look for CmdStan. The <code>cmdstanr</code> package must be installed. If it
+is not installed, the function returns the empty string <code>""</code>.</p></li>
 <li><p><code>""</code> (default): Try all 3 options in the order above to find a valid
 installed copy of CmdStan.</p></li>
 </ol></dd>
