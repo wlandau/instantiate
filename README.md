@@ -218,7 +218,9 @@ fs::dir_tree("package_folder")
 
 Configure the package so the Stan models compile during installation.
 `stan_package_configure()` writes scripts `configure` and
-`configure.win` for this.
+`configure.win` for this. Inside each script is a call to
+`instantiate::stan_package_compile()` which you can manually edit to
+control how your models are compiled.
 
 ``` r
 stan_package_configure(path = "package_folder")

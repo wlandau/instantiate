@@ -23,5 +23,5 @@ stan_cmdstan_version <- function(
   }
   path_new <- stan_cmdstan_path(cmdstan_install = cmdstan_install)
   suppressMessages(cmdstanr::set_cmdstan_path(path = path_new))
-  cmdstanr::cmdstan_version()
+  cmdstanr::cmdstan_version(error_on_NA = error_on_NA)
 }

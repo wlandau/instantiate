@@ -43,8 +43,14 @@ stan_package_compile <- function(
   verbose = TRUE,
   pedantic = FALSE,
   include_paths = NULL,
+  user_header = NULL,
   cpp_options = list(),
-  stanc_options = list()
+  stanc_options = list(),
+  force_recompile = getOption("cmdstanr_force_recompile", default = FALSE),
+  compile_model_methods = FALSE,
+  compile_hessian_method = FALSE,
+  compile_standalone = FALSE,
+  threads = FALSE
 ) {
   stan_assert_cmdstanr()
   # Not possible to test in automated tests in one coverage run.
@@ -73,8 +79,14 @@ stan_package_compile <- function(
     verbose = verbose,
     pedantic = pedantic,
     include_paths = include_paths,
+    user_header = user_header,
     cpp_options = cpp_options,
-    stanc_options = stanc_options
+    stanc_options = stanc_options,
+    force_recompile = force_recompile,
+    compile_model_methods = compile_model_methods,
+    compile_hessian_method = compile_hessian_method,
+    compile_standalone = compile_standalone,
+    threads = threads
   )
   invisible()
 }
@@ -85,8 +97,14 @@ stan_compile_model <- function(
   verbose,
   pedantic,
   include_paths,
+  user_header,
   cpp_options,
-  stanc_options
+  stanc_options,
+  force_recompile,
+  compile_model_methods,
+  compile_hessian_method,
+  compile_standalone,
+  threads
 ) {
   if (verbose) {
     old <- getOption("cmdstanr_verbose")
@@ -99,9 +117,14 @@ stan_compile_model <- function(
     quiet = quiet,
     pedantic = pedantic,
     include_paths = include_paths,
+    user_header = user_header,
     cpp_options = cpp_options,
     stanc_options = stanc_options,
-    force_recompile = TRUE
+    force_recompile = force_recompile,
+    compile_model_methods = compile_model_methods,
+    compile_hessian_method = compile_hessian_method,
+    compile_standalone = compile_standalone,
+    threads = threads
   )
   invisible()
 }

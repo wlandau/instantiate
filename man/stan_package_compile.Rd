@@ -11,8 +11,14 @@ stan_package_compile(
   verbose = TRUE,
   pedantic = FALSE,
   include_paths = NULL,
+  user_header = NULL,
   cpp_options = list(),
-  stanc_options = list()
+  stanc_options = list(),
+  force_recompile = getOption("cmdstanr_force_recompile", default = FALSE),
+  compile_model_methods = FALSE,
+  compile_hessian_method = FALSE,
+  compile_standalone = FALSE,
+  threads = FALSE
 )
 }
 \arguments{
@@ -61,6 +67,9 @@ for details.}
 should look for files specified in \verb{#include} directives in the Stan
 program.}
 
+\item{user_header}{(string) The path to a C++ file (with a .hpp extension)
+to compile with the Stan model.}
+
 \item{cpp_options}{(list) Any makefile options to be used when compiling the
 model (\code{STAN_THREADS}, \code{STAN_MPI}, \code{STAN_OPENCL}, etc.). Anything you would
 otherwise write in the \code{make/local} file. For an example of using threading
@@ -71,6 +80,26 @@ see the Stan case study
 when compiling the model. See the \strong{Examples} section below as well as the
 \code{stanc} chapter of the CmdStan Guide for more details on available options:
 https://mc-stan.org/docs/cmdstan-guide/stanc.html.}
+
+\item{force_recompile}{(logical) Should the model be recompiled even if was
+not modified since last compiled. The default is \code{FALSE}. Can also be set
+via a global \code{cmdstanr_force_recompile} option.}
+
+\item{compile_model_methods}{(logical) Compile additional model methods
+(\code{log_prob()}, \code{grad_log_prob()}, \code{constrain_variables()},
+\code{unconstrain_variables()}).}
+
+\item{compile_hessian_method}{(logical) Should the (experimental) \code{hessian()} method be
+be compiled with the model methods?}
+
+\item{compile_standalone}{(logical) Should functions in the Stan model be
+compiled for use in R? If \code{TRUE} the functions will be available via the
+\code{functions} field in the compiled model object. This can also be done after
+compilation using the
+\code{\link[cmdstanr:model-method-expose_functions]{$expose_functions()}} method.}
+
+\item{threads}{Deprecated and will be removed in a future release. Please
+turn on threading via \code{cpp_options = list(stan_threads = TRUE)} instead.}
 }
 \value{
 \code{NULL} (invisibly)
