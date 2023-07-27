@@ -60,8 +60,14 @@
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  pedantic <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  include_paths <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  user_header <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  cpp_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  stanc_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  stanc_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  force_recompile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"cmdstanr_force_recompile"</span>, default <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>  compile_model_methods <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  compile_hessian_method <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  compile_standalone <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  threads <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -122,6 +128,11 @@ should look for files specified in <code>#include</code> directives in the Stan
 program.</p></dd>
 
 
+<dt>user_header</dt>
+<dd><p>(string) The path to a C++ file (with a .hpp extension)
+to compile with the Stan model.</p></dd>
+
+
 <dt>cpp_options</dt>
 <dd><p>(list) Any makefile options to be used when compiling the
 model (<code>STAN_THREADS</code>, <code>STAN_MPI</code>, <code>STAN_OPENCL</code>, etc.). Anything you would
@@ -135,6 +146,36 @@ see the Stan case study
 when compiling the model. See the <strong>Examples</strong> section below as well as the
 <code>stanc</code> chapter of the CmdStan Guide for more details on available options:
 https://mc-stan.org/docs/cmdstan-guide/stanc.html.</p></dd>
+
+
+<dt>force_recompile</dt>
+<dd><p>(logical) Should the model be recompiled even if was
+not modified since last compiled. The default is <code>FALSE</code>. Can also be set
+via a global <code>cmdstanr_force_recompile</code> option.</p></dd>
+
+
+<dt>compile_model_methods</dt>
+<dd><p>(logical) Compile additional model methods
+(<code>log_prob()</code>, <code>grad_log_prob()</code>, <code>constrain_variables()</code>,
+<code>unconstrain_variables()</code>).</p></dd>
+
+
+<dt>compile_hessian_method</dt>
+<dd><p>(logical) Should the (experimental) <code>hessian()</code> method be
+be compiled with the model methods?</p></dd>
+
+
+<dt>compile_standalone</dt>
+<dd><p>(logical) Should functions in the Stan model be
+compiled for use in R? If <code>TRUE</code> the functions will be available via the
+<code>functions</code> field in the compiled model object. This can also be done after
+compilation using the
+<code><a href="https://mc-stan.org/cmdstanr/reference/model-method-expose_functions.html" class="external-link">$expose_functions()</a></code> method.</p></dd>
+
+
+<dt>threads</dt>
+<dd><p>Deprecated and will be removed in a future release. Please
+turn on threading via <code>cpp_options = list(stan_threads = TRUE)</code> instead.</p></dd>
 
 </dl></div>
     <div id="value">
