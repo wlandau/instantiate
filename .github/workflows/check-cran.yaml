@@ -33,9 +33,14 @@ jobs:
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
-          extra-repositories: 'https://mc-stan.org/r-packages/, https://cloud.r-project.org'
+          extra-repositories: 'https://mc-stan.org/r-packages/'
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
+
+      - name: Repos
+        run: |
+          cat("\noptions(repos=c(stan='https://mc-stan.org/r-packages/',CRAN ='https://cloud.r-project.org'))\n", file = "~/.Rprofile", append = TRUE)
+        shell: Rscript {0}
 
       - name: Remove cmdstanr
         shell: Rscript {0}
