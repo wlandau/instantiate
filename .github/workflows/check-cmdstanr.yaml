@@ -34,7 +34,7 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           rtools-version: '42'
-          extra-repositories: 'https://mc-stan.org/r-packages/'
+          extra-repositories: 'https://mc-stan.org/r-packages/,https://cloud.r-project.org'
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
