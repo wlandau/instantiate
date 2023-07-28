@@ -43,7 +43,7 @@ stan_package_model <- function(
   stan_assert_cmdstanr()
   stan_assert(name, is.character(.), !anyNA(.), nzchar(.))
   stan_assert(package, is.character(.), !anyNA(.), nzchar(.))
-  stan_file <- system.file(
+  stan_file <- get(x = "system.file", envir = globalenv()) (
     file.path("stan", paste0(name, ".stan")),
     package = package,
     lib.loc = library,
