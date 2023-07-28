@@ -34,14 +34,14 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           rtools-version: '42'
-          extra-repositories: ['https://mc-stan.org/r-packages/', 'https://cloud.r-project.org']
+          extra-repositories: 'https://mc-stan.org/r-packages/'
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
       - name: Install CmdStan
         shell: Rscript {0}
         run: |
-          install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
+          install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", "https://cloud.r-project.org", getOption("repos")))
           cmdstanr::check_cmdstan_toolchain(fix = TRUE)
           cmdstanr::install_cmdstan()
 
