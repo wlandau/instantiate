@@ -346,12 +346,19 @@ run_bernoulli_model <- function(y, ...) {
     examples and vignettes. For tests, it is convenient to use
     [`testthat::skip_if_not()`](https://testthat.r-lib.org/reference/skip.html),
     e.g. `skip_if_not(stan_cmdstan_exists())`.
-5.  For [continuous integration](https://devguide.ropensci.org/ci.html)
+5.  [`pkgload::load_all()`](https://pkgload.r-lib.org/reference/load_all.html)
+    might not compile your models. If you use
+    [`pkgload`](https://pkgload.r-lib.org/) or
+    [`devtools`](https://devtools.r-lib.org/) to load and develop your
+    package, you may need to call `instantiate::stan_package_compile()`
+    from the root directory of your package to compile your models
+    manually.
+6.  For [continuous integration](https://devguide.ropensci.org/ci.html)
     (e.g. on [GitHub Actions](https://github.com/r-lib/actions)), please
     use [`cmdstanr`](https://mc-stan.org/cmdstanr/)-based installation
     as explained above, and tweak your workflow YAML files as explained
     in that section.
-6.  For general information on R package development, please consult the
+7.  For general information on R package development, please consult the
     free online book [R Packages (2e)](https://r-pkgs.org/) by [Hadley
     Wickham](https://github.com/hadley) and [Jennifer
     Bryan](https://github.com/jennybc), as well as the official manual
