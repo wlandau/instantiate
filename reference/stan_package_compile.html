@@ -54,10 +54,10 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">stan_package_compile</span><span class="op">(</span></span>
-<span>  path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"inst"</span>, <span class="st">"stan"</span><span class="op">)</span>,</span>
+<span>  models <span class="op">=</span> <span class="fu">instantiate</span><span class="fu">::</span><span class="fu"><a href="stan_package_model_files.html">stan_package_model_files</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  cmdstan_install <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"CMDSTAN_INSTALL"</span><span class="op">)</span>,</span>
-<span>  quiet <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  quiet <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  pedantic <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  include_paths <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  user_header <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -73,11 +73,11 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>path</dt>
-<dd><p>Absolute path to the directory of Stan models. Must be
-an absolute path. Defaults to <code>file.path(getwd(), "inst", "stan")</code>
-because that is where Stan model files must be located if
-building a package configured with <code>instantiate</code>.</p></dd>
+    <dl><dt>models</dt>
+<dd><p>Character vector of file paths to Stan model source code
+files. Defaults to the Stan files in <code>./inst/stan/</code>
+because all the Stan model files must live in the <code>inst/stan/</code> folder
+for an R package built with <code>instantiate</code>.</p></dd>
 
 
 <dt>cmdstan_install</dt>
@@ -103,17 +103,14 @@ installed copy of CmdStan.</p></li>
 </ol></dd>
 
 
-<dt>quiet</dt>
-<dd><p>(logical) Should the verbose output from CmdStan during
-compilation be suppressed? The default is <code>TRUE</code>, but if you encounter an
-error we recommend trying again with <code>quiet=FALSE</code> to see more of the
-output.</p></dd>
-
-
 <dt>verbose</dt>
 <dd><p>Logical of length 1, whether to set the
 <code>cmdstanr_verbose</code> global option to print more compiler messages
 than usual.</p></dd>
+
+
+<dt>quiet</dt>
+<dd><p>Argument to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code> to control compilation.</p></dd>
 
 
 <dt>pedantic</dt>
@@ -123,59 +120,48 @@ for details.</p></dd>
 
 
 <dt>include_paths</dt>
-<dd><p>(character vector) Paths to directories where Stan
-should look for files specified in <code>#include</code> directives in the Stan
-program.</p></dd>
+<dd><p>Argument to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>
+to control model compilation.</p></dd>
 
 
 <dt>user_header</dt>
-<dd><p>(string) The path to a C++ file (with a .hpp extension)
-to compile with the Stan model.</p></dd>
+<dd><p>Argument to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>
+to control model compilation.</p></dd>
 
 
 <dt>cpp_options</dt>
-<dd><p>(list) Any makefile options to be used when compiling the
-model (<code>STAN_THREADS</code>, <code>STAN_MPI</code>, <code>STAN_OPENCL</code>, etc.). Anything you would
-otherwise write in the <code>make/local</code> file. For an example of using threading
-see the Stan case study
-<a href="https://mc-stan.org/users/documentation/case-studies/reduce_sum_tutorial.html" class="external-link">Reduce Sum: A Minimal Example</a>.</p></dd>
+<dd><p>Argument to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>
+to control model compilation.</p></dd>
 
 
 <dt>stanc_options</dt>
-<dd><p>(list) Any Stan-to-C++ transpiler options to be used
-when compiling the model. See the <strong>Examples</strong> section below as well as the
-<code>stanc</code> chapter of the CmdStan Guide for more details on available options:
-https://mc-stan.org/docs/cmdstan-guide/stanc.html.</p></dd>
+<dd><p>Argument to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>
+to model control compilation.</p></dd>
 
 
 <dt>force_recompile</dt>
-<dd><p>(logical) Should the model be recompiled even if was
-not modified since last compiled. The default is <code>FALSE</code>. Can also be set
-via a global <code>cmdstanr_force_recompile</code> option.</p></dd>
+<dd><p>Argument to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>
+to model control compilation.</p></dd>
 
 
 <dt>compile_model_methods</dt>
-<dd><p>(logical) Compile additional model methods
-(<code>log_prob()</code>, <code>grad_log_prob()</code>, <code>constrain_variables()</code>,
-<code>unconstrain_variables()</code>).</p></dd>
+<dd><p>Argument to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>
+to model control compilation.</p></dd>
 
 
 <dt>compile_hessian_method</dt>
-<dd><p>(logical) Should the (experimental) <code>hessian()</code> method be
-be compiled with the model methods?</p></dd>
+<dd><p>Argument to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>
+to model control compilation.</p></dd>
 
 
 <dt>compile_standalone</dt>
-<dd><p>(logical) Should functions in the Stan model be
-compiled for use in R? If <code>TRUE</code> the functions will be available via the
-<code>functions</code> field in the compiled model object. This can also be done after
-compilation using the
-<code><a href="https://mc-stan.org/cmdstanr/reference/model-method-expose_functions.html" class="external-link">$expose_functions()</a></code> method.</p></dd>
+<dd><p>Argument to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>
+to model control compilation.</p></dd>
 
 
 <dt>threads</dt>
-<dd><p>Deprecated and will be removed in a future release. Please
-turn on threading via <code>cpp_options = list(stan_threads = TRUE)</code> instead.</p></dd>
+<dd><p>Argument to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>
+to model control compilation.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -195,7 +181,8 @@ directory.</p>
     <div class="dont-index"><p>Other packages: 
 <code><a href="stan_cmdstan_path.html">stan_cmdstan_path</a>()</code>,
 <code><a href="stan_package_clean.html">stan_package_clean</a>()</code>,
-<code><a href="stan_package_configure.html">stan_package_configure</a>()</code></p></div>
+<code><a href="stan_package_configure.html">stan_package_configure</a>()</code>,
+<code><a href="stan_package_model_files.html">stan_package_model_files</a>()</code></p></div>
     </div>
 
     <div id="ref-examples">
