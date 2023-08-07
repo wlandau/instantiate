@@ -134,6 +134,7 @@ stan_package_compile(path = file.path(path, "inst", "stan"))
 \seealso{
 Other packages: 
 \code{\link{stan_cmdstan_path}()},
+\code{\link{stan_package_clean}()},
 \code{\link{stan_package_configure}()}
 }
 \concept{packages}

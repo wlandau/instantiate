@@ -10,6 +10,7 @@ reference:
   - '`stan_cmdstan_version`'
 - title: R packages with Stan models
   contents:
+  - '`stan_package_clean`'
   - '`stan_package_compile`'
   - '`stan_package_configure`'
   - '`stan_package_create`'

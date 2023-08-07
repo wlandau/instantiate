@@ -44,6 +44,7 @@ stan_cmdstan_path()
 }
 \seealso{
 Other packages: 
+\code{\link{stan_package_clean}()},
 \code{\link{stan_package_compile}()},
 \code{\link{stan_package_configure}()}
 }

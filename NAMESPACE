@@ -3,6 +3,7 @@
 export(stan_cmdstan_exists)
 export(stan_cmdstan_path)
 export(stan_cmdstan_version)
+export(stan_package_clean)
 export(stan_package_compile)
 export(stan_package_configure)
 export(stan_package_create)

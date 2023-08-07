@@ -1,4 +1,4 @@
-stan_test("stan_package_compile()", {
+stan_test("stan_package_compile() and stan_package_clean()", {
   skip_cmdstan()
   cmdstan <- stan_cmdstan_path()
   dir <- file.path("inst", "stan")
@@ -15,4 +15,6 @@ stan_test("stan_package_compile()", {
     exe <- paste0(exe, ".exe")
   }
   expect_true(file.exists(exe))
+  stan_package_clean()
+  expect_false(file.exists(exe))
 })

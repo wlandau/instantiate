@@ -42,6 +42,7 @@ install.packages(
 \seealso{
 Other packages: 
 \code{\link{stan_cmdstan_path}()},
+\code{\link{stan_package_clean}()},
 \code{\link{stan_package_compile}()}
 }
 \concept{packages}

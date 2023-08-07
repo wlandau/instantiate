@@ -1,0 +1,7 @@
+#!/bin/sh
+$R_HOME/bin/Rscript -e "instantiate::stan_package_clean()"
+if [ $? -ne 0 ]; then
+  echo "Could not clean up compiled Stan models." >&2
+  exit 1
+fi
+exit 0

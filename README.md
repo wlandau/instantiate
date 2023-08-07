@@ -220,7 +220,8 @@ fs::dir_tree("package_folder")
 
 Configure the package so the Stan models compile during installation.
 `stan_package_configure()` writes scripts `configure` and
-`configure.win` for this. Inside each script is a call to
+`configure.win` for this, as well as `cleanup` and `cleanup.win` to
+remove compiled model files. Inside each script is a call to
 `instantiate::stan_package_compile()` which you can manually edit to
 control how your models are compiled.
 
@@ -232,6 +233,8 @@ stan_package_configure(path = "package_folder")
 fs::dir_tree("package_folder")
 #> package_folder
 #> ├── DESCRIPTION
+#> ├── cleanup
+#> ├── cleanup.win
 #> ├── configure
 #> ├── configure.win
 #> └── inst

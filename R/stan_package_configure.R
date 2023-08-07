@@ -34,6 +34,16 @@ stan_package_configure <- function(path = getwd(), overwrite = FALSE) {
     isTRUE(.) || isFALSE(.),
     message = "overwrite must be a logical of length 1."
   )
+  in_cleanup <- system.file(
+    "cleanup",
+    package = "instantiate",
+    mustWork = TRUE
+  )
+  in_cleanup_win <- system.file(
+    "cleanup.win",
+    package = "instantiate",
+    mustWork = TRUE
+  )
   in_configure <- system.file(
     "configure",
     package = "instantiate",
@@ -44,8 +54,21 @@ stan_package_configure <- function(path = getwd(), overwrite = FALSE) {
     package = "instantiate",
     mustWork = TRUE
   )
+  out_cleanup <- file.path(path, "cleanup")
+  out_cleanup_win <- file.path(path, "cleanup.win")
   out_configure <- file.path(path, "configure")
   out_configure_win <- file.path(path, "configure.win")
+  file.copy(
+    from = in_cleanup,
+    to = out_cleanup,
+    overwrite = overwrite,
+    copy.mode = TRUE
+  )
+  file.copy(
+    from = in_cleanup_win,
+    to = out_cleanup_win,
+    overwrite = overwrite
+  )
   file.copy(
     from = in_configure,
     to = out_configure,
