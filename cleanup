@@ -1,0 +1,3 @@
+#!/bin/sh
+rm src/cmdstan.o src/instantiate.so
+rm -r inst/cmdstan
