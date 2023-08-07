@@ -31,6 +31,13 @@
 stan_package_clean <- function(
   models = instantiate::stan_package_model_files()
 ) {
+  stan_assert(
+    models,
+    is.character(.),
+    !anyNA(.),
+    nzchar(.),
+    message = "models arg must be a character vector of Stan model files."
+  )
   base <- gsub("\\.[[:alnum:]]+$", "", models)
   suppressWarnings(file.remove(base))
   suppressWarnings(file.remove(paste0(base, ".exe")))

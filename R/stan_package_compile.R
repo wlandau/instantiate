@@ -61,6 +61,15 @@ stan_package_compile <- function(
     return(invisible())
   }
   # nocov end
+  stan_assert(
+    models,
+    is.character(.),
+    length(.) > 0L,
+    !anyNA(.),
+    nzchar(.),
+    message = "models arg must be a nonempty character vector of Stan files."
+  )
+  models <- models[file.exists(models)]
   if (length(models) < 1L) {
     stan_message("No Stan models found.")
     return(invisible())
