@@ -4,8 +4,10 @@
 <!--[![CRAN](https://www.r-pkg.org/badges/version/instantiate)](https://CRAN.R-project.org/package=instantiate)-->
 
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![check](https://github.com/wlandau/instantiate/workflows/check/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Acheck)
-[![codecov](https://codecov.io/gh/wlandau/instantiate/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://app.codecov.io/gh/wlandau/instantiate)
+[![check-cmdstanr](https://github.com/wlandau/instantiate/workflows/check-cmdstanr/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Acheck-cmdstanr)
+[![check-cran](https://github.com/wlandau/instantiate/workflows/check-cran/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Acheck-cran)
+[![check-fixed](https://github.com/wlandau/instantiate/workflows/check-fixed/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Acheck-fixed)
+[![codecov](https://codecov.io/gh/wlandau/instantiate/branch/main/graph/badge.svg)](https://app.codecov.io/gh/wlandau/instantiate)
 [![lint](https://github.com/wlandau/instantiate/workflows/lint/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Alint)
 
 Similar to [`rstantools`](https://mc-stan.org/rstantools/) for
@@ -353,12 +355,30 @@ run_bernoulli_model <- function(y, ...) {
     package, you may need to call `instantiate::stan_package_compile()`
     from the root directory of your package to compile your models
     manually.
-6.  For [continuous integration](https://devguide.ropensci.org/ci.html)
+6.  For [version
+    control](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control),
+    it is best practice to commit only source code files and
+    documentation. Please do not commit any compiled executable Stan
+    model files to your repository. If you do commit them, then other
+    users with different machines will have trouble installing your
+    package, and your commit history will consume too much storage. For
+    [Git](https://git-scm.com), you may add the following lines to the
+    [`.gitigore`](https://git-scm.com/docs/gitignore) file at the root
+    of your package:
+
+<!-- -->
+
+    inst/stan/**
+    !inst/stan/**/*.*
+    inst/stan/**/*.exe
+    inst/stan/**/*.EXE
+
+7.  For [continuous integration](https://devguide.ropensci.org/ci.html)
     (e.g. on [GitHub Actions](https://github.com/r-lib/actions)), please
     use [`cmdstanr`](https://mc-stan.org/cmdstanr/)-based installation
     as explained above, and tweak your workflow YAML files as explained
     in that section.
-7.  For general information on R package development, please consult the
+8.  For general information on R package development, please consult the
     free online book [R Packages (2e)](https://r-pkgs.org/) by [Hadley
     Wickham](https://github.com/hadley) and [Jennifer
     Bryan](https://github.com/jennybc), as well as the official manual

@@ -16,8 +16,10 @@ knitr::opts_chunk$set(
 
 <!--[![CRAN](https://www.r-pkg.org/badges/version/instantiate)](https://CRAN.R-project.org/package=instantiate)-->
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![check](https://github.com/wlandau/instantiate/workflows/check/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Acheck)
-[![codecov](https://codecov.io/gh/wlandau/instantiate/branch/main/graph/badge.svg?token=3T5DlLwUVl)](https://app.codecov.io/gh/wlandau/instantiate)
+[![check-cmdstanr](https://github.com/wlandau/instantiate/workflows/check-cmdstanr/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Acheck-cmdstanr)
+[![check-cran](https://github.com/wlandau/instantiate/workflows/check-cran/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Acheck-cran)
+[![check-fixed](https://github.com/wlandau/instantiate/workflows/check-fixed/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Acheck-fixed)
+[![codecov](https://codecov.io/gh/wlandau/instantiate/branch/main/graph/badge.svg)](https://app.codecov.io/gh/wlandau/instantiate)
 [![lint](https://github.com/wlandau/instantiate/workflows/lint/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Alint)
 
 Similar to [`rstantools`](https://mc-stan.org/rstantools/) for [`rstan`](https://mc-stan.org/rstan/), the `instantiate` package builds pre-compiled [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) models into CRAN-ready statistical modeling R packages. The models compile once during installation, the executables live inside the file systems of their respective packages, and users have the full power and convenience of [`CmdStanR`](https://mc-stan.org/cmdstanr/) without any additional compilation. This approach saves time, allows R package developers to migrate from [`rstan`](https://mc-stan.org/rstan/) to the more modern [`CmdStanR`](https://mc-stan.org/cmdstanr/), and fits well with centrally maintained R installations where users may have trouble installing their own packages, diagnosing compilation errors, and setting environment variables.
@@ -229,8 +231,17 @@ Additional_repositories:
 3. Write user-side statistical modeling functions which call the models in your package as mentioned above.
 4. [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) is too big for [CRAN](https://cran.r-project.org), so `instantiate` will not be able to access it there. So if you plan to submit your package to CRAN, please skip the appropriate code in your examples, vignettes, and tests when `instantiate::stan_cmdstan_exists()` is `FALSE`. Explicit `if()` statements like the above one in the [`roxygen2`](https://roxygen2.r-lib.org/) `@examples` work for examples and vignettes. For tests, it is convenient to use [`testthat::skip_if_not()`](https://testthat.r-lib.org/reference/skip.html), e.g. `skip_if_not(stan_cmdstan_exists())`.
 5. [`pkgload::load_all()`](https://pkgload.r-lib.org/reference/load_all.html) might not compile your models. If you use [`pkgload`](https://pkgload.r-lib.org/) or [`devtools`](https://devtools.r-lib.org/) to load and develop your package, you may need to call `instantiate::stan_package_compile()` from the root directory of your package to compile your models manually.
-6. For [continuous integration](https://devguide.ropensci.org/ci.html) (e.g. on [GitHub Actions](https://github.com/r-lib/actions)), please use [`cmdstanr`](https://mc-stan.org/cmdstanr/)-based installation as explained above, and tweak your workflow YAML files as explained in that section.
-7. For general information on R package development, please consult the free online book [R Packages (2e)](https://r-pkgs.org/) by [Hadley Wickham](https://github.com/hadley) and [Jennifer Bryan](https://github.com/jennybc), as well as the official manual on [Writing R Extensions](https://cran.r-project.org/doc/manuals/R-exts.html) by the R Core Team.
+6. For [version control](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control), it is best practice to commit only source code files and documentation. Please do not commit any compiled executable Stan model files to your repository. If you do commit them, then other users with different machines will have trouble installing your package, and your commit history will consume too much storage. For [Git](https://git-scm.com), you may add the following lines to the [`.gitigore`](https://git-scm.com/docs/gitignore) file at the root of your package: 
+
+```
+inst/stan/**
+!inst/stan/**/*.*
+inst/stan/**/*.exe
+inst/stan/**/*.EXE
+```
+
+7. For [continuous integration](https://devguide.ropensci.org/ci.html) (e.g. on [GitHub Actions](https://github.com/r-lib/actions)), please use [`cmdstanr`](https://mc-stan.org/cmdstanr/)-based installation as explained above, and tweak your workflow YAML files as explained in that section.
+8. For general information on R package development, please consult the free online book [R Packages (2e)](https://r-pkgs.org/) by [Hadley Wickham](https://github.com/hadley) and [Jennifer Bryan](https://github.com/jennybc), as well as the official manual on [Writing R Extensions](https://cran.r-project.org/doc/manuals/R-exts.html) by the R Core Team.
 
 # Code of Conduct
 
