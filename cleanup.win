@@ -1,2 +1,3 @@
-del src\cmdstan.o src\instantiate.dll
-rmdir /s /q inst\cmdstan
+if exist src\cmdstan.o del src\cmdstan.o
+if exist src\instantiate.dll del src\instantiate.dll
+if exist inst\cmdstan rmdir /s /q inst\cmdstan
