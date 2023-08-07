@@ -7,7 +7,6 @@
 #'   directory.
 #' @return `NULL` (invisibly)
 #' @inheritParams stan_cmdstan_path
-#' @inheritParams cmdstanr::`model-method-compile`
 #' @param models Character vector of file paths to Stan model source code
 #'   files. Defaults to the Stan files in `./inst/stan/`
 #'   because all the Stan model files must live in the `inst/stan/` folder
@@ -15,9 +14,28 @@
 #' @param verbose Logical of length 1, whether to set the
 #'   `cmdstanr_verbose` global option to print more compiler messages
 #'   than usual.
+#' @param quiet Argument to `cmdstanr::cmdstan_model()` to control compilation.
 #' @param pedantic Logical of length 1, whether to activate pedantic
 #'   mode when compiling the Stan models. See the `cmdstanr` documentation
 #'   for details.
+#' @param include_paths Argument to `cmdstanr::cmdstan_model()`
+#'   to control model compilation.
+#' @param user_header Argument to `cmdstanr::cmdstan_model()`
+#'   to control model compilation.
+#' @param cpp_options Argument to `cmdstanr::cmdstan_model()`
+#'    to control model compilation.
+#' @param stanc_options Argument to `cmdstanr::cmdstan_model()`
+#'   to model control compilation.
+#' @param force_recompile Argument to `cmdstanr::cmdstan_model()`
+#'   to model control compilation.
+#' @param compile_model_methods Argument to `cmdstanr::cmdstan_model()`
+#'   to model control compilation.
+#' @param compile_hessian_method Argument to `cmdstanr::cmdstan_model()`
+#'   to model control compilation.
+#' @param compile_standalone Argument to `cmdstanr::cmdstan_model()`
+#'   to model control compilation.
+#' @param threads Argument to `cmdstanr::cmdstan_model()`
+#'   to model control compilation.
 #' @examples
 #' if (identical(Sys.getenv("INSTANTIATE_EXAMPLES"), "true")) {
 #' # Compilation happens automatically when the package installs.
@@ -39,8 +57,8 @@
 stan_package_compile <- function(
   models = instantiate::stan_package_model_files(),
   cmdstan_install = Sys.getenv("CMDSTAN_INSTALL"),
-  quiet = FALSE,
   verbose = TRUE,
+  quiet = FALSE,
   pedantic = FALSE,
   include_paths = NULL,
   user_header = NULL,
@@ -83,8 +101,8 @@ stan_package_compile <- function(
   lapply(
     X = models,
     FUN = stan_compile_model,
-    quiet = quiet,
     verbose = verbose,
+    quiet = quiet,
     pedantic = pedantic,
     include_paths = include_paths,
     user_header = user_header,
@@ -101,8 +119,8 @@ stan_package_compile <- function(
 
 stan_compile_model <- function(
   model,
-  quiet,
   verbose,
+  quiet,
   pedantic,
   include_paths,
   user_header,

@@ -7,8 +7,8 @@
 stan_package_compile(
   models = instantiate::stan_package_model_files(),
   cmdstan_install = Sys.getenv("CMDSTAN_INSTALL"),
-  quiet = FALSE,
   verbose = TRUE,
+  quiet = FALSE,
   pedantic = FALSE,
   include_paths = NULL,
   user_header = NULL,
@@ -50,56 +50,42 @@ is not installed, the function returns the empty string \code{""}.
 installed copy of CmdStan.
 }}
 
-\item{quiet}{(logical) Should the verbose output from CmdStan during
-compilation be suppressed? The default is \code{TRUE}, but if you encounter an
-error we recommend trying again with \code{quiet=FALSE} to see more of the
-output.}
-
 \item{verbose}{Logical of length 1, whether to set the
 \code{cmdstanr_verbose} global option to print more compiler messages
 than usual.}
+
+\item{quiet}{Argument to \code{cmdstanr::cmdstan_model()} to control compilation.}
 
 \item{pedantic}{Logical of length 1, whether to activate pedantic
 mode when compiling the Stan models. See the \code{cmdstanr} documentation
 for details.}
 
-\item{include_paths}{(character vector) Paths to directories where Stan
-should look for files specified in \verb{#include} directives in the Stan
-program.}
+\item{include_paths}{Argument to \code{cmdstanr::cmdstan_model()}
+to control model compilation.}
 
-\item{user_header}{(string) The path to a C++ file (with a .hpp extension)
-to compile with the Stan model.}
+\item{user_header}{Argument to \code{cmdstanr::cmdstan_model()}
+to control model compilation.}
 
-\item{cpp_options}{(list) Any makefile options to be used when compiling the
-model (\code{STAN_THREADS}, \code{STAN_MPI}, \code{STAN_OPENCL}, etc.). Anything you would
-otherwise write in the \code{make/local} file. For an example of using threading
-see the Stan case study
-\href{https://mc-stan.org/users/documentation/case-studies/reduce_sum_tutorial.html}{Reduce Sum: A Minimal Example}.}
+\item{cpp_options}{Argument to \code{cmdstanr::cmdstan_model()}
+to control model compilation.}
 
-\item{stanc_options}{(list) Any Stan-to-C++ transpiler options to be used
-when compiling the model. See the \strong{Examples} section below as well as the
-\code{stanc} chapter of the CmdStan Guide for more details on available options:
-https://mc-stan.org/docs/cmdstan-guide/stanc.html.}
+\item{stanc_options}{Argument to \code{cmdstanr::cmdstan_model()}
+to model control compilation.}
 
-\item{force_recompile}{(logical) Should the model be recompiled even if was
-not modified since last compiled. The default is \code{FALSE}. Can also be set
-via a global \code{cmdstanr_force_recompile} option.}
+\item{force_recompile}{Argument to \code{cmdstanr::cmdstan_model()}
+to model control compilation.}
 
-\item{compile_model_methods}{(logical) Compile additional model methods
-(\code{log_prob()}, \code{grad_log_prob()}, \code{constrain_variables()},
-\code{unconstrain_variables()}).}
+\item{compile_model_methods}{Argument to \code{cmdstanr::cmdstan_model()}
+to model control compilation.}
 
-\item{compile_hessian_method}{(logical) Should the (experimental) \code{hessian()} method be
-be compiled with the model methods?}
+\item{compile_hessian_method}{Argument to \code{cmdstanr::cmdstan_model()}
+to model control compilation.}
 
-\item{compile_standalone}{(logical) Should functions in the Stan model be
-compiled for use in R? If \code{TRUE} the functions will be available via the
-\code{functions} field in the compiled model object. This can also be done after
-compilation using the
-\code{\link[cmdstanr:model-method-expose_functions]{$expose_functions()}} method.}
+\item{compile_standalone}{Argument to \code{cmdstanr::cmdstan_model()}
+to model control compilation.}
 
-\item{threads}{Deprecated and will be removed in a future release. Please
-turn on threading via \code{cpp_options = list(stan_threads = TRUE)} instead.}
+\item{threads}{Argument to \code{cmdstanr::cmdstan_model()}
+to model control compilation.}
 }
 \value{
 \code{NULL} (invisibly)
