@@ -46,6 +46,7 @@ stan_cmdstan_path()
 Other packages: 
 \code{\link{stan_package_clean}()},
 \code{\link{stan_package_compile}()},
-\code{\link{stan_package_configure}()}
+\code{\link{stan_package_configure}()},
+\code{\link{stan_package_model_files}()}
 }
 \concept{packages}

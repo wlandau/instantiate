@@ -2,21 +2,21 @@
 % Please edit documentation in R/stan_package_clean.R
 \name{stan_package_clean}
 \alias{stan_package_clean}
-\title{Remove compiled Stan models in an R package.}
+\title{Remove one or more compiled Stan models in an R package.}
 \usage{
-stan_package_clean(path = file.path(getwd(), "inst", "stan"))
+stan_package_clean(models = instantiate::stan_package_model_files())
 }
 \arguments{
-\item{path}{Absolute path to the directory of Stan models. Must be
-an absolute path. Defaults to \code{file.path(getwd(), "inst", "stan")}
-because that is where Stan model files must be located if
-building a package configured with \code{instantiate}.}
+\item{models}{Character vector of file paths to Stan model source code
+files. Defaults to the Stan files in \verb{./inst/stan/}
+because all the Stan model files must live in the \verb{inst/stan/} folder
+for an R package built with \code{instantiate}.}
 }
 \value{
 \code{NULL} (invisibly)
 }
 \description{
-Remove the compiled Stan models from the file system
+Remove one or more compiled Stan models from the file system
 of an R package.
 }
 \examples{
@@ -47,6 +47,7 @@ list.files(path)
 Other packages: 
 \code{\link{stan_cmdstan_path}()},
 \code{\link{stan_package_compile}()},
-\code{\link{stan_package_configure}()}
+\code{\link{stan_package_configure}()},
+\code{\link{stan_package_model_files}()}
 }
 \concept{packages}

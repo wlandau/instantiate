@@ -223,7 +223,9 @@ Configure the package so the Stan models compile during installation.
 `configure.win` for this, as well as `cleanup` and `cleanup.win` to
 remove compiled model files. Inside each script is a call to
 `instantiate::stan_package_compile()` which you can manually edit to
-control how your models are compiled.
+control how your models are compiled. For example, different calls to
+`stan_package_compile()` can compile different groups of models using
+different C++ compiler flags.
 
 ``` r
 stan_package_configure(path = "package_folder")

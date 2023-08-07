@@ -3,7 +3,7 @@ stan_test("stan_package_compile() and stan_package_clean()", {
   cmdstan <- stan_cmdstan_path()
   dir <- file.path("inst", "stan")
   dir.create(dir, recursive = TRUE)
-  expect_message(stan_package_compile(dir))
+  expect_error(stan_package_compile(), class = "stan_error")
   bernoulli <- file.path(cmdstan, "examples", "bernoulli", "bernoulli.stan")
   if (!file.exists(bernoulli)) {
     skip("missing bernoulli.stan example model from CmdStan")

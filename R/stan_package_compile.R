@@ -8,10 +8,10 @@
 #' @return `NULL` (invisibly)
 #' @inheritParams stan_cmdstan_path
 #' @inheritParams cmdstanr::`model-method-compile`
-#' @param path Absolute path to the directory of Stan models. Must be
-#'   an absolute path. Defaults to `file.path(getwd(), "inst", "stan")`
-#'   because that is where Stan model files must be located if
-#'   building a package configured with `instantiate`.
+#' @param models Character vector of file paths to Stan model source code
+#'   files. Defaults to the Stan files in `./inst/stan/`
+#'   because all the Stan model files must live in the `inst/stan/` folder
+#'   for an R package built with `instantiate`.
 #' @param verbose Logical of length 1, whether to set the
 #'   `cmdstanr_verbose` global option to print more compiler messages
 #'   than usual.
@@ -37,7 +37,7 @@
 #' stan_package_compile(path = file.path(path, "inst", "stan"))
 #' }
 stan_package_compile <- function(
-  path = file.path(getwd(), "inst", "stan"),
+  models = instantiate::stan_package_model_files(),
   cmdstan_install = Sys.getenv("CMDSTAN_INSTALL"),
   quiet = FALSE,
   verbose = TRUE,
@@ -61,7 +61,6 @@ stan_package_compile <- function(
     return(invisible())
   }
   # nocov end
-  models <- list.files(path, full.names = TRUE, pattern = "\\.stan$")
   if (length(models) < 1L) {
     stan_message("No Stan models found.")
     return(invisible())

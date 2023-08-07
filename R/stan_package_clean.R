@@ -1,13 +1,10 @@
-#' @title Remove compiled Stan models in an R package.
+#' @title Remove one or more compiled Stan models in an R package.
 #' @export
 #' @family packages
-#' @description Remove the compiled Stan models from the file system
+#' @description Remove one or more compiled Stan models from the file system
 #'   of an R package.
 #' @return `NULL` (invisibly)
-#' @param path Absolute path to the directory of Stan models. Must be
-#'   an absolute path. Defaults to `file.path(getwd(), "inst", "stan")`
-#'   because that is where Stan model files must be located if
-#'   building a package configured with `instantiate`.
+#' @inheritParams stan_package_compile
 #' @examples
 #' if (identical(Sys.getenv("INSTANTIATE_EXAMPLES"), "true")) {
 #' # Compilation happens automatically when the package installs.
@@ -31,8 +28,9 @@
 #' stan_package_clean(path = path)
 #' list.files(path)
 #' }
-stan_package_clean <- function(path = file.path(getwd(), "inst", "stan")) {
-  models <- list.files(path, full.names = TRUE, pattern = "\\.stan$")
+stan_package_clean <- function(
+  models = instantiate::stan_package_model_files()
+) {
   base <- gsub("\\.[[:alnum:]]+$", "", models)
   suppressWarnings(file.remove(base))
   suppressWarnings(file.remove(paste0(base, ".exe")))

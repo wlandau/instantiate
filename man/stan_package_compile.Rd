@@ -5,7 +5,7 @@
 \title{Compile the Stan models in an R package.}
 \usage{
 stan_package_compile(
-  path = file.path(getwd(), "inst", "stan"),
+  models = instantiate::stan_package_model_files(),
   cmdstan_install = Sys.getenv("CMDSTAN_INSTALL"),
   quiet = FALSE,
   verbose = TRUE,
@@ -22,10 +22,10 @@ stan_package_compile(
 )
 }
 \arguments{
-\item{path}{Absolute path to the directory of Stan models. Must be
-an absolute path. Defaults to \code{file.path(getwd(), "inst", "stan")}
-because that is where Stan model files must be located if
-building a package configured with \code{instantiate}.}
+\item{models}{Character vector of file paths to Stan model source code
+files. Defaults to the Stan files in \verb{./inst/stan/}
+because all the Stan model files must live in the \verb{inst/stan/} folder
+for an R package built with \code{instantiate}.}
 
 \item{cmdstan_install}{Character of length 1, how CmdStan was installed. The
 installation method determines how \code{instantiate} looks up CmdStan.
@@ -135,6 +135,7 @@ stan_package_compile(path = file.path(path, "inst", "stan"))
 Other packages: 
 \code{\link{stan_cmdstan_path}()},
 \code{\link{stan_package_clean}()},
-\code{\link{stan_package_configure}()}
+\code{\link{stan_package_configure}()},
+\code{\link{stan_package_model_files}()}
 }
 \concept{packages}
