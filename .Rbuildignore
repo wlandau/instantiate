@@ -24,6 +24,8 @@
 ^\.Rproj\.user$
 ^_pkgdown\.yml$
 ^docs$
+^example$
+^example\.R$
 ^CODE_OF_CONDUCT.md$
 ^codemeta\.json$
 ^CONTRIBUTING.md$

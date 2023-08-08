@@ -36,6 +36,7 @@ Depends:
   R (>= 4.0.0)
 Imports:
   fs,
+  pkglite,
   rlang,
   utils
 Suggests:

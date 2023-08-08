@@ -23,32 +23,27 @@
 #' }
 stan_package_create <- function(path = tempfile()) {
   stan_assert(
+    path,
+    is.character(.),
+    length(.) == 1L,
+    !anyNA(.),
+    nzchar(.),
     !file.exists(path),
-    message = paste("File already exists:", path)
+    message = "path must be a valid file path that does not already exist."
   )
-  from <- system.file("example", package = "instantiate", mustWork = TRUE)
-  fs::dir_copy(path = from, new_path = path)
-  file.rename(
-    from = file.path(path, "github"),
-    to = file.path(path, ".github")
+  packed <- system.file(
+    "example.txt",
+    package = "instantiate",
+    mustWork = TRUE
   )
-  file.rename(
-    from = file.path(path, "gitignore"),
-    to = file.path(path, ".gitignore")
+  temp <- tempfile()
+  on.exit(unlink(x = temp, recursive = TRUE))
+  pkglite::unpack(
+    input = packed,
+    output = temp,
+    install = FALSE,
+    quiet = TRUE
   )
-  file.rename(
-    from = file.path(path, "Rbuildignore"),
-    to = file.path(path, ".Rbuildignore")
-  )
-  stan_message(
-    paste0(
-      "Example package with package name \"example\" created at path \"",
-      path,
-      "\". Run stan_package_configure(path = \"",
-      path,
-      "\") to make sure the built-in Stan model in ",
-      "inst/stan/bernoulli.stan compiles when the package installs."
-    )
-  )
+  file.rename(from = file.path(temp, "example"), to = path)
   invisible()
 }
