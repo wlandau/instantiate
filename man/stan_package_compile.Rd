@@ -88,7 +88,7 @@ to model control compilation.}
 to model control compilation.}
 }
 \value{
-\code{NULL} (invisibly)
+\code{NULL} (invisibly). Called for its side effects.
 }
 \description{
 Compile all Stan models in a directory, usually in a package.

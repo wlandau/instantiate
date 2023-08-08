@@ -5,7 +5,7 @@
 #' @details If building a package using `instantiate`, all Stan model files
 #'   must live in a folder called `inst/stan/` in the package source
 #'   directory.
-#' @return `NULL` (invisibly)
+#' @return `NULL` (invisibly). Called for its side effects.
 #' @inheritParams stan_cmdstan_path
 #' @param models Character vector of file paths to Stan model source code
 #'   files. Defaults to the Stan files in `./inst/stan/`

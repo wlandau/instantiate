@@ -5,7 +5,7 @@
 #' @details After creating the package, the next step is to
 #'   configure it with [stan_package_configure()]. After that,
 #'   install it as an ordinary R package to automatically compile the models.
-#' @return `NULL` (invisibly).
+#' @return `NULL` (invisibly). Called for its side effects.
 #' @param path Path to write the package. Must not already exist.
 #' @examples
 #' if (identical(Sys.getenv("INSTANTIATE_EXAMPLES"), "true")) {

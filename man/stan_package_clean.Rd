@@ -13,7 +13,7 @@ because all the Stan model files must live in the \verb{inst/stan/} folder
 for an R package built with \code{instantiate}.}
 }
 \value{
-\code{NULL} (invisibly)
+\code{NULL} (invisibly). Called for its side effects.
 }
 \description{
 Remove one or more compiled Stan models from the file system

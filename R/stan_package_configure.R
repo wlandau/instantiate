@@ -5,7 +5,7 @@
 #'   compile all the Stan models in `inst/stan/` when the package installs.
 #' @details Writes configuration scripts `configure` and `configure.win`
 #'   in the directory specified by the `path` argument.
-#' @return `NULL` (invisibly).
+#' @return `NULL` (invisibly). Called for its side effects.
 #' @param path Character of length 1, file path to the package which will
 #'   contain Stan models in `inst/stan/` at installation time.
 #' @param overwrite Logical of length 1, whether to overwrite any existing

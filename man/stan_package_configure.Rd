@@ -14,7 +14,7 @@ contain Stan models in \verb{inst/stan/} at installation time.}
 configuration files.}
 }
 \value{
-\code{NULL} (invisibly).
+\code{NULL} (invisibly). Called for its side effects.
 }
 \description{
 Write configuration files in an R package which

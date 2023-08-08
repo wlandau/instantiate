@@ -10,7 +10,7 @@ stan_package_create(path = tempfile())
 \item{path}{Path to write the package. Must not already exist.}
 }
 \value{
-\code{NULL} (invisibly).
+\code{NULL} (invisibly). Called for its side effects.
 }
 \description{
 Create an example package with a Stan model inside.

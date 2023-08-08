@@ -7,6 +7,10 @@
 #'   models on installation. Then the `stan_package_model()` function
 #'   retrieves the `cmdstanr::cmdstan_model()` object without needing
 #'   to re-compile the model.
+#' @return An `R6` Stan model object from the `cmdstanr` package.
+#'   Please visit the documentation website at <https://mc-stan.org/cmdstanr/>
+#'   for detailed information on the composition of this model object
+#'   and how to use it to conduct Bayesian inference.
 #' @inheritParams stan_cmdstan_path
 #' @param name Character of length 1, base name of the Stan model file
 #'   (without the containing directory or `.stan` file extension).

@@ -45,6 +45,12 @@ is not installed, the function returns the empty string \code{""}.
 installed copy of CmdStan.
 }}
 }
+\value{
+An \code{R6} Stan model object from the \code{cmdstanr} package.
+Please visit the documentation website at \url{https://mc-stan.org/cmdstanr/}
+for detailed information on the composition of this model object
+and how to use it to conduct Bayesian inference.
+}
 \description{
 Get the \code{cmdstanr} model object for a pre-compiled Stan
 model inside a package.

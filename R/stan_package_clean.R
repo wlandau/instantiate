@@ -3,7 +3,7 @@
 #' @family packages
 #' @description Remove one or more compiled Stan models from the file system
 #'   of an R package.
-#' @return `NULL` (invisibly)
+#' @return `NULL` (invisibly). Called for its side effects.
 #' @inheritParams stan_package_compile
 #' @examples
 #' if (identical(Sys.getenv("INSTANTIATE_EXAMPLES"), "true")) {
