@@ -18,3 +18,7 @@ stan_test("stan_package_compile() and stan_package_clean()", {
   stan_package_clean()
   expect_false(file.exists(exe))
 })
+
+stan_test("stan_package_compile() on empty directory", {
+  expect_message(stan_package_compile(models = tempfile()))
+})
