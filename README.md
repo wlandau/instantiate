@@ -246,11 +246,11 @@ fs::dir_tree("package_folder")
 
 ## Installation
 
-Install the package at `package_folder` just like you would any other R
-package.
+Install the package just like you would any other R package. To install
+it from your local copy of `package_folder`, open R and run:
 
 ``` r
-install.packages("package_folder", type = "source", repos = NULL)
+install.packages(pkgs = "package_folder", type = "source", repos = NULL)
 ```
 
 ## Models
