@@ -1,7 +1,7 @@
 Package: instantiate
-Title: Pre-Compiled CmdStan Models in R Packages
+Title: Pre-Compiled 'CmdStan' Models in R Packages
 Description: Similar to 'rstantools' for 'rstan',
-  the `instantiate` package builds pre-compiled
+  the 'instantiate' package builds pre-compiled
   'CmdStan' models into CRAN-ready statistical modeling R packages.
   The models compile once during installation,
   the executables live inside the file systems of their respective packages,
