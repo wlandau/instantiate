@@ -28,15 +28,9 @@ in the directory specified by the \code{path} argument.
 if (identical(Sys.getenv("INSTANTIATE_EXAMPLES"), "true")) {
 path <- tempfile()
 stan_package_create(path = path)
+list.files(path)
 stan_package_configure(path = path)
-temporary_library <- tempfile()
-dir.create(temporary_library)
-install.packages(
-  pkgs = path,
-  lib = temporary_library,
-  type = "source",
-  repos = NULL
-)
+list.files(path)
 }
 }
 \seealso{

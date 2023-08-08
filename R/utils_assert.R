@@ -93,14 +93,10 @@ stan_assert_cmdstanr <- function() {
       pkg = "cmdstanr",
       reason = paste(
         "The {cmdstanr} package is needed to install",
-        "CmdStan and run Stan models."
-      ),
-      action = function(pkg, ...) {
-        install.packages(
-          pkgs = "cmdstanr",
-          repos = c("https://mc-stan.org/r-packages/", getOption("repos"))
-        )
-      }
+        "CmdStan and run Stan models. Please install it manually using",
+        "install.packages(pkgs = \"cmdstanr\",",
+        "repos = c(\"https://mc-stan.org/r-packages/\", getOption(\"repos\"))"
+      )
     ),
     error = function(e) {
       stan_error(conditionMessage(e))

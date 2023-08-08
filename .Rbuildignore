@@ -38,3 +38,4 @@
 ^paper\.bib$
 ^NOTICE$
 ^cmdstan$
+^tests/testthat/test-stan_package_model\.R$

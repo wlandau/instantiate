@@ -24,15 +24,7 @@ install it as an ordinary R package to automatically compile the models.
 if (identical(Sys.getenv("INSTANTIATE_EXAMPLES"), "true")) {
 path <- tempfile()
 stan_package_create(path = path)
-stan_package_configure(path = path)
-temporary_library <- tempfile()
-dir.create(temporary_library)
-install.packages(
-  pkgs = path,
-  lib = temporary_library,
-  type = "source",
-  repos = NULL
-)
+list.files(path)
 }
 }
 \keyword{packages}

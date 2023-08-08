@@ -59,26 +59,11 @@ model inside a package.
 Packages configured with \code{instantiate} compile their Stan
 models on installation. Then the \code{stan_package_model()} function
 retrieves the \code{cmdstanr::cmdstan_model()} object without needing
-to re-compile the model.
+to re-compile the model. Please see the documentation website
+of the \code{instantiate} package for examples.
 }
 \examples{
-if (identical(Sys.getenv("INSTANTIATE_EXAMPLES"), "true")) {
-path <- tempfile()
-stan_package_create(path = path)
-stan_package_configure(path = path)
-temporary_library <- tempfile()
-dir.create(temporary_library)
-install.packages(
-  pkgs = path,
-  lib = temporary_library,
-  type = "source",
-  repos = NULL
-)
-model <- stan_package_model(
-  name = "bernoulli",
-  package = "example",
-  library = temporary_library
-)
-}
+# Please see the documentation website of the {instantiate} package
+#   for examples.
 }
 \keyword{packages}

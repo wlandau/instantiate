@@ -6,7 +6,8 @@
 #' @details Packages configured with `instantiate` compile their Stan
 #'   models on installation. Then the `stan_package_model()` function
 #'   retrieves the `cmdstanr::cmdstan_model()` object without needing
-#'   to re-compile the model.
+#'   to re-compile the model. Please see the documentation website
+#'   of the `instantiate` package for examples.
 #' @return An `R6` Stan model object from the `cmdstanr` package.
 #'   Please visit the documentation website at <https://mc-stan.org/cmdstanr/>
 #'   for detailed information on the composition of this model object
@@ -20,24 +21,8 @@
 #'   to look for the package with the built-in Stan model.
 #'   Passed to the `lib.loc` argument of `system.file()`.
 #' @examples
-#' if (identical(Sys.getenv("INSTANTIATE_EXAMPLES"), "true")) {
-#' path <- tempfile()
-#' stan_package_create(path = path)
-#' stan_package_configure(path = path)
-#' temporary_library <- tempfile()
-#' dir.create(temporary_library)
-#' install.packages(
-#'   pkgs = path,
-#'   lib = temporary_library,
-#'   type = "source",
-#'   repos = NULL
-#' )
-#' model <- stan_package_model(
-#'   name = "bernoulli",
-#'   package = "example",
-#'   library = temporary_library
-#' )
-#' }
+#' # Please see the documentation website of the {instantiate} package
+#' #   for examples.
 stan_package_model <- function(
   name,
   package,
