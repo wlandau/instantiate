@@ -87,9 +87,8 @@ package file system.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="stan_package_create.html">stan_package_create</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">path</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in system.file("example.txt", package = "instantiate", mustWork = TRUE):</span> no file found</span>
 <span class="r-in"><span><span class="fu">stan_package_model_files</span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> No Stan model files found at "/tmp/Rtmp62bvH0/file2b8d164a1021/inst/stan". Packages built with {instantiate} must put their Stan models here.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpGK4zYk/file2bbd5cdca942/inst/stan/bernoulli.stan"</span>
 </code></pre></div>
     </div>
   </div>
