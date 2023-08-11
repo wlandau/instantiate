@@ -24,8 +24,13 @@ jobs:
     - name: Build the package
       run: R CMD build .
 
+    - name: Find tar.gz as artifact
+      run: |
+        TAR_PATH=$(find . -name "instantiate-*.tar.gz" | head -n 1)
+        echo "::set-output name=tar_path::$TAR_PATH"
+
     - name: Upload tar.gz artifact
       uses: actions/upload-artifact@v2
       with:
         name: build-internal
-        path: instantiate-*.tar.gz
+        path: ${{ steps.find-tarball.outputs.tar_path }}
