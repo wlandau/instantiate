@@ -1,4 +1,5 @@
-if (identical(tolower(Sys.getenv("CMDSTAN_INSTALL", "")), "internal")) {
+# .github/workflows/build-internal.yaml works by modifying the second line:
+if (identical(tolower(Sys.getenv("CMDSTAN_INSTALL", "")), "internal")) { 
   rlang::check_installed(
     pkg = "cmdstanr",
     reason = "The {cmdstanr} package is required to auto-install CmdStan.",
@@ -11,10 +12,12 @@ if (identical(tolower(Sys.getenv("CMDSTAN_INSTALL", "")), "internal")) {
   )
   message("Installing CmdStan inside {instantiate}.")
   Sys.unsetenv("CXX")
-  cmdstanr::install_cmdstan(dir = "inst")
-  cmdstan <- file.path("inst", "cmdstan")
-  file.rename(from = cmdstanr::cmdstan_path(), to = cmdstan)
-  cmdstanr::set_cmdstan_path(path = cmdstan)
-  example <- file.path(cmdstan, "examples", "bernoulli", "bernoulli.stan")
+  parent <- file.path("inst", "cmdstan")
+  if (!file.exists(parent)) {
+    dir.create(parent)
+  }
+  cmdstanr::install_cmdstan(dir = parent)
+  cmdstanr <- cmdstanr::cmdstan_path()
+  example <- file.path(cmdstanr, "examples", "bernoulli", "bernoulli.stan")
   cmdstanr::cmdstan_model(stan_file = example, compile = TRUE)
 }
