@@ -27,10 +27,17 @@ jobs:
     - name: Find tar.gz as artifact
       run: |
         TAR_PATH=$(find . -name "instantiate-*.tar.gz" | head -n 1)
-        echo "::set-output name=tar_path::$TAR_PATH"
+        if [[ -n "$TAR_PATH" ]]; then
+          echo "Found tarball at $TAR_PATH"
+          # Use the environment file to set the tarball path
+          echo "TAR_PATH=$TAR_PATH" >> $GITHUB_ENV
+        else
+          echo "No tarball found."
+          exit 1
+        fi
 
     - name: Upload tar.gz artifact
       uses: actions/upload-artifact@v2
       with:
         name: build-internal
-        path: ${{ steps.find-tarball.outputs.tar_path }}
+        path: ${{ env.TAR_PATH }}
