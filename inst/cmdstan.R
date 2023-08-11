@@ -9,11 +9,12 @@ if (identical(tolower(Sys.getenv("CMDSTAN_INSTALL", "")), "internal")) {
       )
     }
   )
-  cmdstan <- file.path("inst", "cmdstan")
-  if (!file.exists(cmdstan)) {
-    dir.create(cmdstan)
-  }
   message("Installing CmdStan inside {instantiate}.")
   Sys.unsetenv("CXX")
-  cmdstanr::install_cmdstan(dir = cmdstan)
+  cmdstanr::install_cmdstan(dir = "inst")
+  cmdstan <- file.path("inst", "cmdstan")
+  file.rename(from = cmdstanr::cmdstan_path(), to = cmdstan)
+  cmdstanr::set_cmdstan_path(path = cmdstan)
+  example <- file.path(cmdstan, "examples", "bernoulli", "bernoulli.stan")
+  cmdstanr::cmdstan_model(stan_file = example, compile = TRUE)
 }
