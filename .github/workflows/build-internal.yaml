@@ -1,4 +1,4 @@
-name: Upload Tarball Artifact
+name: build-internal
 
 on:
   push:
