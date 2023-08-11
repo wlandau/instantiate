@@ -24,6 +24,11 @@ jobs:
     - name: Build the package
       run: R CMD build .
 
+    - name: List files
+      run: |
+        echo "Listing files in current directory:"
+        ls -alh
+
     - name: Find tar.gz as artifact
       run: |
         TAR_PATH=$(find . -name "instantiate-*.tar.gz" | head -n 1)
