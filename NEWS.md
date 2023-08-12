@@ -1,6 +1,6 @@
-# instantiate 0.0.2.9000
+# instantiate 0.0.3
 
-
+* Bug fixes for internal CmdStan installation.
 
 # instantiate 0.0.2
 
