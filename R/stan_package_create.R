@@ -36,6 +36,19 @@ stan_package_create <- function(path = tempfile()) {
     install = FALSE,
     quiet = TRUE
   )
-  file.rename(from = file.path(temp, "example"), to = path)
+  temp <- file.path(temp, "example")
+  fs::dir_copy(
+    path = temp,
+    new_path = path,
+    overwrite = TRUE
+  )
+  unlink(x = temp, recursive = TRUE)
+  message(
+    paste0(
+      "Package with an internal Stan model created at ",
+      path,
+      ". Configure with stan_package_configure() before installing."
+    )
+  )
   invisible()
 }
