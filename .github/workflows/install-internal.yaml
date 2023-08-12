@@ -1,4 +1,4 @@
-name: build-internal
+name: install-internal
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-internal:
+  install-internal:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,7 +21,7 @@ jobs:
         use-public-rspm: true
         extra-repositories: 'https://mc-stan.org/r-packages/'
 
-    - name: Build the package
+    - name: Build instantiate tarball
       run: R CMD build .
 
     - name: Find tar.gz as artifact
@@ -38,5 +38,5 @@ jobs:
     - name: Upload tar.gz artifact
       uses: actions/upload-artifact@v3.1.2
       with:
-        name: instantiate
+        name: install-internal
         path: ${{ env.TAR_PATH }}

@@ -92,6 +92,13 @@ least complicated approach when it works. Steps:
 2.  Install `instantiate` using `install.packages("instantiate")` or
     similar.
 
+Alternatively, if it is not feasible to set `CMDSTAN_INSTALL` during the
+installation of `instantiate`, you can install the tarball inside the
+`install-internal.zip` file attached to the latest GitHub release. This
+zip file contains a modified tarball which installs
+[`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) internally
+regardless of any environment variables.
+
 ## Fixed installation
 
 In this approach, `instantiate` commits itself permanently to a

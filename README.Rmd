@@ -57,6 +57,8 @@ This approach installs [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan)
 1. Set the `CMDSTAN_INSTALL` environment variable to `"internal"`.
 2. Install `instantiate` using `install.packages("instantiate")` or similar.
 
+Alternatively, if it is not feasible to set `CMDSTAN_INSTALL` during the installation of `instantiate`, you can install the tarball inside the `install-internal.zip` file attached to the latest GitHub release. This zip file contains a modified tarball which installs [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) internally regardless of any environment variables.
+
 ## Fixed installation
 
 In this approach, `instantiate` commits itself permanently to a pre-existing installation of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). This is helpful for centrally maintained R installations, but unlike internal installation, fixed installation can leverage a pre-existing installation of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). This helps when your organization has a policy for maintaining non-R system libraries and already has [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) installed. Steps:
