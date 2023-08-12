@@ -17,6 +17,7 @@ if (identical(tolower(Sys.getenv("CMDSTAN_INSTALL", "")), "internal")) {
   message("Installing CmdStan inside {instantiate}.")
   Sys.unsetenv("CXX")
   cmdstanr::install_cmdstan(dir = cmdstan)
-  example <- file.path(cmdstanr, "examples", "bernoulli", "bernoulli.stan")
+  cmdstan <- cmdstanr::cmdstan_path()
+  example <- file.path(cmdstan, "examples", "bernoulli", "bernoulli.stan")
   cmdstanr::cmdstan_model(stan_file = example, compile = TRUE)
 }
