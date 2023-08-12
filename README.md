@@ -94,10 +94,23 @@ least complicated approach when it works. Steps:
 
 Alternatively, if it is not feasible to set `CMDSTAN_INSTALL` during the
 installation of `instantiate`, you can install the tarball inside the
-`install-internal.zip` file attached to the latest GitHub release. This
-zip file contains a modified tarball which installs
-[`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) internally
-regardless of any environment variables.
+`install-internal.zip` file attached to the [latest GitHub
+release](https://github.com/wlandau/instantiate/releases/). Here is an
+example. You may need to change `0.0.3` in the URL to point to the
+latest [GitHub tag](https://github.com/wlandau/instantiate/tags).
+
+``` r
+zip <- "https://github.com/wlandau/instantiate/releases/download/0.0.3/install-internal.zip"
+temp_zip <- tempfile()
+temp_tar <- tempfile()
+download.file(zip, temp_zip)
+unzip(temp_zip, exdir = temp_tar)
+install.packages(
+  pkgs = file.path(temp_tar, list.files(temp_tar)),
+  type = "source",
+  repos = NULL
+)
+```
 
 ## Fixed installation
 

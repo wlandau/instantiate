@@ -1,3 +1,7 @@
+# instantiate 0.0.3.9000 (development)
+
+
+
 # instantiate 0.0.3
 
 * Generate a modified tarball of the package which always installs CmdStan internally, regardless of environment variables (#8). The appropriate version of this tarball will be attached to forthcoming releases on GitHub.

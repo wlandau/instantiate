@@ -15,7 +15,7 @@ Description: Similar to 'rstantools' for 'rstan',
   and setting environment variables.
   Packages 'rstantools', 'cmdstanr', 'stannis', and
   'stanapi' are similar Stan clients with different objectives.
-Version: 0.0.3
+Version: 0.0.3.9000
 License: MIT + file LICENSE
 URL: https://wlandau.github.io/instantiate/,
   https://github.com/wlandau/instantiate
