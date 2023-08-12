@@ -31,10 +31,9 @@ jobs:
 
     - name: Find tar.gz as artifact
       run: |
-        TAR_PATH=$(find . -name "instantiate-*.tar.gz" | head -n 1)
+        TAR_PATH=$(find . -name "instantiate*.tar.gz" | head -n 1)
         if [[ -n "$TAR_PATH" ]]; then
           echo "Found tarball at $TAR_PATH"
-          # Use the environment file to set the tarball path
           echo "TAR_PATH=$TAR_PATH" >> $GITHUB_ENV
         else
           echo "No tarball found."
