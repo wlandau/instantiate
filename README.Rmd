@@ -72,6 +72,12 @@ install.packages(
 )
 ```
 
+The [`install-internal`](https://github.com/wlandau/instantiate/tree/install-internal) branch hosts the latest development version of the code in this modified tarball.
+
+```r
+remotes::install_github("wlandau/instantiate", ref = "install-internal")
+```
+
 ## Fixed installation
 
 In this approach, `instantiate` commits itself permanently to a pre-existing installation of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). This is helpful for centrally maintained R installations, but unlike internal installation, fixed installation can leverage a pre-existing installation of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). This helps when your organization has a policy for maintaining non-R system libraries and already has [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) installed. Steps:
