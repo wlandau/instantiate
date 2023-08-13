@@ -112,6 +112,15 @@ install.packages(
 )
 ```
 
+The
+[`install-internal`](https://github.com/wlandau/instantiate/tree/install-internal)
+branch hosts the latest development version of the code in this modified
+tarball.
+
+``` r
+remotes::install_github("wlandau/instantiate", ref = "install-internal")
+```
+
 ## Fixed installation
 
 In this approach, `instantiate` commits itself permanently to a
