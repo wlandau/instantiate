@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">instantiate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.4</span>
       </span>
     </div>
 
@@ -64,10 +64,8 @@
 <span>  cpp_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  stanc_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  force_recompile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"cmdstanr_force_recompile"</span>, default <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
-<span>  compile_model_methods <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  compile_hessian_method <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  compile_standalone <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  threads <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  threads <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -144,24 +142,13 @@ to model control compilation.</p></dd>
 to model control compilation.</p></dd>
 
 
-<dt>compile_model_methods</dt>
-<dd><p>Argument to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>
-to model control compilation.</p></dd>
-
-
-<dt>compile_hessian_method</dt>
-<dd><p>Argument to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>
-to model control compilation.</p></dd>
-
-
-<dt>compile_standalone</dt>
-<dd><p>Argument to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>
-to model control compilation.</p></dd>
-
-
 <dt>threads</dt>
 <dd><p>Argument to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>
 to model control compilation.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Other named arguments to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>.</p></dd>
 
 </dl></div>
     <div id="value">
