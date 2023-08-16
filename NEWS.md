@@ -1,6 +1,6 @@
-# instantiate 0.0.3.9000 (development)
+# instantiate 0.0.4
 
-
+* Relax `cmdstanr` requirement (now minimum version 0.5.2).
 
 # instantiate 0.0.3
 

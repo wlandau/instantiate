@@ -15,10 +15,8 @@ stan_package_compile(
   cpp_options = list(),
   stanc_options = list(),
   force_recompile = getOption("cmdstanr_force_recompile", default = FALSE),
-  compile_model_methods = FALSE,
-  compile_hessian_method = FALSE,
-  compile_standalone = FALSE,
-  threads = FALSE
+  threads = FALSE,
+  ...
 )
 }
 \arguments{
@@ -75,17 +73,10 @@ to model control compilation.}
 \item{force_recompile}{Argument to \code{cmdstanr::cmdstan_model()}
 to model control compilation.}
 
-\item{compile_model_methods}{Argument to \code{cmdstanr::cmdstan_model()}
-to model control compilation.}
-
-\item{compile_hessian_method}{Argument to \code{cmdstanr::cmdstan_model()}
-to model control compilation.}
-
-\item{compile_standalone}{Argument to \code{cmdstanr::cmdstan_model()}
-to model control compilation.}
-
 \item{threads}{Argument to \code{cmdstanr::cmdstan_model()}
 to model control compilation.}
+
+\item{...}{Other named arguments to \code{cmdstanr::cmdstan_model()}.}
 }
 \value{
 \code{NULL} (invisibly). Called for its side effects.
