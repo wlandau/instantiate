@@ -52,7 +52,7 @@ The important environment variables for `instantiate` are:
 
 ## Internal installation
 
-This approach installs [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) inside the installed file system of `instantiate` when the `instantiate` package installs. This approach is useful for centrally maintained R installations where many users share a common set of R packages and system libraries, as is common in highly regulated industries. The procedure may be slower complete than the other options, and it is not amenable to [GitHub Actions](https://github.com/features/actions) workflows which upload R package libraries as archives, but it is the least complicated approach when it works. Steps:
+This approach installs [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) inside the installed file system of `instantiate` when the `instantiate` package installs. This approach is useful for centrally maintained R installations where many users share a common set of R packages and system libraries, as is common in highly regulated industries. The procedure may be slower to complete than the other options, and it is not amenable to [GitHub Actions](https://github.com/features/actions) workflows which upload R package libraries as archives, but it is the least complicated approach when it works. Steps:
 
 1. Set the `CMDSTAN_INSTALL` environment variable to `"internal"`.
 2. Install `instantiate` using `install.packages("instantiate")` or similar.
