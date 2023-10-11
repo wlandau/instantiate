@@ -128,10 +128,10 @@
 <div class="section level2">
 <h2 id="environment-variables">Environment variables<a class="anchor" aria-label="anchor" href="#environment-variables"></a>
 </h2>
-<p>The <code>instantiate</code> package uses environment variables to to control the installation of <a href="https://mc-stan.org/users/interfaces/cmdstan" class="external-link"><code>CmdStan</code></a>. An environment variable is an operating system setting with a name and a value (both text strings). In R, there are two ways to set environment variables:</p>
+<p>The <code>instantiate</code> package uses environment variables to control the installation of <a href="https://mc-stan.org/users/interfaces/cmdstan" class="external-link"><code>CmdStan</code></a>. An environment variable is an operating system setting with a name and a value (both text strings). In R, there are two ways to set environment variables:</p>
 <ol style="list-style-type: decimal">
 <li>
-<code><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv()</a></code>, which sets environment variables temporarily for the current R session.</li>
+<code><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv()</a></code>, which sets environment variables temporarily for the current R session.</li>
 <li>The <code>.Renviron</code> text file in you home directory, which passes environment variables to all new R sessions. the <a href="https://usethis.r-lib.org/reference/edit.html" class="external-link"><code>edit_r_environ()</code></a> function from the <a href="https://usethis.r-lib.org/" class="external-link"><code>usethis</code></a> package helps.</li>
 </ol>
 <p>The important environment variables for <code>instantiate</code> are:</p>
@@ -145,7 +145,7 @@
 <div class="section level2">
 <h2 id="internal-installation">Internal installation<a class="anchor" aria-label="anchor" href="#internal-installation"></a>
 </h2>
-<p>This approach installs <a href="https://mc-stan.org/users/interfaces/cmdstan" class="external-link"><code>CmdStan</code></a> inside the installed file system of <code>instantiate</code> when the <code>instantiate</code> package installs. This approach is useful for centrally maintained R installations where many users share a common set of R packages and system libraries, as is common in highly regulated industries. The procedure may be slower complete than the other options, and it is not amenable to <a href="https://github.com/features/actions" class="external-link">GitHub Actions</a> workflows which upload R package libraries as archives, but it is the least complicated approach when it works. Steps:</p>
+<p>This approach installs <a href="https://mc-stan.org/users/interfaces/cmdstan" class="external-link"><code>CmdStan</code></a> inside the installed file system of <code>instantiate</code> when the <code>instantiate</code> package installs. This approach is useful for centrally maintained R installations where many users share a common set of R packages and system libraries, as is common in highly regulated industries. The procedure may be slower to complete than the other options, and it is not amenable to <a href="https://github.com/features/actions" class="external-link">GitHub Actions</a> workflows which upload R package libraries as archives, but it is the least complicated approach when it works. Steps:</p>
 <ol style="list-style-type: decimal">
 <li>Set the <code>CMDSTAN_INSTALL</code> environment variable to <code>"internal"</code>.</li>
 <li>Install <code>instantiate</code> using <code>install.packages("instantiate")</code> or similar.</li>
