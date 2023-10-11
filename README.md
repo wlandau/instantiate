@@ -48,14 +48,14 @@ using one of the R commands below.
 
 ## Environment variables
 
-The `instantiate` package uses environment variables to to control the
+The `instantiate` package uses environment variables to control the
 installation of
 [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). An
 environment variable is an operating system setting with a name and a
 value (both text strings). In R, there are two ways to set environment
 variables:
 
-1.  `Sys.getenv()`, which sets environment variables temporarily for the
+1.  `Sys.setenv()`, which sets environment variables temporarily for the
     current R session.
 2.  The `.Renviron` text file in you home directory, which passes
     environment variables to all new R sessions. the
@@ -83,8 +83,8 @@ installed file system of `instantiate` when the `instantiate` package
 installs. This approach is useful for centrally maintained R
 installations where many users share a common set of R packages and
 system libraries, as is common in highly regulated industries. The
-procedure may be slower complete than the other options, and it is not
-amenable to [GitHub Actions](https://github.com/features/actions)
+procedure may be slower to complete than the other options, and it is
+not amenable to [GitHub Actions](https://github.com/features/actions)
 workflows which upload R package libraries as archives, but it is the
 least complicated approach when it works. Steps:
 
