@@ -4,7 +4,7 @@
 \alias{stan_cmdstan_path}
 \title{Path to CmdStan for \code{instantiate}}
 \usage{
-stan_cmdstan_path(cmdstan_install = Sys.getenv("CMDSTAN_INSTALL"))
+stan_cmdstan_path(cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = ""))
 }
 \arguments{
 \item{cmdstan_install}{Character of length 1, how CmdStan was installed. The

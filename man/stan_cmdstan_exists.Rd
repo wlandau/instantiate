@@ -4,7 +4,9 @@
 \alias{stan_cmdstan_exists}
 \title{Check if \code{instantiate} can find CmdStan.}
 \usage{
-stan_cmdstan_exists(cmdstan_install = Sys.getenv("CMDSTAN_INSTALL"))
+stan_cmdstan_exists(
+  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = "")
+)
 }
 \arguments{
 \item{cmdstan_install}{Character of length 1, how CmdStan was installed. The

@@ -5,7 +5,7 @@
 \title{Version of CmdStan that \code{instantiate} uses.}
 \usage{
 stan_cmdstan_version(
-  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL"),
+  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = ""),
   error_on_NA = TRUE
 )
 }

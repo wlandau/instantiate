@@ -97,15 +97,18 @@ environment variable at installation time (i.e. during
 | Fixed              | `"fixed"`                     | No               | The value that the `CMDSTAN` environment variable originally contained at installation time, regardless of the current value of `CMDSTAN` at runtime. |
 | Internal           | `"internal"`                  | Yes              | The internal copy of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) inside `instantiate`.                                                  |
 
-At runtime, `CMDSTAN_INSTALL` overrides `instantiate`’s automatic
+At runtime `instantiate`, the `CMDSTAN_INSTALL` environment variable
+takes on a different role: it overrides `instantiate`’s automatic
 preference for
-[`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). For example,
-if you installed `instantiate` with `CMDSTAN_INSTALL` equal
-`"internal"`, you can set `Sys.setenv(CMDSTAN_INSTALL = "implicit")` at
-runtime to let `cmdstanr::cmdstan_path()` choose the path to
-[`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan).
-Alternatively, you can manually set the `cmdstan_install` argument of
-functions like `stan_cmdstan_path()`.
+[`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). (So does the
+`cmdstan_install` function argument.) For example, if you installed
+`instantiate` with `CMDSTAN_INSTALL` equal `"internal"`, you can set
+`Sys.setenv(CMDSTAN_INSTALL = "implicit")` at runtime to let
+`cmdstanr::cmdstan_path()` choose the path to
+[`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). You can
+always choose implicit or fixed installation, but you can only choose
+internal installation if `instantiate` was installed with an internal
+copy of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan).
 
 # Packaging Stan models
 

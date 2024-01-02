@@ -27,7 +27,7 @@ stan_package_model <- function(
   name,
   package,
   library = NULL,
-  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL")
+  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = "")
 ) {
   stan_assert_cmdstanr()
   stan_assert(name, is.character(.), !anyNA(.), nzchar(.))

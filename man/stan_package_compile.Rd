@@ -6,7 +6,7 @@
 \usage{
 stan_package_compile(
   models = instantiate::stan_package_model_files(),
-  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL"),
+  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = ""),
   verbose = TRUE,
   quiet = FALSE,
   pedantic = FALSE,

@@ -8,7 +8,7 @@ stan_package_model(
   name,
   package,
   library = NULL,
-  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL")
+  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = "")
 )
 }
 \arguments{
