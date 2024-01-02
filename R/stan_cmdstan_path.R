@@ -40,7 +40,7 @@ stan_cmdstan_path <- function(
     out <- file.path(parent, list.files(parent)) %||% ""
   }
   if (identical(install, "fixed") || path_next(install, out)) {
-    out <- .Call(c_cmdstan_path)
+    out <- .Call(c_cmdstan_path, package = "instantiate")
   }
   if (identical(install, "cmdstanr") || path_next(install, out)) {
     out <- cmdstanr_path()
