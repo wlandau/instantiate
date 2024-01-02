@@ -5,8 +5,9 @@ for (file in c("symbols.rds", Sys.glob(paste0("*", SHLIB_EXT)))) {
     file.copy(file, file.path(libs, file))
   }
 }
-choice <- Sys.getenv("CMDSTAN_INSTALL", "")
-if (identical(tolower(choice), "internal")) {
+choice <- tolower(Sys.getenv("CMDSTAN_INSTALL", ""))
+
+if (identical(choice, "internal")) {
   rlang::check_installed(
     pkg = "cmdstanr",
     reason = "The {cmdstanr} package is required to auto-install CmdStan.",
@@ -21,20 +22,35 @@ if (identical(tolower(choice), "internal")) {
   if (!file.exists(cmdstan)) {
     dir.create(cmdstan, recursive = TRUE, showWarnings = FALSE)
   }
-  message("Installing CmdStan to ", cmdstan)
+  message(
+    sprintf(
+      c(
+        "Internal installation: installing CmdStan inside {instantiate} ",
+        "\"%s\". {instantiate} will prefer this internal copy of CmdStan ",
+        "when the CMDSTAN_INSTALL environment variable is unset."
+      ),
+      cmdstan
+    )
+  )
   cmdstanr::install_cmdstan(dir = cmdstan)
   cmdstan <- max(list.files(cmdstan, full.names = TRUE))
   cmdstanr::set_cmdstan_path(path = cmdstan)
   example <- file.path(cmdstan, "examples", "bernoulli", "bernoulli.stan")
   cmdstanr::cmdstan_model(stan_file = example, compile = TRUE)
-} else {
+} else if (identical(choice, "fixed")) {
   message(
     sprintf(
       c(
-        "Sys.getenv(\"CMDSTAN_INSTALL\") is \"%s\", ",
-        "so CmdStan will not be installed inside {instantiate}."
+        "Fixed installation: the CMDSTAN environment variable is set to ",
+        "\"%s\". {instantiate} will prefer this copy of CmdStan ",
+        "when the CMDSTAN_INSTALL environment variable is unset."
       ),
-      choice
+      Sys.getenv("CMDSTAN")
     )
+  )
+} else {
+  message(
+    "Implicit installation: {instantiate} will use cmdstanr::cmdstan_path() ",
+    "to find CmdStan when the CMDSTAN_INSTALL environment variable is unset."
   )
 }

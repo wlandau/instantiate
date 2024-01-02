@@ -29,7 +29,7 @@
 #' @examples
 #' stan_cmdstan_path()
 stan_cmdstan_path <- function(
-  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL")
+  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = "")
 ) {
   # It is not feasible to test all these cases in a single test coverage run.
   # Covered in several GitHub Actions workflows.
