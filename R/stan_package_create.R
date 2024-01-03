@@ -25,6 +25,14 @@ stan_package_create <- function(path = tempfile()) {
   )
   source <- system.file("example", package = "instantiate", mustWork = TRUE)
   fs::dir_copy(path = source, new_path = path, overwrite = TRUE)
+  file.rename(
+    from = file.path(path, "gitignore"),
+    to = file.path(path, ".gitignore")
+  )
+  file.rename(
+    from = file.path(path, "rbuildignore"),
+    to = file.path(path, ".Rbuildignore")
+  )
   message(
     paste0(
       "Package with an internal Stan model created at directory path \"",
