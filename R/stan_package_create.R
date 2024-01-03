@@ -33,6 +33,10 @@ stan_package_create <- function(path = tempfile()) {
     from = file.path(path, "rbuildignore"),
     to = file.path(path, ".Rbuildignore")
   )
+  file.rename(
+    from = file.path(path, "github"),
+    to = file.path(path, ".github")
+  )
   message(
     paste0(
       "Package with an internal Stan model created at directory path \"",
