@@ -5,8 +5,8 @@ for (file in c("symbols.rds", Sys.glob(paste0("*", SHLIB_EXT)))) {
     file.copy(file, file.path(libs, file))
   }
 }
-choice <- tolower(Sys.getenv("CMDSTAN_INSTALL", ""))
 
+choice <- tolower(Sys.getenv("CMDSTAN_INSTALL", ""))
 if (identical(choice, "internal")) {
   rlang::check_installed(
     pkg = "cmdstanr",
