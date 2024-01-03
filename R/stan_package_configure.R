@@ -48,6 +48,7 @@ stan_package_configure <- function(path = getwd(), overwrite = FALSE) {
   out_cleanup_win <- file.path(path, "cleanup.win")
   out_install <- file.path(src, "install.libs.R")
   out_makevars <- file.path(src, "Makevars")
+  out_makevars_win <- file.path(src, "Makevars.win")
   file.copy(
     from = in_cleanup,
     to = out_cleanup,
@@ -70,6 +71,9 @@ stan_package_configure <- function(path = getwd(), overwrite = FALSE) {
   )
   if (!file.exists(out_makevars)) {
     file.create(out_makevars)
+  }
+  if (!file.exists(out_makevars_win)) {
+    file.create(out_makevars_win)
   }
   invisible()
 }
