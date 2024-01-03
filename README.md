@@ -89,7 +89,8 @@ Your choice determines
 
 The following table describes the role of the `CMDSTAN_INSTALL`
 environment variable at installation time (i.e. during
-`install.packages("instantiate")`).
+`install.packages("instantiate")`). Implicit installation is recommended
+for most situations.
 
 | Installation type  | `CMDSTAN_INSTALL`             | Install CmdStan? | Default path to CmdStan at runtime                                                                                                                    |
 |--------------------|-------------------------------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -98,8 +99,8 @@ environment variable at installation time (i.e. during
 | Internal           | `"internal"`                  | Yes              | The internal copy of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) inside `instantiate`.                                                  |
 
 At runtime `instantiate`, the `CMDSTAN_INSTALL` environment variable
-takes on a different role: it overrides `instantiate`’s automatic
-preference for
+takes on a different role: it overrides the automatic preference that
+`instantiate` has for the path to
 [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). (So does the
 `cmdstan_install` function argument.) For example, if you installed
 `instantiate` with `CMDSTAN_INSTALL` equal `"internal"`, you can set

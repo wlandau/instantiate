@@ -49,6 +49,7 @@ Suggests:
 Additional_repositories:
   https://mc-stan.org/r-packages/
 SystemRequirements: CmdStan (https://mc-stan.org/users/interfaces/cmdstan)
+StagedInstall: no
 Encoding: UTF-8
 Language: en-US
 Config/testthat/edition: 3

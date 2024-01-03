@@ -18,7 +18,7 @@ if (identical(choice, "internal")) {
       )
     }
   )
-  cmdstan <- file.path(R_PACKAGE_DIR, "bin", R_ARCH, "cmdstan")
+  cmdstan <- file.path(R_PACKAGE_DIR, "bin", "cmdstan")
   if (!file.exists(cmdstan)) {
     dir.create(cmdstan, recursive = TRUE, showWarnings = FALSE)
   }
