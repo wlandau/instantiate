@@ -72,7 +72,7 @@ The following section explains how to create an R package with pre-compiled Stan
 
 ## Structure
 
-Begin with an R package with one or more Stan model files inside the `inst/stan/` directory. `stan_package_create()` is a convenient way to start.
+Begin with an R package with one or more Stan model files inside the `src/stan/` directory. `stan_package_create()` is a convenient way to start.
 
 ```r
 stan_package_create(path = "package_folder")
@@ -202,10 +202,10 @@ Additional_repositories:
 6. For [version control](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control), it is best practice to commit only source code files and documentation. Please do not commit any compiled executable Stan model files to your repository. If you do commit them, then other users with different machines will have trouble installing your package, and your commit history will consume too much storage. For [Git](https://git-scm.com), you may add the following lines to the [`.gitigore`](https://git-scm.com/docs/gitignore) file at the root of your package: 
 
 ```
-inst/stan/**
-!inst/stan/**/*.*
-inst/stan/**/*.exe
-inst/stan/**/*.EXE
+src/stan/**
+!src/stan/**/*.*
+src/stan/**/*.exe
+src/stan/**/*.EXE
 ```
 
 7. For [continuous integration](https://devguide.ropensci.org/ci.html) (e.g. on [GitHub Actions](https://github.com/r-lib/actions)), please use [`cmdstanr`](https://mc-stan.org/cmdstanr/)-based installation as explained above, and tweak your workflow YAML files as explained in that section.

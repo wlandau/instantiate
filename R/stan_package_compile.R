@@ -3,13 +3,13 @@
 #' @family packages
 #' @description Compile all Stan models in a directory, usually in a package.
 #' @details If building a package using `instantiate`, all Stan model files
-#'   must live in a folder called `inst/stan/` in the package source
+#'   must live in a folder called `src/stan/` in the package source
 #'   directory.
 #' @return `NULL` (invisibly). Called for its side effects.
 #' @inheritParams stan_cmdstan_path
 #' @param models Character vector of file paths to Stan model source code
-#'   files. Defaults to the Stan files in `./inst/stan/`
-#'   because all the Stan model files must live in the `inst/stan/` folder
+#'   files. Defaults to the Stan files in `./src/stan/`
+#'   because all the Stan model files must live in the `src/stan/` folder
 #'   for an R package built with `instantiate`.
 #' @param verbose Logical of length 1, whether to set the
 #'   `cmdstanr_verbose` global option to print more compiler messages

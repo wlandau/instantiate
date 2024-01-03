@@ -27,9 +27,9 @@ stan_package_create <- function(path = tempfile()) {
   fs::dir_copy(path = source, new_path = path, overwrite = TRUE)
   message(
     paste0(
-      "Package with an internal Stan model created at ",
+      "Package with an internal Stan model created at directory path \"",
       path,
-      ". Configure with stan_package_configure() before installing."
+      "\". Configure with stan_package_configure() before installing."
     )
   )
   invisible()

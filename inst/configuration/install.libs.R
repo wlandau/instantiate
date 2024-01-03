@@ -25,5 +25,5 @@ if (!file.exists(bin)) {
 bin_stan <- file.path(bin, "stan")
 fs::dir_copy(path = "stan", new_path = bin_stan)
 instantiate::stan_package_compile(
-  models = list.files(bin_stan, full.names = TRUE, pattern = "\\.stan$")
+  models = instantiate::stan_package_model_files(path = bin_stan)
 )

@@ -21,8 +21,8 @@ stan_package_compile(
 }
 \arguments{
 \item{models}{Character vector of file paths to Stan model source code
-files. Defaults to the Stan files in \verb{./inst/stan/}
-because all the Stan model files must live in the \verb{inst/stan/} folder
+files. Defaults to the Stan files in \verb{./src/stan/}
+because all the Stan model files must live in the \verb{src/stan/} folder
 for an R package built with \code{instantiate}.}
 
 \item{cmdstan_install}{Character of length 1, how to look for an installed
@@ -88,7 +88,7 @@ Compile all Stan models in a directory, usually in a package.
 }
 \details{
 If building a package using \code{instantiate}, all Stan model files
-must live in a folder called \verb{inst/stan/} in the package source
+must live in a folder called \verb{src/stan/} in the package source
 directory.
 }
 \examples{

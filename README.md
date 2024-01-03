@@ -122,7 +122,7 @@ previously.
 ## Structure
 
 Begin with an R package with one or more Stan model files inside the
-`inst/stan/` directory. `stan_package_create()` is a convenient way to
+`src/stan/` directory. `stan_package_create()` is a convenient way to
 start.
 
 ``` r
@@ -298,10 +298,10 @@ run_bernoulli_model <- function(y, ...) {
 
 <!-- -->
 
-    inst/stan/**
-    !inst/stan/**/*.*
-    inst/stan/**/*.exe
-    inst/stan/**/*.EXE
+    src/stan/**
+    !src/stan/**/*.*
+    src/stan/**/*.exe
+    src/stan/**/*.EXE
 
 7.  For [continuous integration](https://devguide.ropensci.org/ci.html)
     (e.g. on [GitHub Actions](https://github.com/r-lib/actions)), please
