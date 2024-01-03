@@ -25,9 +25,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" -e "instantiate::stan_package_clean()"
-if [ $? -ne 0 ]; then
-  echo "Could not clean up compiled Stan models." >&2
-  exit 1
+if [ -d "bin" ]; then
+  rm -rf bin
 fi
-exit 0
+

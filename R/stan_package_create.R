@@ -23,26 +23,8 @@ stan_package_create <- function(path = tempfile()) {
     !file.exists(path),
     message = "path must be a valid file path that does not already exist."
   )
-  packed <- system.file(
-    "example.txt",
-    package = "instantiate",
-    mustWork = TRUE
-  )
-  temp <- tempfile()
-  on.exit(unlink(x = temp, recursive = TRUE))
-  pkglite::unpack(
-    input = packed,
-    output = temp,
-    install = FALSE,
-    quiet = TRUE
-  )
-  temp <- file.path(temp, "example")
-  fs::dir_copy(
-    path = temp,
-    new_path = path,
-    overwrite = TRUE
-  )
-  unlink(x = temp, recursive = TRUE)
+  source <- system.file("example", package = "instantiate", mustWork = TRUE)
+  fs::dir_copy(path = source, new_path = path, overwrite = TRUE)
   message(
     paste0(
       "Package with an internal Stan model created at ",

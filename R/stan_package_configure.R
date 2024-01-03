@@ -38,20 +38,16 @@ stan_package_configure <- function(path = getwd(), overwrite = FALSE) {
     package = "instantiate",
     mustWork = TRUE
   )
-  in_configure <- system.file(
-    file.path("configuration", "configure"),
+  in_install <- system.file(
+    file.path("configuration", "install.libs.R"),
     package = "instantiate",
     mustWork = TRUE
   )
-  in_configure_win <- system.file(
-    file.path("configuration", "configure.win"),
-    package = "instantiate",
-    mustWork = TRUE
-  )
+  src <- file.path(path, "src")
   out_cleanup <- file.path(path, "cleanup")
   out_cleanup_win <- file.path(path, "cleanup.win")
-  out_configure <- file.path(path, "configure")
-  out_configure_win <- file.path(path, "configure.win")
+  out_install <- file.path(src, "install.libs.R")
+  out_makevars <- file.path(src, "Makevars")
   file.copy(
     from = in_cleanup,
     to = out_cleanup,
@@ -63,16 +59,17 @@ stan_package_configure <- function(path = getwd(), overwrite = FALSE) {
     to = out_cleanup_win,
     overwrite = overwrite
   )
+  if (!file.exists(src)) {
+    dir.create(src)
+  }
   file.copy(
-    from = in_configure,
-    to = out_configure,
+    from = in_install,
+    to = out_install,
     overwrite = overwrite,
     copy.mode = TRUE
   )
-  file.copy(
-    from = in_configure_win,
-    to = out_configure_win,
-    overwrite = overwrite
-  )
+  if (!file.exists(out_makevars)) {
+    file.create(out_makevars)
+  }
   invisible()
 }

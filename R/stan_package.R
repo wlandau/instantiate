@@ -20,7 +20,6 @@
 #'   diagnosing compilation errors, and setting environment variables.
 #' @useDynLib instantiate, .registration = TRUE
 #' @importFrom fs dir_copy
-#' @importFrom pkglite unpack
 #' @importFrom rlang abort check_installed inform is_installed warn
 #' @importFrom utils capture.output globalVariables install.packages
 NULL

@@ -1,0 +1,9 @@
+^.*\.Rproj$
+^\.git$
+^\.github$
+^\.gitignore$
+^\.Rbuildignore$
+^\.RData$
+^\.Rhistory$
+^\.Rproj\.user$
+^NOTICE$
