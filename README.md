@@ -136,7 +136,7 @@ At minimum the package file structure should look something like this:
 fs::dir_tree("package_folder")
 #> package_folder
 #> ├── DESCRIPTION
-#> └── inst
+#> └── src
 #>     └── stan
 #>         └── bernoulli.stan
 ```
@@ -144,17 +144,13 @@ fs::dir_tree("package_folder")
 ## Configuration
 
 Configure the package so the Stan models compile during installation.
-`stan_package_configure()` writes scripts `configure` and
-`configure.win` for this, as well as `cleanup` and `cleanup.win` to
-remove compiled model files. Inside each script is a call to
+`stan_package_configure()` writes required scripts `cleanup`,
+`cleanup.win`, `src/Makevars`, `src/Makevars.win`, and
+`src/install.libs.R`. Inside `src/install.libs.R` is a call to
 `instantiate::stan_package_compile()` which you can manually edit to
 control how your models are compiled. For example, different calls to
 `stan_package_compile()` can compile different groups of models using
 different C++ compiler flags.
-
-``` r
-stan_package_configure(path = "package_folder")
-```
 
 ``` r
 fs::dir_tree("package_folder")
@@ -162,9 +158,10 @@ fs::dir_tree("package_folder")
 #> ├── DESCRIPTION
 #> ├── cleanup
 #> ├── cleanup.win
-#> ├── configure
-#> ├── configure.win
-#> └── inst
+#> └── src
+#>     ├── Makevars
+#>     ├── Makevars.win
+#>     ├── install.libs.R
 #>     └── stan
 #>         └── bernoulli.stan
 ```
