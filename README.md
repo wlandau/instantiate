@@ -1,8 +1,7 @@
 
 # instantiate: pre-compiled CmdStan models in R packages
 
-<!--[![CRAN](https://www.r-pkg.org/badges/version/instantiate)](https://CRAN.R-project.org/package=instantiate)-->
-
+[![CRAN](https://www.r-pkg.org/badges/version/instantiate)](https://CRAN.R-project.org/package=instantiate)
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![check-cmdstanr](https://github.com/wlandau/instantiate/workflows/check-cmdstanr/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Acheck-cmdstanr)
 [![check-cran](https://github.com/wlandau/instantiate/workflows/check-cran/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Acheck-cran)
