@@ -23,6 +23,29 @@ stan_assert <- function(
   invisible()
 }
 
+stan_assert_install <- function(install) {
+  message <- paste(
+    "The CMDSTAN_INSTALL environment variable and the install argument",
+    "must be \"implicit\", \"fixed\", \"internal\", \"\", or unset",
+    "both when {instantiate} is installed and when {instantiate} is used.",
+    "If you are using {instantiate} and you get this error even though",
+    "CMDSTAN_INSTALL is an allowable value, please reinstall {instantiate}",
+    "with an allowable value of CMDSTAN_INSTALL."
+  )
+  stan_assert(
+    install,
+    is.character(.),
+    !anyNA(.),
+    length(.) == 1L,
+    message = message
+  )
+  stan_assert(
+    install %in% c("implicit", "fixed", "internal", ""),
+    message = message
+  )
+  invisible()
+}
+
 stan_deprecate <- function(name, date, version, alternative) {
   message <- sprintf(
     "%s was deprecated on %s (instantiate version %s). Alternative: %s.",

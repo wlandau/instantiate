@@ -30,7 +30,11 @@ The website at <https://wlandau.github.io/instantiate/> includes a [function ref
 
 # Installation
 
-The `instantiate` uses [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) [`CmdStanR`](https://mc-stan.org/cmdstanr/), and the directions below describe different ways to install all three. Regardless of the approach, the last step is always to install the `instantiate` package using one of the R commands below.
+The `instantiate` package depends on the R package [`CmdStanR`](https://mc-stan.org/cmdstanr/) and the command line tool [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan), so it is important to follow these stages in order:
+
+1. Install the R package [`CmdStanR`](https://mc-stan.org/cmdstanr/). [`CmdStanR`](https://mc-stan.org/cmdstanr/) is not on CRAN, so the recommended way to install it is `install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))`.
+2. Optional: set environment variables `CMDSTAN_INSTALL` and/or `CMDSTAN` to manage the  [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) installation. See the "Administering CmdStan" section below for details.
+3. Install `instantiate` using one of the R commands below.
 
 Type | Source | Command
 ---|---|---
@@ -40,94 +44,35 @@ Development | R-universe | `install.packages("instantiate", repos = "https://wla
 
 ## Environment variables
 
-The `instantiate` package uses environment variables to control the installation of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). An environment variable is an operating system setting with a name and a value (both text strings). In R, there are two ways to set environment variables:
+The `instantiate` package uses environment variables to manage the installation of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). An environment variable is an operating system setting with a name and a value (both text strings). In R, there are two ways to set environment variables:
 
 1. `Sys.setenv()`, which sets environment variables temporarily for the current R session.
 2. The `.Renviron` text file in you home directory, which passes environment variables to all new R sessions. the [`edit_r_environ()`](https://usethis.r-lib.org/reference/edit.html) function from the [`usethis`](https://usethis.r-lib.org/) package helps.
 
-The important environment variables for `instantiate` are:
+# Administering CmdStan
 
-1. `CMDSTAN`: directory path to [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). Used by the `"fixed"` and `"cmdstanr"` installation modes defined below.
-2. `CMDSTAN_INSTALL`: the installation mode of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) for `instantiate`. If you manually set a value, it must be equal to `"internal"`, `"fixed"`, or `"cmdstanr"`. Otherwise, you can leave `CMDSTAN_INSTALL` unset (the empty string `""`). Each of these options is described below.
+With `instantiate`, you have three different options for managing [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). These options are called "installation types". To choose an installation type, set the `CMDSTAN_INSTALL` environment variable before installing `instantiate`. Your choice determines 
 
-## Internal installation
+1. Whether [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) will be installed inside `instantiate` during `install.packages("instantiate")`.
+2. The location where `instantiate` will automatically look for [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) at runtime.
 
-This approach installs [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) inside the installed file system of `instantiate` when the `instantiate` package installs. This approach is useful for centrally maintained R installations where many users share a common set of R packages and system libraries, as is common in highly regulated industries. The procedure may be slower to complete than the other options, and it is not amenable to [GitHub Actions](https://github.com/features/actions) workflows which upload R package libraries as archives, but it is the least complicated approach when it works. Steps:
+The following table describes the role of the `CMDSTAN_INSTALL` environment variable at installation time (i.e. during `install.packages("instantiate")`). Implicit installation is recommended for most situations.
 
-1. Set the `CMDSTAN_INSTALL` environment variable to `"internal"`.
-2. Install `instantiate` using `install.packages("instantiate")` or similar.
+Installation type | `CMDSTAN_INSTALL` | Install CmdStan? | Default path to CmdStan at runtime
+---|---|---|---
+Implicit (default) | `"implicit"` or `""` or unset | No | `cmdstanr::cmdstan_path()`, which depends on the current value of the `CMDSTAN` environment value at runtime.
+Fixed | `"fixed"` | No | The value that the `CMDSTAN` environment variable originally contained at installation time, regardless of the current value of `CMDSTAN` at runtime.
+Internal | `"internal"` | Yes | The internal copy of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) inside `instantiate`.
 
-Alternatively, if it is not feasible to set `CMDSTAN_INSTALL` during the installation of `instantiate`, you can install the tarball inside the `install-internal.zip` file attached to the [latest GitHub release](https://github.com/wlandau/instantiate/releases/). Here is an example. You may need to change `0.0.3` in the URL to point to the latest [GitHub tag](https://github.com/wlandau/instantiate/tags). 
+At runtime `instantiate`, the `CMDSTAN_INSTALL` environment variable takes on a different role: it overrides the automatic preference that `instantiate` has for the path to [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). (So does the `cmdstan_install` function argument.) For example, if you installed `instantiate` with `CMDSTAN_INSTALL` equal `"internal"`, you can set `Sys.setenv(CMDSTAN_INSTALL = "implicit")` at runtime to let `cmdstanr::cmdstan_path()` choose the path to [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). You can always choose implicit or fixed installation, but you can only choose internal installation if `instantiate` was installed with an internal copy of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan).
 
-```r
-zip <- "https://github.com/wlandau/instantiate/releases/download/0.0.3/install-internal.zip"
-temp_zip <- tempfile()
-temp_tar <- tempfile()
-download.file(zip, temp_zip)
-unzip(temp_zip, exdir = temp_tar)
-install.packages(
-  pkgs = file.path(temp_tar, list.files(temp_tar)),
-  type = "source",
-  repos = NULL
-)
-```
+# Packaging Stan models
 
-The [`install-internal`](https://github.com/wlandau/instantiate/tree/install-internal) branch hosts the latest development version of the code in this modified tarball.
-
-```r
-remotes::install_github("wlandau/instantiate", ref = "install-internal")
-```
-
-## Fixed installation
-
-In this approach, `instantiate` commits itself permanently to a pre-existing installation of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). This is helpful for centrally maintained R installations, but unlike internal installation, fixed installation can leverage a pre-existing installation of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). This helps when your organization has a policy for maintaining non-R system libraries and already has [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) installed. Steps:
-
-1. Set the `CMDSTAN` environment variable to the existing path to [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan).
-2. Install `instantiate` using `install.packages("instantiate")` or similar.
-
-Beyond this point, you can change or unset the `CMDSTAN` environment variable without changing where `instantiate` looks for [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). To redirect `instantiate` to a different [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) path, set `CMDSTAN` to the new path and then run `install.packages("instantiate")` again.
-
-## `cmdstanr` installation
-
-For maximum flexibility, `instantiate` can let [`cmdstanr`](https://mc-stan.org/cmdstanr/) control the path to [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). This choice is the most practical approach for individual users and continuous integration workflows such as those on [GitHub Actions](https://github.com/features/actions). The easiest way to set this up is:
-
-1. Unset the `CMDSTAN` environment variable.
-2. Install `instantiate` using `install.packages("instantiate")` or similar.
-
-(1) is not strictly necessary if you set `CMDSTAN_INSTALL=cmdstanr` at runtime (after installation).
-
-To install `instantiate` as part of a [GitHub Actions package check workflow](https://github.com/r-lib/actions),
-
-1. Generate your [workflow YAML file](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions) the usual way, e.g. [`use_github_action("check-standard")`](https://usethis.r-lib.org/reference/github_actions.html) for package checks or [`use_github_action("test-coverage")`](https://usethis.r-lib.org/reference/github_actions.html) for test coverage. See <https://github.com/r-lib/actions> for a list of workflow archetypes.
-2. Add `extra-repositories: 'https://mc-stan.org/r-packages/'` under `with:` inside the `uses: r-lib/actions/setup-r` step. This is necessary while [`cmdstanr`](https://github.com/stan-dev/cmdstanr) is not on CRAN.
-3. Add a manual workflow step to after between [R setup](https://github.com/r-lib/actions/tree/v2-branch/setup-r) and [package dependency setup](https://github.com/r-lib/actions/tree/v2-branch/setup-r-dependencies) to install [`cmdstanr`](https://mc-stan.org/cmdstanr/) and [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan).
-
-The inserted YAML may look like this (although typically with more settings under `with:` in `setup-r`):
-
-```yaml
-- uses: r-lib/actions/setup-r@v2
-  with:
-    extra-repositories: 'https://mc-stan.org/r-packages/'
-
-- name: Install CmdStan
-  shell: Rscript {0}
-  run: |
-    install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
-    cmdstanr::check_cmdstan_toolchain(fix = TRUE)
-    cmdstanr::install_cmdstan()
-```
-
-## Choosing the installation
-
-At runtime, `instantiate` automatically looks to the `CMDSTAN_INSTALL` environment variable to find [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). If `CMDSTAN_INSTALL` is not set (i.e. if `Sys.getenv("CMDSTAN_INSTALL")` is `""`) then `instantiate` attempts to find [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) at the internal installation, then the fixed installation, then using [`cmdstanr`](https://mc-stan.org/cmdstanr/), in that order. You can also control this choice using the `cmdstan_install` argument to functions such as `stan_package_compile()`. 
-
-# Packaging
-
-These instructions explain how to create an R package with pre-compiled Stan models.
+The following section explains how to create an R package with pre-compiled Stan models. This stage of the development workflow is considered "runtime" for the purposes of administering [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) as described previously.
 
 ## Structure
 
-Begin with an R package with one or more Stan model files inside the `inst/stan/` directory. `stan_package_create()` is a convenient way to start.
+Begin with an R package with one or more Stan model files inside the `src/stan/` directory. `stan_package_create()` is a convenient way to start.
 
 ```r
 stan_package_create(path = "package_folder")
@@ -140,18 +85,15 @@ At minimum the package file structure should look something like this:
 fs::dir_tree("package_folder")
 #> package_folder
 #> ├── DESCRIPTION
-#> └── inst
+#> └── src
 #>     └── stan
 #>         └── bernoulli.stan
 ```
 
 ## Configuration
 
-Configure the package so the Stan models compile during installation. `stan_package_configure()` writes scripts `configure` and `configure.win` for this, as well as `cleanup` and `cleanup.win` to remove compiled model files. Inside each script is a call to `instantiate::stan_package_compile()` which you can manually edit to control how your models are compiled. For example, different calls to `stan_package_compile()` can compile different groups of models using different C++ compiler flags.
+Configure the package so the Stan models compile during installation. `stan_package_configure()` writes required scripts `cleanup`, `cleanup.win`, `src/Makevars`, `src/Makevars.win`, and `src/install.libs.R`. Inside `src/install.libs.R` is a call to `instantiate::stan_package_compile()` which you can manually edit to control how your models are compiled. For example, different calls to `stan_package_compile()` can compile different groups of models using different C++ compiler flags.
 
-```r
-stan_package_configure(path = "package_folder")
-```
 
 ```r
 fs::dir_tree("package_folder")
@@ -159,9 +101,10 @@ fs::dir_tree("package_folder")
 #> ├── DESCRIPTION
 #> ├── cleanup
 #> ├── cleanup.win
-#> ├── configure
-#> ├── configure.win
-#> └── inst
+#> └── src
+#>     ├── Makevars
+#>     ├── Makevars.win
+#>     ├── install.libs.R
 #>     └── stan
 #>         └── bernoulli.stan
 ```
@@ -257,10 +200,10 @@ Additional_repositories:
 6. For [version control](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control), it is best practice to commit only source code files and documentation. Please do not commit any compiled executable Stan model files to your repository. If you do commit them, then other users with different machines will have trouble installing your package, and your commit history will consume too much storage. For [Git](https://git-scm.com), you may add the following lines to the [`.gitigore`](https://git-scm.com/docs/gitignore) file at the root of your package: 
 
 ```
-inst/stan/**
-!inst/stan/**/*.*
-inst/stan/**/*.exe
-inst/stan/**/*.EXE
+src/stan/**
+!src/stan/**/*.*
+src/stan/**/*.exe
+src/stan/**/*.EXE
 ```
 
 7. For [continuous integration](https://devguide.ropensci.org/ci.html) (e.g. on [GitHub Actions](https://github.com/r-lib/actions)), please use [`cmdstanr`](https://mc-stan.org/cmdstanr/)-based installation as explained above, and tweak your workflow YAML files as explained in that section.

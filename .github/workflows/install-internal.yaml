@@ -9,15 +9,19 @@ jobs:
   install-internal:
     runs-on: ubuntu-latest
 
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
 
     - name: Change the script so CmdStan always installs internally.
-      run: sed -i '2s/.*/if (TRUE) {/' inst/cmdstan.R
+      run: sed -i '1s/.*/choice <- "internal"/' src/install.libs.R
 
     - name: Remove GitHub Actions workflow files
-      run: rm -rf .github/workflws
+      run: rm -rf .github/workflows
 
     - name: Deploy to install-internal branch
       if: github.event_name != 'pull_request'

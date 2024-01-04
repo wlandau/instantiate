@@ -15,7 +15,7 @@ Description: Similar to 'rstantools' for 'rstan',
   and setting environment variables.
   Packages 'rstantools', 'cmdstanr', 'stannis', and
   'stanapi' are similar Stan clients with different objectives.
-Version: 0.0.4.9000
+Version: 0.0.4.9001
 License: MIT + file LICENSE
 URL: https://wlandau.github.io/instantiate/,
   https://github.com/wlandau/instantiate
@@ -36,7 +36,6 @@ Depends:
   R (>= 4.0.0)
 Imports:
   fs,
-  pkglite,
   rlang,
   utils
 Suggests:
@@ -49,6 +48,7 @@ Suggests:
 Additional_repositories:
   https://mc-stan.org/r-packages/
 SystemRequirements: CmdStan (https://mc-stan.org/users/interfaces/cmdstan)
+StagedInstall: no
 Encoding: UTF-8
 Language: en-US
 Config/testthat/edition: 3

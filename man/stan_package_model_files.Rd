@@ -7,8 +7,8 @@
 stan_package_model_files(path = getwd())
 }
 \arguments{
-\item{path}{Character of length 1, path to the root directory of the
-R package with the Stan models.}
+\item{path}{Character of length 1, root path to start from when searching
+for Stan model files.}
 }
 \value{
 Character vector of paths to Stan model files in the package.
@@ -17,7 +17,7 @@ Character vector of paths to Stan model files in the package.
 List all the paths to the Stan model files in a package.
 }
 \details{
-All Stan models must live in the \verb{inst/stan/} directory in the
+All Stan models must live in the \verb{src/stan/} directory in the
 package file system.
 }
 \examples{

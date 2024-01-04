@@ -27,16 +27,38 @@ stan_package_model <- function(
   name,
   package,
   library = NULL,
-  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL")
+  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = "")
 ) {
   stan_assert_cmdstanr()
   stan_assert(name, is.character(.), !anyNA(.), nzchar(.))
   stan_assert(package, is.character(.), !anyNA(.), nzchar(.))
   stan_file <- get(x = "system.file", envir = globalenv()) (
+    file.path("bin", "stan", paste0(name, ".stan")),
+    package = package,
+    lib.loc = library,
+    mustWork = FALSE
+  )
+  stan_file_inst <- get(x = "system.file", envir = globalenv()) (
     file.path("stan", paste0(name, ".stan")),
     package = package,
     lib.loc = library,
-    mustWork = TRUE
+    mustWork = FALSE
+  )
+  if (file.exists(stan_file_inst)) {
+    stan_deprecate(
+      name = "Stan files installed to inst/stan/",
+      date = "2024-01-03",
+      version = "0.0.4.9001",
+      alternative = paste(
+        "Reinstall your Stan modeling package so your",
+        "compiled models are in bin/stan/ instead."
+      )
+    )
+    stan_file <- if_any(file.exists(stan_file), stan_file, stan_file_inst)
+  }
+  stan_assert(
+    file.exists(stan_file),
+    message = sprintf("Stan model file \"%s\" not found.", stan_file)
   )
   exe_file <- file.path(dirname(stan_file), name)
   exe_file <- if_any(stan_on_windows(), paste0(exe_file, ".exe"), exe_file)
