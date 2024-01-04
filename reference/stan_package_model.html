@@ -18,7 +18,7 @@ model inside a package."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">instantiate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.4.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.4.9001</span>
       </span>
     </div>
 
@@ -59,7 +59,7 @@ model inside a package.</p>
 <span>  <span class="va">name</span>,</span>
 <span>  <span class="va">package</span>,</span>
 <span>  library <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  cmdstan_install <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"CMDSTAN_INSTALL"</span><span class="op">)</span></span>
+<span>  cmdstan_install <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"CMDSTAN_INSTALL"</span>, unset <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -82,25 +82,27 @@ Passed to the <code>lib.loc</code> argument of <code><a href="https://rdrr.io/r/
 
 
 <dt>cmdstan_install</dt>
-<dd><p>Character of length 1, how CmdStan was installed. The
-installation method determines how <code>instantiate</code> looks up CmdStan.
-Set the default value with the <code>CMDSTAN_INSTALL</code> environment variable.
-Choices:</p><ol><li><p><code>"internal"</code>: Use the copy of CmdStan installed internally inside the
-<code>instantiate</code> package file system. Before using this option,
-CmdStan must be installed in the package file system. To do this,
-set the <code>CMDSTAN_INSTALL</code> environment variable to <code>"internal"</code> before
-installing <code>instantiate</code>.</p></li>
-<li><p><code>"fixed"</code>: Use the copy of CmdStan that was located at the value
-contained in <code>Sys.getenv("CMDSTAN")</code> at the time <code>instantiate</code>
-was installed. In this case, the path to CmdStan is not inside
-<code>instantiate</code> itself, but it is fixed at installation time
-and does not depend on the current value of
-<code>Sys.getenv("CMDSTAN")</code> at runtime.</p></li>
-<li><p><code>"cmdstanr"</code>: Let the <code><a href="https://mc-stan.org/cmdstanr/reference/set_cmdstan_path.html" class="external-link">cmdstanr::cmdstan_path()</a></code> decide where
-to look for CmdStan. The <code>cmdstanr</code> package must be installed. If it
-is not installed, the function returns the empty string <code>""</code>.</p></li>
-<li><p><code>""</code> (default): Try all 3 options in the order above to find a valid
-installed copy of CmdStan.</p></li>
+<dd><p>Character of length 1, how to look for an installed
+copy of CmdStan. See <a href="https://wlandau.github.io/instantiate/" class="external-link">https://wlandau.github.io/instantiate/</a> for details.
+Choices:</p><ol><li><p><code>""</code> (default): look at the original value that the <code>CMDSTAN_INSTALL</code>
+environment variable contained when <code>instantiate</code> at the time
+when it was installed.
+If it was <code>"implicit"</code>, <code>"fixed"</code>, or <code>"internal"</code>, then choose
+the corresponding option below. Otherwise, default to <code>"internal"</code>.</p></li>
+<li><p><code>"implicit"</code>: Let the <code><a href="https://mc-stan.org/cmdstanr/reference/set_cmdstan_path.html" class="external-link">cmdstanr::cmdstan_path()</a></code> decide where
+to look for CmdStan. As explained in the <code>cmdstanr</code> documentation,
+the output of <code><a href="https://mc-stan.org/cmdstanr/reference/set_cmdstan_path.html" class="external-link">cmdstanr::cmdstan_path()</a></code> depends
+on the current value of the <code>CMDSTAN</code> environment variable.
+The <code>cmdstanr</code> package must be installed. If it
+is not installed, then <code><a href="stan_cmdstan_path.html">stan_cmdstan_path()</a></code>
+returns the empty string <code>""</code>.</p></li>
+<li><p><code>"fixed"</code>: Use the path to CmdStan that was originally
+contained in <code>Sys.getenv("CMDSTAN")</code> at the time when <code>instantiate</code>
+was installed.</p></li>
+<li><p><code>"internal"</code>: Use the copy of CmdStan installed internally inside the
+<code>instantiate</code> package file system. To use this option,
+<code>instantiate</code> needs to have been originally installed with the
+<code>CMDSTAN_INSTALL</code> environment variable set to <code>"internal"</code>.</p></li>
 </ol></dd>
 
 </dl></div>
