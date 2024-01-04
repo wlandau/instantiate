@@ -2,10 +2,10 @@
 #
 # This script was copied and modified from the source code of the {configure}
 # R package by Kevin Ushey. License and copyright are in the comment below.
-# 
+#
 # MIT License
 # =====================
-# 
+#
 # Copyright 2021 Kevin Ushey
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,6 +25,4 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-if exist src\cmdstan.o del src\cmdstan.o
-if exist src\instantiate.dll del src\instantiate.dll
-if exist bin rmdir /s /q bin
+rm -rf bin src/cmdstan.o src/instantiate.dll src/Makevars.win

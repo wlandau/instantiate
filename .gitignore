@@ -16,3 +16,5 @@ vignettes/*.html
 revdep
 cmdstan
 *.dll
+Makevars
+Makevars.win
