@@ -1,4 +1,4 @@
-# instantiate 0.0.4.9001 (development)
+# instantiate 0.0.4.9002 (development)
 
 * Use `install.libs.R` for both CmdStan in `instantiate` and Stan model compilation in packages (#1, #9, #12).
 * Stan models should now be in `src/stan/` instead of `inst/stan/` (#12). `inst/stan/` should still work for the next few versions, but it is now deprecated. When a modeling package is installed, its `install.libs.R` moves `src/stan/` to `bin/stan/` and then compiles models inside `bin/stan/`.
