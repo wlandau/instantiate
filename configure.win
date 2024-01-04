@@ -25,9 +25,5 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" inst/cmdstan.R
-if [ $? -ne 0 ]; then
-  echo "Could not install CmdStan." >&2
-  exit 1
-fi
-exit 0
+echo "PKG_CFLAGS=-DCMDSTAN='\"${CMDSTAN}\"' -DCMDSTAN_INSTALL='\"${CMDSTAN_INSTALL}\"'" > src/Makevars.win
+touch src/cmdstan.c

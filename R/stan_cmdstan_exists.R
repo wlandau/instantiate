@@ -7,7 +7,7 @@
 #' @examples
 #' stan_cmdstan_exists()
 stan_cmdstan_exists <- function(
-  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL")
+  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = "")
 ) {
   path <- stan_cmdstan_path(cmdstan_install = cmdstan_install)
   cmdstan_valid(path)

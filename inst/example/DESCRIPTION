@@ -1,0 +1,18 @@
+Package: example
+Type: Package
+Title: Example Package With Instantiate
+Version: 0.0.1
+Author: You
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: Demonstrate how to create an R package with pre-compiled Stan
+  models.
+Depends:
+  R (>= 4.0.0)
+Imports:
+  instantiate
+Additional_repositories:
+  https://mc-stan.org/r-packages/
+SystemRequirements: CmdStan (https://mc-stan.org/users/interfaces/cmdstan)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3

@@ -6,7 +6,7 @@
 \usage{
 stan_package_compile(
   models = instantiate::stan_package_model_files(),
-  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL"),
+  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = ""),
   verbose = TRUE,
   quiet = FALSE,
   pedantic = FALSE,
@@ -21,31 +21,33 @@ stan_package_compile(
 }
 \arguments{
 \item{models}{Character vector of file paths to Stan model source code
-files. Defaults to the Stan files in \verb{./inst/stan/}
-because all the Stan model files must live in the \verb{inst/stan/} folder
+files. Defaults to the Stan files in \verb{./src/stan/}
+because all the Stan model files must live in the \verb{src/stan/} folder
 for an R package built with \code{instantiate}.}
 
-\item{cmdstan_install}{Character of length 1, how CmdStan was installed. The
-installation method determines how \code{instantiate} looks up CmdStan.
-Set the default value with the \code{CMDSTAN_INSTALL} environment variable.
+\item{cmdstan_install}{Character of length 1, how to look for an installed
+copy of CmdStan. See \url{https://wlandau.github.io/instantiate/} for details.
 Choices:
 \enumerate{
+\item \code{""} (default): look at the original value that the \code{CMDSTAN_INSTALL}
+environment variable contained when \code{instantiate} at the time
+when it was installed.
+If it was \code{"implicit"}, \code{"fixed"}, or \code{"internal"}, then choose
+the corresponding option below. Otherwise, default to \code{"internal"}.
+\item \code{"implicit"}: Let the \code{cmdstanr::cmdstan_path()} decide where
+to look for CmdStan. As explained in the \code{cmdstanr} documentation,
+the output of \code{cmdstanr::cmdstan_path()} depends
+on the current value of the \code{CMDSTAN} environment variable.
+The \code{cmdstanr} package must be installed. If it
+is not installed, then \code{stan_cmdstan_path()}
+returns the empty string \code{""}.
+\item \code{"fixed"}: Use the path to CmdStan that was originally
+contained in \code{Sys.getenv("CMDSTAN")} at the time when \code{instantiate}
+was installed.
 \item \code{"internal"}: Use the copy of CmdStan installed internally inside the
-\code{instantiate} package file system. Before using this option,
-CmdStan must be installed in the package file system. To do this,
-set the \code{CMDSTAN_INSTALL} environment variable to \code{"internal"} before
-installing \code{instantiate}.
-\item \code{"fixed"}: Use the copy of CmdStan that was located at the value
-contained in \code{Sys.getenv("CMDSTAN")} at the time \code{instantiate}
-was installed. In this case, the path to CmdStan is not inside
-\code{instantiate} itself, but it is fixed at installation time
-and does not depend on the current value of
-\code{Sys.getenv("CMDSTAN")} at runtime.
-\item \code{"cmdstanr"}: Let the \code{cmdstanr::cmdstan_path()} decide where
-to look for CmdStan. The \code{cmdstanr} package must be installed. If it
-is not installed, the function returns the empty string \code{""}.
-\item \code{""} (default): Try all 3 options in the order above to find a valid
-installed copy of CmdStan.
+\code{instantiate} package file system. To use this option,
+\code{instantiate} needs to have been originally installed with the
+\code{CMDSTAN_INSTALL} environment variable set to \code{"internal"}.
 }}
 
 \item{verbose}{Logical of length 1, whether to set the
@@ -86,7 +88,7 @@ Compile all Stan models in a directory, usually in a package.
 }
 \details{
 If building a package using \code{instantiate}, all Stan model files
-must live in a folder called \verb{inst/stan/} in the package source
+must live in a folder called \verb{src/stan/} in the package source
 directory.
 }
 \examples{

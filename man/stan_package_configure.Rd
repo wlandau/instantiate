@@ -8,7 +8,7 @@ stan_package_configure(path = getwd(), overwrite = FALSE)
 }
 \arguments{
 \item{path}{Character of length 1, file path to the package which will
-contain Stan models in \verb{inst/stan/} at installation time.}
+contain Stan models in \verb{src/stan/} at installation time.}
 
 \item{overwrite}{Logical of length 1, whether to overwrite any existing
 configuration files.}
@@ -18,7 +18,7 @@ configuration files.}
 }
 \description{
 Write configuration files in an R package which
-compile all the Stan models in \verb{inst/stan/} when the package installs.
+compile all the Stan models in \verb{src/stan/} when the package installs.
 }
 \details{
 Writes configuration scripts \code{configure} and \code{configure.win}

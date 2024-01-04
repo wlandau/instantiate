@@ -13,7 +13,7 @@
 #'   message(stan_cmdstan_version())
 #' }
 stan_cmdstan_version <- function(
-  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL"),
+  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = ""),
   error_on_NA = TRUE
 ) {
   stan_assert_cmdstanr()

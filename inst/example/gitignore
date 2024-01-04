@@ -1,0 +1,10 @@
+*~
+.Rapp.history
+.RData
+.Rhistory
+.Rproj.user/
+inst/stan/**
+!inst/stan/**/*.*
+inst/stan/**/*.exe
+inst/stan/**/*.EXE
+*.dll
