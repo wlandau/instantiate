@@ -20,5 +20,6 @@ stan_test("stan_package_compile() and stan_package_clean()", {
 })
 
 stan_test("stan_package_compile() on empty directory", {
+  skip_cmdstan()
   expect_message(stan_package_compile(models = tempfile()))
 })
