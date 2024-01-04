@@ -115,7 +115,7 @@ stan_assert_cmdstanr <- function() {
     rlang::check_installed(
       pkg = "cmdstanr",
       reason = paste(
-        "The {cmdstanr} package is needed to install",
+        "The {cmdstanr} package is required in order to install",
         "CmdStan and run Stan models. Please install it manually using",
         "install.packages(pkgs = \"cmdstanr\",",
         "repos = c(\"https://mc-stan.org/r-packages/\", getOption(\"repos\"))"
