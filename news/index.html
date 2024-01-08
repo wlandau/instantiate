@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">instantiate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.4.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -48,7 +48,7 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.0.4.9002" id="instantiate-0049002-development">instantiate 0.0.4.9002 (development)<a class="anchor" aria-label="anchor" href="#instantiate-0049002-development"></a></h2>
+<h2 class="page-header" data-toc-text="0.1.0" id="instantiate-010">instantiate 0.1.0<a class="anchor" aria-label="anchor" href="#instantiate-010"></a></h2>
 <ul><li>Use <code>install.libs.R</code> for both CmdStan in <code>instantiate</code> and Stan model compilation in packages (<a href="https://github.com/wlandau/instantiate/issues/1" class="external-link">#1</a>, <a href="https://github.com/wlandau/instantiate/issues/9" class="external-link">#9</a>, <a href="https://github.com/wlandau/instantiate/issues/12" class="external-link">#12</a>).</li>
 <li>Stan models should now be in <code>src/stan/</code> instead of <code>inst/stan/</code> (<a href="https://github.com/wlandau/instantiate/issues/12" class="external-link">#12</a>). <code>inst/stan/</code> should still work for the next few versions, but it is now deprecated. When a modeling package is installed, its <code>install.libs.R</code> moves <code>src/stan/</code> to <code>bin/stan/</code> and then compiles models inside <code>bin/stan/</code>.</li>
 <li>Disable staged installation for <code>instantiate</code> itself to help the hard-coded paths in CmdStan work as expected in “internal” installation.</li>
