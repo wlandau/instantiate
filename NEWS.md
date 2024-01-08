@@ -1,3 +1,7 @@
+# instantiate 0.1.0.9000 (development)
+
+
+
 # instantiate 0.1.0
 
 * Use `install.libs.R` for both CmdStan in `instantiate` and Stan model compilation in packages (#1, #9, #12).
