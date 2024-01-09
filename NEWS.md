@@ -1,6 +1,7 @@
-# instantiate 0.1.0.9000 (development)
+# instantiate 0.2.0
 
-
+* Remove "internal" installation (#16).
+* In the documentation, remove claims that `instantiate` is a good fit for centralized multi-user R environments (c.f. https://github.com/stan-dev/cmdstan/issues/1175).
 
 # instantiate 0.1.0
 
