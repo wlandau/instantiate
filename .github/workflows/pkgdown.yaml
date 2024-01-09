@@ -26,7 +26,12 @@ jobs:
       - uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
-          extra-repositories: 'https://mc-stan.org/r-packages/'
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::pkgdown, local::.
+          needs: website
+          cache-version: 2
 
       - name: Repos
         run: |
@@ -38,12 +43,6 @@ jobs:
         run: |
           install.packages("cmdstanr")
           cmdstanr::install_cmdstan()
-
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::pkgdown, local::.
-          needs: website
-          cache-version: 2
 
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
