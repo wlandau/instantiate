@@ -25,8 +25,8 @@ stan_assert <- function(
 
 stan_assert_install <- function(install) {
   message <- paste(
-    "The CMDSTAN_INSTALL environment variable and the install argument",
-    "must be \"implicit\", \"fixed\", \"internal\", \"\", or unset",
+    "The CMDSTAN_INSTALL environment variable and the cmdstan_install",
+    "argument must be \"implicit\", \"fixed\", \"\", or unset",
     "both when {instantiate} is installed and when {instantiate} is used.",
     "If you are using {instantiate} and you get this error even though",
     "CMDSTAN_INSTALL is an allowable value, please reinstall {instantiate}",
@@ -40,7 +40,7 @@ stan_assert_install <- function(install) {
     message = message
   )
   stan_assert(
-    install %in% c("implicit", "fixed", "internal", ""),
+    install %in% c("implicit", "fixed", ""),
     message = message
   )
   invisible()

@@ -6,16 +6,12 @@ Description: Similar to 'rstantools' for 'rstan',
   The models compile once during installation,
   the executables live inside the file systems of their respective packages,
   and users have the full power and convenience of
-  'cmdstanr' without any additional compilation.
-  This approach saves time, allows R package developers
-  to migrate from 'rstan' to the more modern
-  'cmdstanr', and fits well with centrally maintained
-  R installations where users have trouble installing
-  their own packages, diagnosing compilation errors,
-  and setting environment variables.
+  'cmdstanr' without any additional compilation after package installation.
+  This approach saves time and helps R package developers
+  migrate from 'rstan' to the more modern 'cmdstanr'.
   Packages 'rstantools', 'cmdstanr', 'stannis', and
   'stanapi' are similar Stan clients with different objectives.
-Version: 0.1.0.9000
+Version: 0.2.0
 License: MIT + file LICENSE
 URL: https://wlandau.github.io/instantiate/,
   https://github.com/wlandau/instantiate
@@ -39,16 +35,11 @@ Imports:
   rlang,
   utils
 Suggests:
-  cmdstanr (>= 0.5.2),
   knitr (>= 1.30),
   markdown (>= 1.1),
   rmarkdown (>= 2.4),
   testthat (>= 3.0.0),
   withr
-Additional_repositories:
-  https://mc-stan.org/r-packages/
-SystemRequirements: CmdStan (https://mc-stan.org/users/interfaces/cmdstan)
-StagedInstall: no
 Encoding: UTF-8
 Language: en-US
 Config/testthat/edition: 3

@@ -19,9 +19,9 @@ stan_cmdstan_version <- function(
   stan_assert_cmdstanr()
   path_old <- cmdstanr_path()
   if (cmdstan_valid(path_old)) {
-    on.exit(suppressMessages(cmdstanr::set_cmdstan_path(path = path_old)))
+    on.exit(suppressMessages(cmdstanr("set_cmdstan_path")(path = path_old)))
   }
   path_new <- stan_cmdstan_path(cmdstan_install = cmdstan_install)
-  suppressMessages(cmdstanr::set_cmdstan_path(path = path_new))
-  cmdstanr::cmdstan_version(error_on_NA = error_on_NA)
+  suppressMessages(cmdstanr("set_cmdstan_path")(path = path_new))
+  cmdstanr("cmdstan_version")(error_on_NA = error_on_NA)
 }

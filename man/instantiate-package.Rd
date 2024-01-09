@@ -14,12 +14,9 @@ The models compile once during installation,
 the executables live inside the file systems of their
 respective packages, and users have the full power
 and convenience of \href{https://mc-stan.org/cmdstanr/}{\code{CmdStanR}}
-without any additional compilation. This approach saves time,
-allows R package developers to migrate from
-\href{https://mc-stan.org/rstan/}{\code{rstan}}
-to the more modern \href{https://mc-stan.org/cmdstanr/}{\code{CmdStanR}},
-and fits well with centrally maintained R installations
-where users may have trouble installing their own packages,
-diagnosing compilation errors, and setting environment variables.
+without any additional compilation after package installation.
+This approach saves time and helps R package developers
+migrate from \href{https://mc-stan.org/rstan/}{\code{rstan}}
+to the more modern \href{https://mc-stan.org/cmdstanr/}{\code{CmdStanR}}.
 }
 \concept{help}

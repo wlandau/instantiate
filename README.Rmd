@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 [![codecov](https://codecov.io/gh/wlandau/instantiate/branch/main/graph/badge.svg)](https://app.codecov.io/gh/wlandau/instantiate)
 [![lint](https://github.com/wlandau/instantiate/workflows/lint/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Alint)
 
-Similar to [`rstantools`](https://mc-stan.org/rstantools/) for [`rstan`](https://mc-stan.org/rstan/), the `instantiate` package builds pre-compiled [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) models into CRAN-ready statistical modeling R packages. The models compile once during installation, the executables live inside the file systems of their respective packages, and users have the full power and convenience of [`CmdStanR`](https://mc-stan.org/cmdstanr/) without any additional compilation. This approach saves time, allows R package developers to migrate from [`rstan`](https://mc-stan.org/rstan/) to the more modern [`CmdStanR`](https://mc-stan.org/cmdstanr/), and fits well with centrally maintained R installations where users may have trouble installing their own packages, diagnosing compilation errors, and setting environment variables.
+Similar to [`rstantools`](https://mc-stan.org/rstantools/) for [`rstan`](https://mc-stan.org/rstan/), the `instantiate` package builds pre-compiled [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) models into CRAN-ready statistical modeling R packages. The models compile once during installation, the executables live inside the file systems of their respective packages, and users have the full power and convenience of [`CmdStanR`](https://mc-stan.org/cmdstanr/) without any additional compilation after package installation. This approach saves time and helps R package developers migrate from [`rstan`](https://mc-stan.org/rstan/) to the more modern [`CmdStanR`](https://mc-stan.org/cmdstanr/).
 
 # Documentation
 
@@ -51,20 +51,18 @@ The `instantiate` package uses environment variables to manage the installation 
 
 # Administering CmdStan
 
-With `instantiate`, you have three different options for managing [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). These options are called "installation types". To choose an installation type, set the `CMDSTAN_INSTALL` environment variable before installing `instantiate`. Your choice determines 
+By default, `instantiate` looks for the copy of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) located at `cmdstanr::install_cmdstan()`. If you upgrade [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan), then the path returned by `cmdstanr::install_cmdstan()` will change, which may not be desirable in some cases. To permanently lock the path that `instantiate` uses, follow these steps:
 
-1. Whether [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) will be installed inside `instantiate` during `install.packages("instantiate")`.
-2. The location where `instantiate` will automatically look for [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) at runtime.
+1. Set the `CMDSTAN` environment variable to the desired path to [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan).
+2. Set the `CMDSTAN_INSTALL` environment variable to `"fixed"`.
+3. Install `instantiate`.
 
-The following table describes the role of the `CMDSTAN_INSTALL` environment variable at installation time (i.e. during `install.packages("instantiate")`). Implicit installation is recommended for most situations.
+Henceforth, `instantiate` will automatically use the [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) path from (1), regardless of the value of `CMDSTAN` after (3). To prefer `cmdstanr::cmdstan_path()` instead, you could do one of the following:
 
-Installation type | `CMDSTAN_INSTALL` | Install CmdStan? | Default path to CmdStan at runtime
----|---|---|---
-Implicit (default) | `"implicit"` or `""` or unset | No | `cmdstanr::cmdstan_path()`, which depends on the current value of the `CMDSTAN` environment value at runtime.
-Fixed | `"fixed"` | No | The value that the `CMDSTAN` environment variable originally contained at installation time, regardless of the current value of `CMDSTAN` at runtime.
-Internal | `"internal"` | Yes | The internal copy of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan) inside `instantiate`.
+* Reinstall `instantiate` with `CMDSTAN_INSTALL` not equal to `"fixed"`, or
+* Set `CMDSTAN_INSTALL` to `"implicit"` at runtime, or
+* Set the `cmdstan_install` argument to `"implicit"` for the current `instantiate` package function you are using.
 
-At runtime `instantiate`, the `CMDSTAN_INSTALL` environment variable takes on a different role: it overrides the automatic preference that `instantiate` has for the path to [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). (So does the `cmdstan_install` function argument.) For example, if you installed `instantiate` with `CMDSTAN_INSTALL` equal `"internal"`, you can set `Sys.setenv(CMDSTAN_INSTALL = "implicit")` at runtime to let `cmdstanr::cmdstan_path()` choose the path to [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). You can always choose implicit or fixed installation, but you can only choose internal installation if `instantiate` was installed with an internal copy of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan).
 
 # Packaging Stan models
 

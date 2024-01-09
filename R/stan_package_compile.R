@@ -79,10 +79,10 @@ stan_package_compile <- function(
   }
   path_old <- cmdstanr_path()
   if (cmdstan_valid(path_old)) {
-    on.exit(suppressMessages(cmdstanr::set_cmdstan_path(path = path_old)))
+    on.exit(suppressMessages(cmdstanr("set_cmdstan_path")(path = path_old)))
   }
   path_new <- stan_cmdstan_path(cmdstan_install = cmdstan_install)
-  suppressMessages(cmdstanr::set_cmdstan_path(path = path_new))
+  suppressMessages(cmdstanr("set_cmdstan_path")(path = path_new))
   lapply(
     X = models,
     FUN = stan_compile_model,
@@ -118,7 +118,7 @@ stan_compile_model <- function(
     on.exit(options("cmdstanr_verbose" = old))
     options("cmdstanr_verbose" = TRUE)
   }
-  cmdstanr::cmdstan_model(
+  cmdstanr("cmdstan_model")(
     stan_file = model,
     compile = TRUE,
     quiet = quiet,

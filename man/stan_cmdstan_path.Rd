@@ -14,8 +14,8 @@ Choices:
 \item \code{""} (default): look at the original value that the \code{CMDSTAN_INSTALL}
 environment variable contained when \code{instantiate} at the time
 when it was installed.
-If it was \code{"implicit"}, \code{"fixed"}, or \code{"internal"}, then choose
-the corresponding option below. Otherwise, default to \code{"internal"}.
+If it was \code{"implicit"} or \code{"fixed"}, then choose
+the corresponding option below. Otherwise, default to \code{"implicit"}.
 \item \code{"implicit"}: Let the \code{cmdstanr::cmdstan_path()} decide where
 to look for CmdStan. As explained in the \code{cmdstanr} documentation,
 the output of \code{cmdstanr::cmdstan_path()} depends
@@ -26,10 +26,6 @@ returns the empty string \code{""}.
 \item \code{"fixed"}: Use the path to CmdStan that was originally
 contained in \code{Sys.getenv("CMDSTAN")} at the time when \code{instantiate}
 was installed.
-\item \code{"internal"}: Use the copy of CmdStan installed internally inside the
-\code{instantiate} package file system. To use this option,
-\code{instantiate} needs to have been originally installed with the
-\code{CMDSTAN_INSTALL} environment variable set to \code{"internal"}.
 }}
 }
 \value{

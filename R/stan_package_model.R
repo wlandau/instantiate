@@ -64,11 +64,11 @@ stan_package_model <- function(
   exe_file <- if_any(stan_on_windows(), paste0(exe_file, ".exe"), exe_file)
   path_old <- cmdstanr_path()
   if (cmdstan_valid(path_old)) {
-    on.exit(suppressMessages(cmdstanr::set_cmdstan_path(path = path_old)))
+    on.exit(suppressMessages(cmdstanr("set_cmdstan_path")(path = path_old)))
   }
   path_new <- stan_cmdstan_path(cmdstan_install = cmdstan_install)
-  suppressMessages(cmdstanr::set_cmdstan_path(path = path_new))
-  cmdstanr::cmdstan_model(
+  suppressMessages(cmdstanr("set_cmdstan_path")(path = path_new))
+  cmdstanr("cmdstan_model")(
     stan_file = stan_file,
     exe_file = exe_file,
     compile = FALSE
