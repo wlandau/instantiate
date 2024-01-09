@@ -2,6 +2,7 @@
 
 * Remove "internal" installation (#16).
 * In the documentation, remove claims that `instantiate` is a good fit for centralized multi-user R environments (c.f. https://github.com/stan-dev/cmdstan/issues/1175).
+* Check subdirectories of the fixed CmdStan installation path.
 
 # instantiate 0.1.0
 

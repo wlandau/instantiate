@@ -35,9 +35,14 @@ stan_cmdstan_path <- function(
     cmdstan_install
   )
   stan_assert_install(install)
-  if_any(
+  path <- if_any(
     identical(install, "fixed"),
     .Call(c_cmdstan_path_fixed, PACKAGE = "instantiate"),
     cmdstanr_path()
   )
+  if_any(
+    cmdstan_valid(path),
+    path,
+    cmdstanr("cmdstan_default_path")(dir = path)
+  ) %|||% NULL
 }
