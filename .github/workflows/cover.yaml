@@ -20,21 +20,21 @@ jobs:
           use-public-rspm: true
           extra-repositories: 'https://mc-stan.org/r-packages/'
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::covr, local::.
-          needs: coverage
-          cache-version: 2
-
       - name: Repos
         run: |
           cat("\noptions(repos=c(stan='https://mc-stan.org/r-packages/',CRAN ='https://cloud.r-project.org'))\n", file = "~/.Rprofile", append = TRUE)
         shell: Rscript {0}
 
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::covr, local::., any::cmdstanr
+          needs: coverage
+          cache-version: 2
+
       - name: Install CmdStan
         shell: Rscript {0}
         run: |
-          install.packages("cmdstanr")
+          cmdstanr::check_cmdstan_toolchain(fix = TRUE)
           cmdstanr::install_cmdstan()
 
       - name: Test coverage
