@@ -2,7 +2,7 @@
 % Please edit documentation in R/stan_cmdstan_exists.R
 \name{stan_cmdstan_exists}
 \alias{stan_cmdstan_exists}
-\title{Check if \code{instantiate} can find CmdStan.}
+\title{Check if \code{instantiate} can find CmdStanR and CmdStan.}
 \usage{
 stan_cmdstan_exists(
   cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = "")
@@ -31,10 +31,11 @@ was installed.
 }}
 }
 \value{
-\code{TRUE} if \code{instantiate} can find CmdStan, \code{FALSE} otherwise.
+\code{TRUE} if \code{instantiate} can find the CmdStanR R package and the
+CmdStan command line tool. Returns \code{FALSE} otherwise.
 }
 \description{
-Check if \code{instantiate} can find CmdStan.
+Check if \code{instantiate} can find CmdStanR and CmdStan.
 }
 \examples{
 stan_cmdstan_exists()

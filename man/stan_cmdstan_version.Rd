@@ -31,9 +31,8 @@ contained in \code{Sys.getenv("CMDSTAN")} at the time when \code{instantiate}
 was installed.
 }}
 
-\item{error_on_NA}{(logical) Should an error be thrown if CmdStan is not
-found. The default is \code{TRUE}. If \code{FALSE}, \code{cmdstan_version()} returns
-\code{NULL}.}
+\item{error_on_NA}{Logical of length 1, whether an error should be thrown
+if CmdStan is not found.}
 }
 \value{
 Character of length 1, version of CmdStan that the \code{instantiate}

@@ -29,6 +29,11 @@
 stan_cmdstan_path <- function(
   cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = "")
 ) {
+  # nocov start
+  if (!rlang::is_installed("cmdstanr")) {
+    return("") # Not possible to cover in regular unit tests.
+  }
+  # nocov end
   install <- if_any(
     identical(cmdstan_install, ""),
     .Call(c_cmdstan_path_install, PACKAGE = "instantiate"),
@@ -44,5 +49,5 @@ stan_cmdstan_path <- function(
     cmdstan_valid(path),
     path,
     cmdstanr("cmdstan_default_path")(dir = path)
-  ) %|||% NULL
+  ) %|||% ""
 }

@@ -7,7 +7,8 @@
 #'   package uses. If CmdStan is not found, then the return value depends
 #'   on the `error_on_NA` argument.
 #' @inheritParams stan_cmdstan_path
-#' @inheritParams cmdstanr::cmdstan_version
+#' @param error_on_NA Logical of length 1, whether an error should be thrown
+#'   if CmdStan is not found.
 #' @examples
 #' if (stan_cmdstan_exists()) {
 #'   message(stan_cmdstan_version())
