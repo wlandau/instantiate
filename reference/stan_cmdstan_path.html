@@ -18,7 +18,7 @@ package uses."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">instantiate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
       </span>
     </div>
 
@@ -66,8 +66,8 @@ copy of CmdStan. See <a href="https://wlandau.github.io/instantiate/" class="ext
 Choices:</p><ol><li><p><code>""</code> (default): look at the original value that the <code>CMDSTAN_INSTALL</code>
 environment variable contained when <code>instantiate</code> at the time
 when it was installed.
-If it was <code>"implicit"</code>, <code>"fixed"</code>, or <code>"internal"</code>, then choose
-the corresponding option below. Otherwise, default to <code>"internal"</code>.</p></li>
+If it was <code>"implicit"</code> or <code>"fixed"</code>, then choose
+the corresponding option below. Otherwise, default to <code>"implicit"</code>.</p></li>
 <li><p><code>"implicit"</code>: Let the <code><a href="https://mc-stan.org/cmdstanr/reference/set_cmdstan_path.html" class="external-link">cmdstanr::cmdstan_path()</a></code> decide where
 to look for CmdStan. As explained in the <code>cmdstanr</code> documentation,
 the output of <code><a href="https://mc-stan.org/cmdstanr/reference/set_cmdstan_path.html" class="external-link">cmdstanr::cmdstan_path()</a></code> depends
@@ -78,10 +78,6 @@ returns the empty string <code>""</code>.</p></li>
 <li><p><code>"fixed"</code>: Use the path to CmdStan that was originally
 contained in <code>Sys.getenv("CMDSTAN")</code> at the time when <code>instantiate</code>
 was installed.</p></li>
-<li><p><code>"internal"</code>: Use the copy of CmdStan installed internally inside the
-<code>instantiate</code> package file system. To use this option,
-<code>instantiate</code> needs to have been originally installed with the
-<code>CMDSTAN_INSTALL</code> environment variable set to <code>"internal"</code>.</p></li>
 </ol></dd>
 
 </dl></div>
