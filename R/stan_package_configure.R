@@ -70,10 +70,10 @@ stan_package_configure <- function(path = getwd(), overwrite = FALSE) {
     copy.mode = TRUE
   )
   if (!file.exists(out_makevars)) {
-    file.create(out_makevars)
+    writeLines("", out_makevars)
   }
   if (!file.exists(out_makevars_win)) {
-    file.create(out_makevars_win)
+    writeLines("", out_makevars_win)
   }
   invisible()
 }

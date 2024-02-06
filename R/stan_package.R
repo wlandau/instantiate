@@ -1,5 +1,4 @@
 #' instantiate: pre-compiled CmdStan models in R packages
-#' @docType package
 #' @name instantiate-package
 #' @family help
 #' @description Similar to [`rstantools`](https://mc-stan.org/rstantools/)
@@ -16,6 +15,7 @@
 #'   migrate from [`rstan`](https://mc-stan.org/rstan/)
 #'   to the more modern [`CmdStanR`](https://mc-stan.org/cmdstanr/).
 #' @useDynLib instantiate, .registration = TRUE
+#' @importFrom callr r
 #' @importFrom fs dir_copy
 #' @importFrom rlang abort check_installed inform is_installed warn
 #' @importFrom utils capture.output globalVariables install.packages

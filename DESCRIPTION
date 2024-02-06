@@ -11,7 +11,7 @@ Description: Similar to 'rstantools' for 'rstan',
   migrate from 'rstan' to the more modern 'cmdstanr'.
   Packages 'rstantools', 'cmdstanr', 'stannis', and
   'stanapi' are similar Stan clients with different objectives.
-Version: 0.2.0.9000
+Version: 0.2.1
 License: MIT + file LICENSE
 URL: https://wlandau.github.io/instantiate/,
   https://github.com/wlandau/instantiate
@@ -31,6 +31,7 @@ Authors@R: c(
 Depends:
   R (>= 4.0.0)
 Imports:
+  callr,
   fs,
   rlang,
   utils
@@ -44,4 +45,4 @@ Encoding: UTF-8
 Language: en-US
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
