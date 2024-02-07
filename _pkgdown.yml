@@ -2,17 +2,17 @@ destination: docs/
 reference:
 - title: Help
   contents:
-  - '`instantiate-package`'
+  - 'instantiate-package'
 - title: CmdStan
   contents:
-  - '`stan_cmdstan_exists`'
-  - '`stan_cmdstan_path`'
-  - '`stan_cmdstan_version`'
+  - 'stan_cmdstan_exists'
+  - 'stan_cmdstan_path'
+  - 'stan_cmdstan_version'
 - title: R packages with Stan models
   contents:
-  - '`stan_package_clean`'
-  - '`stan_package_compile`'
-  - '`stan_package_configure`'
-  - '`stan_package_create`'
-  - '`stan_package_model`'
-  - '`stan_package_model_files`'
+  - 'stan_package_clean'
+  - 'stan_package_compile'
+  - 'stan_package_configure'
+  - 'stan_package_create'
+  - 'stan_package_model'
+  - 'stan_package_model_files'
