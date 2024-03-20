@@ -1,6 +1,6 @@
-# instantiate 0.2.1.9000 (development)
+# instantiate 0.2.2
 
-
+* Allow downstream packages to install even if `CmdStanR` is not installed (#20, @xinxinc476).
 
 # instantiate 0.2.1
 

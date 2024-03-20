@@ -55,10 +55,13 @@ stan_package_compile <- function(
   threads = FALSE,
   ...
 ) {
-  stan_assert_cmdstanr()
   # Not possible to test in automated tests in one coverage run.
   # Covered in GitHub Actions workflows.
   # nocov start
+  result <- try(stan_assert_cmdstanr())
+  if (inherits(result, "try-error")) {
+    return(invisible())
+  }
   if (!stan_cmdstan_exists(cmdstan_install = cmdstan_install)) {
     stan_cmdstan_message()
     return(invisible())
