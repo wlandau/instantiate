@@ -43,7 +43,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">instantiate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.2</span>
       </span>
     </div>
 
@@ -265,8 +265,8 @@
 <ol style="list-style-type: decimal">
 <li>In your package <code>DESCRIPTION</code> file, list <a href="https://mc-stan.org/r-packages/" class="external-link uri">https://mc-stan.org/r-packages/</a> in the <code>Additional_repositories:</code> field (<a href="https://github.com/paul-buerkner/brms/blob/5c09251daabd5416e3d47004cc6c62816dc53cfa/DESCRIPTION#L95-L96" class="external-link">example in <code>brms</code></a>). This step is only necessary while <a href="https://mc-stan.org/cmdstanr/" class="external-link"><code>cmdstanr</code></a> is not yet on CRAN.</li>
 </ol>
-<!-- --><div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Additional_repositories<span class="sc">:</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    https<span class="sc">:</span><span class="er">//</span>mc<span class="sc">-</span>stan.org<span class="sc">/</span>r<span class="sc">-</span>packages<span class="sc">/</span></span></code></pre></div>
+<!-- --><div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>Additional_repositories<span class="sc">:</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>    https<span class="sc">:</span><span class="er">//</span>mc<span class="sc">-</span>stan.org<span class="sc">/</span>r<span class="sc">-</span>packages<span class="sc">/</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>In your package <code>DESCRIPTION</code> and <code>NAMESPACE</code> files, import the <code>instantiate</code> package and function <code><a href="reference/stan_package_model.html">stan_package_model()</a></code>.</li>
 <li>Write user-side statistical modeling functions which call the models in your package as mentioned above.</li>
@@ -276,10 +276,10 @@
 <a href="https://pkgload.r-lib.org/reference/load_all.html" class="external-link"><code>pkgload::load_all()</code></a> might not compile your models. If you use <a href="https://pkgload.r-lib.org/" class="external-link"><code>pkgload</code></a> or <a href="https://devtools.r-lib.org/" class="external-link"><code>devtools</code></a> to load and develop your package, you may need to call <code><a href="reference/stan_package_compile.html">instantiate::stan_package_compile()</a></code> from the root directory of your package to compile your models manually.</li>
 <li>For <a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control" class="external-link">version control</a>, it is best practice to commit only source code files and documentation. Please do not commit any compiled executable Stan model files to your repository. If you do commit them, then other users with different machines will have trouble installing your package, and your commit history will consume too much storage. For <a href="https://git-scm.com" class="external-link">Git</a>, you may add the following lines to the <a href="https://git-scm.com/docs/gitignore" class="external-link"><code>.gitigore</code></a> file at the root of your package:</li>
 </ol>
-<!-- --><div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>src<span class="sc">/</span>stan<span class="sc">/</span><span class="er">**</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>src<span class="sc">/</span>stan<span class="sc">/</span><span class="er">**/*</span>.<span class="sc">*</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>src<span class="sc">/</span>stan<span class="sc">/</span><span class="er">**/*</span>.exe</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>src<span class="sc">/</span>stan<span class="sc">/</span><span class="er">**/*</span>.EXE</span></code></pre></div>
+<!-- --><div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>src<span class="sc">/</span>stan<span class="sc">/</span><span class="er">**</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="sc">!</span>src<span class="sc">/</span>stan<span class="sc">/</span><span class="er">**/*</span>.<span class="sc">*</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>src<span class="sc">/</span>stan<span class="sc">/</span><span class="er">**/*</span>.exe</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>src<span class="sc">/</span>stan<span class="sc">/</span><span class="er">**/*</span>.EXE</span></code></pre></div>
 <ol start="7" style="list-style-type: decimal">
 <li>For <a href="https://devguide.ropensci.org/ci.html" class="external-link">continuous integration</a> (e.g. on <a href="https://github.com/r-lib/actions" class="external-link">GitHub Actions</a>), please use <a href="https://mc-stan.org/cmdstanr/" class="external-link"><code>cmdstanr</code></a>-based installation as explained above, and tweak your workflow YAML files as explained in that section.</li>
 <li>For general information on R package development, please consult the free online book <a href="https://r-pkgs.org/" class="external-link">R Packages (2e)</a> by <a href="https://github.com/hadley" class="external-link">Hadley Wickham</a> and <a href="https://github.com/jennybc" class="external-link">Jennifer Bryan</a>, as well as the official manual on <a href="https://cran.r-project.org/doc/manuals/R-exts.html" class="external-link">Writing R Extensions</a> by the R Core Team.</li>
@@ -294,20 +294,20 @@
 <div class="section level1">
 <h1 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h1>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>To cite package ‘instantiate’ <span class="cf">in</span> publications use<span class="sc">:</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  Landau <span class="fu">WM</span> (<span class="dv">2023</span>). _instantiate<span class="sc">:</span> A Minimal CmdStan Client <span class="cf">for</span> R Packages_.</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  https<span class="sc">:</span><span class="er">//</span>wlandau.github.io<span class="sc">/</span>instantiate<span class="sc">/</span>, https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>wlandau<span class="sc">/</span>instantiate.</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="sc">@</span>Manual{,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    title <span class="ot">=</span> {instantiate<span class="sc">:</span> A Minimal CmdStan Client <span class="cf">for</span> R Packages},</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    author <span class="ot">=</span> {William Michael Landau},</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2023</span>},</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    note <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>wlandau.github.io<span class="sc">/</span>instantiate<span class="sc">/</span>,</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>wlandau<span class="sc">/</span>instantiate},</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>To cite package ‘instantiate’ <span class="cf">in</span> publications use<span class="sc">:</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  Landau <span class="fu">WM</span> (<span class="dv">2023</span>). _instantiate<span class="sc">:</span> A Minimal CmdStan Client <span class="cf">for</span> R Packages_.</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  https<span class="sc">:</span><span class="er">//</span>wlandau.github.io<span class="sc">/</span>instantiate<span class="sc">/</span>, https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>wlandau<span class="sc">/</span>instantiate.</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>  <span class="sc">@</span>Manual{,</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>    title <span class="ot">=</span> {instantiate<span class="sc">:</span> A Minimal CmdStan Client <span class="cf">for</span> R Packages},</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>    author <span class="ot">=</span> {William Michael Landau},</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2023</span>},</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>    note <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>wlandau.github.io<span class="sc">/</span>instantiate<span class="sc">/</span>,</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>wlandau<span class="sc">/</span>instantiate},</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>  }</span></code></pre></div>
 </div>
 
   </div>
