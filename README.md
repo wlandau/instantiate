@@ -28,7 +28,7 @@ The website at <https://wlandau.github.io/instantiate/> includes a
 reference](https://wlandau.github.io/instantiate/reference/index.html)
 and other documentation.
 
-# Installation
+# Installing `instantiate`
 
 The `instantiate` package depends on the R package
 [`CmdStanR`](https://mc-stan.org/cmdstanr/) and the command line tool
@@ -52,7 +52,18 @@ important to follow these stages in order:
 | Development | GitHub     | `remotes::install_github("wlandau/instantiate")`                            |
 | Development | R-universe | `install.packages("instantiate", repos = "https://wlandau.r-universe.dev")` |
 
-## Environment variables
+# Installing packages that use `instantiate`
+
+Packages that use `instantiate` may be published on CRAN. CRAN does not
+have `CmdStan`, so the models are not pre-compiled in the Mac OS and
+Windows binaries. If you install from CRAN, please install from the
+source. For example:
+
+``` r
+install.packages("hdbayes", type = "source")
+```
+
+# Environment variables
 
 The `instantiate` package uses environment variables to manage the
 installation of

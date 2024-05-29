@@ -28,7 +28,7 @@ Similar to [`rstantools`](https://mc-stan.org/rstantools/) for [`rstan`](https:/
 
 The website at <https://wlandau.github.io/instantiate/> includes a [function reference](https://wlandau.github.io/instantiate/reference/index.html) and other documentation.
 
-# Installation
+# Installing `instantiate`
 
 The `instantiate` package depends on the R package [`CmdStanR`](https://mc-stan.org/cmdstanr/) and the command line tool [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan), so it is important to follow these stages in order:
 
@@ -42,7 +42,15 @@ Release | CRAN | `install.packages("instantiate")`
 Development | GitHub | `remotes::install_github("wlandau/instantiate")`
 Development | R-universe | `install.packages("instantiate", repos = "https://wlandau.r-universe.dev")`
 
-## Environment variables
+# Installing packages that use `instantiate`
+
+Packages that use `instantiate` may be published on CRAN. CRAN does not have `CmdStan`, so the models are not pre-compiled in the Mac OS and Windows binaries. If you install from CRAN, please install from the source. For example:
+
+```{r, eval = FALSE}
+install.packages("hdbayes", type = "source")
+```
+
+# Environment variables
 
 The `instantiate` package uses environment variables to manage the installation of [`CmdStan`](https://mc-stan.org/users/interfaces/cmdstan). An environment variable is an operating system setting with a name and a value (both text strings). In R, there are two ways to set environment variables:
 
