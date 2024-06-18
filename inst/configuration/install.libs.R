@@ -30,5 +30,7 @@ callr::r(
       models = instantiate::stan_package_model_files(path = bin_stan)
     )
   },
-  args = list(bin_stan = bin_stan)
+  args = list(bin_stan = bin_stan),
+  show = TRUE,
+  stderr = "2>&1"
 )

@@ -1,3 +1,7 @@
+# instantiate 0.2.2.9000
+
+* Set `show = TRUE` and `stderr = "2>&1"` in the `callr` process that compiles models.
+
 # instantiate 0.2.2
 
 * Allow downstream packages to install even if `CmdStanR` is not installed (#20, @xinxinc476).
