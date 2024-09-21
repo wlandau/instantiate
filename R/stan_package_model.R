@@ -20,6 +20,7 @@
 #' @param library Character of length 1 or `NULL`, library path
 #'   to look for the package with the built-in Stan model.
 #'   Passed to the `lib.loc` argument of `system.file()`.
+#' @param compile whether to compile the model.
 #' @examples
 #' # Please see the documentation website of the {instantiate} package
 #' #   for examples.
@@ -27,7 +28,8 @@ stan_package_model <- function(
   name,
   package,
   library = NULL,
-  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = "")
+  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = ""),
+  compile = FALSE
 ) {
   stan_assert_cmdstanr()
   stan_assert(name, is.character(.), !anyNA(.), nzchar(.))
@@ -71,6 +73,6 @@ stan_package_model <- function(
   cmdstanr("cmdstan_model")(
     stan_file = stan_file,
     exe_file = exe_file,
-    compile = FALSE
+    compile = compile
   )
 }
