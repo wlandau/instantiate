@@ -29,7 +29,8 @@ stan_package_model <- function(
   package,
   library = NULL,
   cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = ""),
-  compile = FALSE
+  compile = FALSE,
+  ...
 ) {
   stan_assert_cmdstanr()
   stan_assert(name, is.character(.), !anyNA(.), nzchar(.))
@@ -73,6 +74,7 @@ stan_package_model <- function(
   cmdstanr("cmdstan_model")(
     stan_file = stan_file,
     exe_file = exe_file,
-    compile = compile
+    compile = compile,
+    ...
   )
 }
