@@ -20,7 +20,8 @@
 #' @param library Character of length 1 or `NULL`, library path
 #'   to look for the package with the built-in Stan model.
 #'   Passed to the `lib.loc` argument of `system.file()`.
-#' @param compile whether to compile the model.
+#' @param compile A boolean, whether to compile the model.
+#' @param ... Arguments passed to cmdstanr("cmdstan_model").
 #' @examples
 #' # Please see the documentation website of the {instantiate} package
 #' #   for examples.
