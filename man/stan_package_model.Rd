@@ -8,7 +8,9 @@ stan_package_model(
   name,
   package,
   library = NULL,
-  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = "")
+  cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = ""),
+  compile = FALSE,
+  ...
 )
 }
 \arguments{
@@ -42,6 +44,14 @@ returns the empty string \code{""}.
 contained in \code{Sys.getenv("CMDSTAN")} at the time when \code{instantiate}
 was installed.
 }}
+
+\item{compile}{\code{TRUE} to compile the model and store the executable file
+where the package is installed in \code{.libpaths()}. \code{FALSE} to
+skip compilation and assume the model is already compiled,
+which is usually the case.}
+
+\item{...}{Named arguments passed via \code{cmdstanr::cmdstan_model()}
+to the \code{compile()} method of the CmdStan model object.}
 }
 \value{
 An \code{R6} Stan model object from the \code{cmdstanr} package.
