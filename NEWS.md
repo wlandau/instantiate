@@ -1,6 +1,7 @@
-# instantiate 0.2.2.9000
+# instantiate 0.2.3
 
 * Set `show = TRUE` and `stderr = "2>&1"` in the `callr` process that compiles models.
+* Add a new `compile` argument to `stan_package_model()` (#26, @stemangiola).
 
 # instantiate 0.2.2
 
