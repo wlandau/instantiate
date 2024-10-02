@@ -11,7 +11,7 @@ Description: Similar to 'rstantools' for 'rstan',
   migrate from 'rstan' to the more modern 'cmdstanr'.
   Packages 'rstantools', 'cmdstanr', 'stannis', and
   'stanapi' are similar Stan clients with different objectives.
-Version: 0.2.3
+Version: 0.2.3.9000
 License: MIT + file LICENSE
 URL: https://wlandau.github.io/instantiate/,
   https://github.com/wlandau/instantiate
