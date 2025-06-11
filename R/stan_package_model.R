@@ -76,10 +76,18 @@ stan_package_model <- function(
   }
   path_new <- stan_cmdstan_path(cmdstan_install = cmdstan_install)
   suppressMessages(cmdstanr("set_cmdstan_path")(path = path_new))
-  cmdstanr("cmdstan_model")(
-    stan_file = stan_file,
-    exe_file = exe_file,
-    compile = compile,
-    ...
-  )
+  # https://github.com/wlandau/instantiate/discussions/28
+  if (!file.exists(exe_file) || isTRUE(compile)) {
+    cmdstanr("cmdstan_model")(
+      stan_file = stan_file,
+      compile = compile,
+      ...
+    )
+  } else {
+    cmdstanr("cmdstan_model")(
+      exe_file = exe_file,
+      compile = compile,
+      ...
+    )
+  }
 }
