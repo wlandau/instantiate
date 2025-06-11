@@ -40,13 +40,13 @@ stan_package_model <- function(
   stan_assert_cmdstanr()
   stan_assert(name, is.character(.), !anyNA(.), nzchar(.))
   stan_assert(package, is.character(.), !anyNA(.), nzchar(.))
-  stan_file <- get(x = "system.file", envir = globalenv()) (
+  stan_file <- base::system.file(
     file.path("bin", "stan", paste0(name, ".stan")),
     package = package,
     lib.loc = library,
     mustWork = FALSE
   )
-  stan_file_inst <- get(x = "system.file", envir = globalenv()) (
+  stan_file_inst <- base::system.file(
     file.path("stan", paste0(name, ".stan")),
     package = package,
     lib.loc = library,
@@ -66,7 +66,15 @@ stan_package_model <- function(
   }
   stan_assert(
     file.exists(stan_file),
-    message = sprintf("Stan model file \"%s\" not found.", stan_file)
+    message = sprintf(
+      paste(
+        "Stan model file \"%s\" not found. ",
+        "Note: {instantiate} is not compatible with pkgload::load_all(). ",
+        "Please install and load your package ",
+        "the standard way for R packages."
+      ),
+      stan_file
+    )
   )
   exe_file <- file.path(dirname(stan_file), name)
   exe_file <- if_any(stan_on_windows(), paste0(exe_file, ".exe"), exe_file)

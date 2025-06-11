@@ -46,10 +46,10 @@ important to follow these stages in order:
     details.
 3.  Install `instantiate` using one of the R commands below.
 
-| Type        | Source     | Command                                                                     |
-|-------------|------------|-----------------------------------------------------------------------------|
-| Release     | CRAN       | `install.packages("instantiate")`                                           |
-| Development | GitHub     | `remotes::install_github("wlandau/instantiate")`                            |
+| Type | Source | Command |
+|----|----|----|
+| Release | CRAN | `install.packages("instantiate")` |
+| Development | GitHub | `remotes::install_github("wlandau/instantiate")` |
 | Development | R-universe | `install.packages("instantiate", repos = "https://wlandau.r-universe.dev")` |
 
 # Installing packages that use `instantiate`
@@ -271,12 +271,13 @@ run_bernoulli_model <- function(y, ...) {
     [`testthat::skip_if_not()`](https://testthat.r-lib.org/reference/skip.html),
     e.g. `skip_if_not(stan_cmdstan_exists())`.
 5.  [`pkgload::load_all()`](https://pkgload.r-lib.org/reference/load_all.html)
-    might not compile your models. If you use
-    [`pkgload`](https://pkgload.r-lib.org/) or
-    [`devtools`](https://devtools.r-lib.org/) to load and develop your
-    package, you may need to call `instantiate::stan_package_compile()`
-    from the root directory of your package to compile your models
-    manually.
+    is not compatible with `instantiate`. This is because `instantiate`
+    relies on a custom `src/install.libs.R` script to compile the
+    models, and `load_all()` does not pick up custom binaries compiled
+    this way. That means `devtools::test()` may not work as expected.
+    Please install your package the standard way, then test with
+    alternative means such as `devtools::check()`, `R CMD check`, or
+    `tinytest`.
 6.  For [version
     control](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control),
     it is best practice to commit only source code files and

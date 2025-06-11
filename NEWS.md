@@ -1,6 +1,7 @@
-# instantiate 0.2.3.9001 (development)
+# instantiate 0.2.3.9002 (development)
 
 * Omit `stan_file` from `cmdstan_model()` when `compile` is `FALSE` (#28, @lcgodoy).
+* Emphasize incompatibility with `pkgload::load_all()` (#29, @toddmccready).
 
 # instantiate 0.2.3
 
