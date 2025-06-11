@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">instantiate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.3.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.3.9002</span>
       </span>
     </div>
 
@@ -89,9 +89,9 @@
 </ol>
 <table class="table">
 <colgroup>
-<col width="12%">
-<col width="11%">
-<col width="75%">
+<col width="33%">
+<col width="33%">
+<col width="33%">
 </colgroup>
 <thead><tr class="header">
 <th>Type</th>
@@ -272,7 +272,7 @@
 <li>
 <a href="https://mc-stan.org/users/interfaces/cmdstan" class="external-link"><code>CmdStan</code></a> is too big for <a href="https://cran.r-project.org" class="external-link">CRAN</a>, so <code>instantiate</code> will not be able to access it there. So if you plan to submit your package to CRAN, please skip the appropriate code in your examples, vignettes, and tests when <code><a href="reference/stan_cmdstan_exists.html">instantiate::stan_cmdstan_exists()</a></code> is <code>FALSE</code>. Explicit <code>if()</code> statements like the above one in the <a href="https://roxygen2.r-lib.org/" class="external-link"><code>roxygen2</code></a> <code>@examples</code> work for examples and vignettes. For tests, it is convenient to use <a href="https://testthat.r-lib.org/reference/skip.html" class="external-link"><code>testthat::skip_if_not()</code></a>, e.g. <code>skip_if_not(stan_cmdstan_exists())</code>.</li>
 <li>
-<a href="https://pkgload.r-lib.org/reference/load_all.html" class="external-link"><code>pkgload::load_all()</code></a> might not compile your models. If you use <a href="https://pkgload.r-lib.org/" class="external-link"><code>pkgload</code></a> or <a href="https://devtools.r-lib.org/" class="external-link"><code>devtools</code></a> to load and develop your package, you may need to call <code><a href="reference/stan_package_compile.html">instantiate::stan_package_compile()</a></code> from the root directory of your package to compile your models manually.</li>
+<a href="https://pkgload.r-lib.org/reference/load_all.html" class="external-link"><code>pkgload::load_all()</code></a> is not compatible with <code>instantiate</code>. This is because <code>instantiate</code> relies on a custom <code>src/install.libs.R</code> script to compile the models, and <code>load_all()</code> does not pick up custom binaries compiled this way. That means <code>devtools::test()</code> may not work as expected. Please install your package the standard way, then test with alternative means such as <code>devtools::check()</code>, <code>R CMD check</code>, or <code>tinytest</code>.</li>
 <li>For <a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control" class="external-link">version control</a>, it is best practice to commit only source code files and documentation. Please do not commit any compiled executable Stan model files to your repository. If you do commit them, then other users with different machines will have trouble installing your package, and your commit history will consume too much storage. For <a href="https://git-scm.com" class="external-link">Git</a>, you may add the following lines to the <a href="https://git-scm.com/docs/gitignore" class="external-link"><code>.gitigore</code></a> file at the root of your package:</li>
 </ol>
 <!-- --><div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>src<span class="sc">/</span>stan<span class="sc">/</span><span class="er">**</span></span>
