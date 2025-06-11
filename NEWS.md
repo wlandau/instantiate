@@ -1,6 +1,6 @@
-# instantiate 0.2.3.9000 (development)
+# instantiate 0.2.3.9001 (development)
 
-
+* Omit `stan_file` from `cmdstan_model()` when `compile` is `FALSE` (#28, @lcgodoy).
 
 # instantiate 0.2.3
 
