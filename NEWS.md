@@ -2,6 +2,7 @@
 
 * Omit `stan_file` from `cmdstan_model()` when `compile` is `FALSE` (#28, @lcgodoy).
 * Emphasize incompatibility with `pkgload::load_all()` (#29, @toddmccready).
+* Add `include_paths` argument to `stan_package_model()` (#33, @t-momozaki).
 
 # instantiate 0.2.3
 

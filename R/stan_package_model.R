@@ -24,6 +24,8 @@
 #'    where the package is installed in `.libpaths()`. `FALSE` to
 #'    skip compilation and assume the model is already compiled,
 #'    which is usually the case.
+#' @param include_paths Argument to `cmdstanr::cmdstan_model()`
+#'   to control model compilation.
 #' @param ... Named arguments passed via `cmdstanr::cmdstan_model()`
 #'    to the `compile()` method of the CmdStan model object.
 #' @examples
@@ -35,6 +37,7 @@ stan_package_model <- function(
   library = NULL,
   cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = ""),
   compile = FALSE,
+  include_paths = NULL,
   ...
 ) {
   stan_assert_cmdstanr()
@@ -89,12 +92,14 @@ stan_package_model <- function(
     cmdstanr("cmdstan_model")(
       stan_file = stan_file,
       compile = compile,
+      include_paths = include_paths,
       ...
     )
   } else {
     cmdstanr("cmdstan_model")(
       exe_file = exe_file,
       compile = compile,
+      include_paths = include_paths,
       ...
     )
   }

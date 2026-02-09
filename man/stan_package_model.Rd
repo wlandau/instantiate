@@ -10,6 +10,7 @@ stan_package_model(
   library = NULL,
   cmdstan_install = Sys.getenv("CMDSTAN_INSTALL", unset = ""),
   compile = FALSE,
+  include_paths = NULL,
   ...
 )
 }
@@ -49,6 +50,9 @@ was installed.
 where the package is installed in \code{.libpaths()}. \code{FALSE} to
 skip compilation and assume the model is already compiled,
 which is usually the case.}
+
+\item{include_paths}{Argument to \code{cmdstanr::cmdstan_model()}
+to control model compilation.}
 
 \item{...}{Named arguments passed via \code{cmdstanr::cmdstan_model()}
 to the \code{compile()} method of the CmdStan model object.}
