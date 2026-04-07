@@ -49,5 +49,6 @@ stan_cmdstan_path <- function(
     cmdstan_valid(path),
     path,
     cmdstanr("cmdstan_default_path")(dir = path)
-  ) %|||% ""
+  ) %|||%
+    ""
 }
