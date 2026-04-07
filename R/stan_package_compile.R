@@ -28,8 +28,9 @@
 #'   to model control compilation.
 #' @param force_recompile Argument to `cmdstanr::cmdstan_model()`
 #'   to model control compilation.
-#' @param threads Argument to `cmdstanr::cmdstan_model()`
-#'   to model control compilation.
+#' @param threads Deprecated on 2026-04-07 (version 0.2.3.9003).
+#'   `cmdstanr::cmdstan_model()` no longer
+#'   accepts a `threads` argument.
 #' @param ... Other named arguments to `cmdstanr::cmdstan_model()`.
 #' @examples
 #' if (identical(Sys.getenv("INSTANTIATE_EXAMPLES"), "true")) {
@@ -52,7 +53,7 @@ stan_package_compile <- function(
   cpp_options = list(),
   stanc_options = list(),
   force_recompile = getOption("cmdstanr_force_recompile", default = FALSE),
-  threads = FALSE,
+  threads = NULL,
   ...
 ) {
   # Not possible to test in automated tests in one coverage run.
@@ -75,6 +76,17 @@ stan_package_compile <- function(
     nzchar(.),
     message = "models arg must be a nonempty character vector of Stan files."
   )
+  if (!is.null(threads)) {
+    stan_deprecate(
+      name = "The \"threads\" argument of stan_package_compile()",
+      date = "2026-04-07",
+      version = "0.2.3.9003",
+      alternative = paste(
+        "Set threads in cpp_options,",
+        "e.g. cpp_options = list(stan_threads = TRUE)"
+      )
+    )
+  }
   models <- models[file.exists(models)]
   if (length(models) < 1L) {
     stan_message("No Stan models found.")
@@ -97,7 +109,6 @@ stan_package_compile <- function(
     cpp_options = cpp_options,
     stanc_options = stanc_options,
     force_recompile = force_recompile,
-    threads = threads,
     ...
   )
   invisible()
@@ -113,7 +124,6 @@ stan_compile_model <- function(
   cpp_options,
   stanc_options,
   force_recompile,
-  threads,
   ...
 ) {
   if (verbose) {
@@ -131,7 +141,6 @@ stan_compile_model <- function(
     cpp_options = cpp_options,
     stanc_options = stanc_options,
     force_recompile = force_recompile,
-    threads = threads,
     ...
   )
   invisible()

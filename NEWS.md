@@ -1,3 +1,7 @@
+# instantiate 0.2.3.9003 (development)
+
+* Deprecate the `threads` argument of `stan_package_compile()`. `cmdstanr::cmdstan_model()` no longer accepts a `threads` argument in `cmdstanr >= 0.9.0`.
+
 # instantiate 0.2.3.9002 (development)
 
 * Omit `stan_file` from `cmdstan_model()` when `compile` is `FALSE` (#28, @lcgodoy).
