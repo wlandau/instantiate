@@ -83,7 +83,7 @@
 </h1>
 <p>The <code>instantiate</code> package depends on the R package <a href="https://mc-stan.org/cmdstanr/" class="external-link"><code>CmdStanR</code></a> and the command line tool <a href="https://mc-stan.org/users/interfaces/cmdstan" class="external-link"><code>CmdStan</code></a>, so it is important to follow these stages in order:</p>
 <ol style="list-style-type: decimal">
-<li>Install the R package <a href="https://mc-stan.org/cmdstanr/" class="external-link"><code>CmdStanR</code></a>. <a href="https://mc-stan.org/cmdstanr/" class="external-link"><code>CmdStanR</code></a> is not on CRAN, so the recommended way to install it is <code>install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))</code>.</li>
+<li>Install the R package <a href="https://mc-stan.org/cmdstanr/" class="external-link"><code>CmdStanR</code></a>. <a href="https://mc-stan.org/cmdstanr/" class="external-link"><code>CmdStanR</code></a> is not on CRAN, so the recommended way to install it is <code>install.packages("cmdstanr", repos = c("https://stan-dev.r-universe.dev/", getOption("repos")))</code>.</li>
 <li>Optional: set environment variables <code>CMDSTAN_INSTALL</code> and/or <code>CMDSTAN</code> to manage the <a href="https://mc-stan.org/users/interfaces/cmdstan" class="external-link"><code>CmdStan</code></a> installation. See the “Administering CmdStan” section below for details.</li>
 <li>Install <code>instantiate</code> using one of the R commands below.</li>
 </ol>
@@ -262,10 +262,10 @@
 <h2 id="development">Development<a class="anchor" aria-label="anchor" href="#development"></a>
 </h2>
 <ol style="list-style-type: decimal">
-<li>In your package <code>DESCRIPTION</code> file, list <a href="https://mc-stan.org/r-packages/" class="external-link uri">https://mc-stan.org/r-packages/</a> in the <code>Additional_repositories:</code> field (<a href="https://github.com/paul-buerkner/brms/blob/5c09251daabd5416e3d47004cc6c62816dc53cfa/DESCRIPTION#L95-L96" class="external-link">example in <code>brms</code></a>). This step is only necessary while <a href="https://mc-stan.org/cmdstanr/" class="external-link"><code>cmdstanr</code></a> is not yet on CRAN.</li>
+<li>In your package <code>DESCRIPTION</code> file, list <a href="https://stan-dev.r-universe.dev/" class="external-link uri">https://stan-dev.r-universe.dev/</a> in the <code>Additional_repositories:</code> field (<a href="https://github.com/paul-buerkner/brms/blob/5c09251daabd5416e3d47004cc6c62816dc53cfa/DESCRIPTION#L95-L96" class="external-link">example in <code>brms</code></a>). This step is only necessary while <a href="https://mc-stan.org/cmdstanr/" class="external-link"><code>cmdstanr</code></a> is not yet on CRAN.</li>
 </ol>
 <!-- --><div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>Additional_repositories<span class="sc">:</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>    https<span class="sc">:</span><span class="er">//</span>mc<span class="sc">-</span>stan.org<span class="sc">/</span>r<span class="sc">-</span>packages<span class="sc">/</span></span></code></pre></div>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>    https<span class="sc">:</span><span class="er">//</span>stan<span class="sc">-</span>dev.r<span class="sc">-</span>universe.dev<span class="sc">/</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>In your package <code>DESCRIPTION</code> and <code>NAMESPACE</code> files, import the <code>instantiate</code> package and function <code><a href="reference/stan_package_model.html">stan_package_model()</a></code>.</li>
 <li>Write user-side statistical modeling functions which call the models in your package as mentioned above.</li>
