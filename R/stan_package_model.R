@@ -97,6 +97,7 @@ stan_package_model <- function(
     )
   } else {
     cmdstanr("cmdstan_model")(
+      stan_file = stan_file,
       exe_file = exe_file,
       compile = compile,
       include_paths = include_paths,
