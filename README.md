@@ -292,9 +292,14 @@ run_bernoulli_model <- function(y, ...) {
 <!-- -->
 
     src/stan/**
+    !src/stan/**/
     !src/stan/**/*.*
     src/stan/**/*.exe
     src/stan/**/*.EXE
+    .*.cmdstanr.json
+
+The last line ignores the build record that `cmdstanr` (1.0 and later)
+writes beside each executable.
 
 7.  For [continuous integration](https://devguide.ropensci.org/ci.html)
     (e.g. on [GitHub Actions](https://github.com/r-lib/actions)), please

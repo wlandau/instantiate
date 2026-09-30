@@ -206,10 +206,14 @@ Additional_repositories:
 
 ```
 src/stan/**
+!src/stan/**/
 !src/stan/**/*.*
 src/stan/**/*.exe
 src/stan/**/*.EXE
+.*.cmdstanr.json
 ```
+
+The last line ignores the build record that `cmdstanr` (1.0 and later) writes beside each executable.
 
 7. For [continuous integration](https://devguide.ropensci.org/ci.html) (e.g. on [GitHub Actions](https://github.com/r-lib/actions)), please use [`cmdstanr`](https://mc-stan.org/cmdstanr/)-based installation as explained above, and tweak your workflow YAML files as explained in that section.
 8. For general information on R package development, please consult the free online book [R Packages (2e)](https://r-pkgs.org/) by [Hadley Wickham](https://github.com/hadley) and [Jennifer Bryan](https://github.com/jennybc), as well as the official manual on [Writing R Extensions](https://cran.r-project.org/doc/manuals/R-exts.html) by the R Core Team.

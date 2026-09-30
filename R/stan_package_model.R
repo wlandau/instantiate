@@ -21,13 +21,15 @@
 #'   to look for the package with the built-in Stan model.
 #'   Passed to the `lib.loc` argument of `system.file()`.
 #' @param compile `TRUE` to compile the model and store the executable file
-#'    where the package is installed in `.libpaths()`. `FALSE` to
-#'    skip compilation and assume the model is already compiled,
-#'    which is usually the case.
+#'    where the package is installed in `.libPaths()`. `FALSE` to
+#'    use the executable already installed there, which is usually
+#'    the case. If the executable is missing, the model is compiled
+#'    either way.
 #' @param include_paths Argument to `cmdstanr::cmdstan_model()`
-#'   to control model compilation.
-#' @param ... Named arguments passed via `cmdstanr::cmdstan_model()`
-#'    to the `compile()` method of the CmdStan model object.
+#'   to control model compilation. Used only when `compile` is `TRUE`
+#'   or the executable is missing.
+#' @param ... Named arguments passed to `cmdstanr::cmdstan_model()`.
+#'    Used only when `compile` is `TRUE` or the executable is missing.
 #' @examples
 #' # Please see the documentation website of the {instantiate} package
 #' #   for examples.
@@ -91,16 +93,10 @@ stan_package_model <- function(
   if (!file.exists(exe_file) || isTRUE(compile)) {
     cmdstanr("cmdstan_model")(
       stan_file = stan_file,
-      compile = compile,
       include_paths = include_paths,
       ...
     )
   } else {
-    cmdstanr("cmdstan_model")(
-      exe_file = exe_file,
-      compile = compile,
-      include_paths = include_paths,
-      ...
-    )
+    cmdstanr("cmdstan_model")(exe_file = exe_file)
   }
 }

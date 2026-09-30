@@ -14,11 +14,20 @@ stan_test("stan_package_model()", {
       quiet = TRUE
     )
   )
+  bin_stan <- file.path(temporary_library, "example", "bin", "stan")
+  files <- list.files(
+    bin_stan,
+    all.files = TRUE,
+    full.names = TRUE,
+    no.. = TRUE
+  )
+  hashes <- tools::md5sum(files)
   model <- stan_package_model(
     name = "bernoulli",
     package = "example",
     library = temporary_library
   )
+  expect_identical(tools::md5sum(files), hashes)
   tmp <- utils::capture.output(
     fit <- model$sample(
       data = list(N = 10, y = c(1, 0, 1, 0, 1, 0, 0, 0, 0, 0)),
@@ -84,7 +93,12 @@ stan_test("stan_package_model(include_paths = ...)", {
     name = "bernoulli",
     package = "example",
     library = temporary_library,
+    compile = TRUE,
     include_paths = stan_dir
+  )
+  expect_identical(
+    normalizePath(model$include_paths()),
+    normalizePath(stan_dir)
   )
   tmp <- utils::capture.output(
     fit <- model$sample(

@@ -133,7 +133,6 @@ stan_compile_model <- function(
   }
   cmdstanr("cmdstan_model")(
     stan_file = model,
-    compile = TRUE,
     quiet = quiet,
     pedantic = pedantic,
     include_paths = include_paths,

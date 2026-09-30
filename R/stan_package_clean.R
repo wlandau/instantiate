@@ -32,5 +32,8 @@ stan_package_clean <- function(
   suppressWarnings(file.remove(base))
   suppressWarnings(file.remove(paste0(base, ".exe")))
   suppressWarnings(file.remove(paste0(base, ".EXE")))
+  record <- file.path(dirname(base), paste0(".", basename(base)))
+  suppressWarnings(file.remove(paste0(record, ".cmdstanr.json")))
+  suppressWarnings(file.remove(paste0(record, ".exe.cmdstanr.json")))
   invisible()
 }
