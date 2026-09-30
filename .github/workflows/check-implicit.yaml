@@ -8,7 +8,7 @@ jobs:
   check-implicit:
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }}${{ matrix.config.cmdstanr && format(', {0}', matrix.config.cmdstanr) || '' }})
 
     strategy:
       fail-fast: false
@@ -19,6 +19,7 @@ jobs:
           - {os: ubuntu-latest, r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest, r: 'release'}
           - {os: ubuntu-latest, r: 'oldrel-1'}
+          - {os: ubuntu-latest, r: 'release', cmdstanr: 'stan-dev/cmdstanr@v1.0'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -39,12 +40,12 @@ jobs:
 
       - name: Repos
         run: |
-          cat("\noptions(repos=c(stan='https://mc-stan.org/r-packages/',CRAN ='https://cloud.r-project.org'))\n", file = "~/.Rprofile", append = TRUE)
+          cat("\noptions(repos=c(stan='https://stan-dev.r-universe.dev',CRAN ='https://cloud.r-project.org'))\n", file = "~/.Rprofile", append = TRUE)
         shell: Rscript {0}
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck, local::., any::cmdstanr
+          extra-packages: any::rcmdcheck, local::., ${{ matrix.config.cmdstanr || 'any::cmdstanr' }}
           needs: check
           cache-version: 2
 
