@@ -109,19 +109,21 @@ was installed.</p></li>
 
 <dt id="arg-compile">compile<a class="anchor" aria-label="anchor" href="#arg-compile"></a></dt>
 <dd><p><code>TRUE</code> to compile the model and store the executable file
-where the package is installed in <code>.libpaths()</code>. <code>FALSE</code> to
-skip compilation and assume the model is already compiled,
-which is usually the case.</p></dd>
+where the package is installed in <code><a href="https://rdrr.io/r/base/libPaths.html" class="external-link">.libPaths()</a></code>. <code>FALSE</code> to
+use the executable already installed there, which is usually
+the case. If the executable is missing, the model is compiled
+either way.</p></dd>
 
 
 <dt id="arg-include-paths">include_paths<a class="anchor" aria-label="anchor" href="#arg-include-paths"></a></dt>
 <dd><p>Argument to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>
-to control model compilation.</p></dd>
+to control model compilation. Used only when <code>compile</code> is <code>TRUE</code>
+or the executable is missing.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Named arguments passed via <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>
-to the <code>compile()</code> method of the CmdStan model object.</p></dd>
+<dd><p>Named arguments passed to <code><a href="https://mc-stan.org/cmdstanr/reference/cmdstan_model.html" class="external-link">cmdstanr::cmdstan_model()</a></code>.
+Used only when <code>compile</code> is <code>TRUE</code> or the executable is missing.</p></dd>
 
 </dl></div>
     <div id="value">
