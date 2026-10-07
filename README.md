@@ -3,7 +3,7 @@
 
 [![CRAN](https://www.r-pkg.org/badges/version/instantiate)](https://CRAN.R-project.org/package=instantiate)
 [![status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![check-cmdstanr](https://github.com/wlandau/instantiate/workflows/check-cmdstanr/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Acheck-cmdstanr)
+[![check-implicit](https://github.com/wlandau/instantiate/workflows/check-implicit/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Acheck-implicit)
 [![check-cran](https://github.com/wlandau/instantiate/workflows/check-cran/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Acheck-cran)
 [![check-fixed](https://github.com/wlandau/instantiate/workflows/check-fixed/badge.svg)](https://github.com/wlandau/instantiate/actions?query=workflow%3Acheck-fixed)
 [![codecov](https://codecov.io/gh/wlandau/instantiate/branch/main/graph/badge.svg)](https://app.codecov.io/gh/wlandau/instantiate)
@@ -292,9 +292,14 @@ run_bernoulli_model <- function(y, ...) {
 <!-- -->
 
     src/stan/**
+    !src/stan/**/
     !src/stan/**/*.*
     src/stan/**/*.exe
     src/stan/**/*.EXE
+    .*.cmdstanr.json
+
+The last line ignores the build record that `cmdstanr` (1.0 and later)
+writes beside each executable.
 
 7.  For [continuous integration](https://devguide.ropensci.org/ci.html)
     (e.g. on [GitHub Actions](https://github.com/r-lib/actions)), please

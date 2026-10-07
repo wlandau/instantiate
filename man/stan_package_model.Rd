@@ -47,15 +47,17 @@ was installed.
 }}
 
 \item{compile}{\code{TRUE} to compile the model and store the executable file
-where the package is installed in \code{.libpaths()}. \code{FALSE} to
-skip compilation and assume the model is already compiled,
-which is usually the case.}
+where the package is installed in \code{.libPaths()}. \code{FALSE} to
+use the executable already installed there, which is usually
+the case. If the executable is missing, the model is compiled
+either way.}
 
 \item{include_paths}{Argument to \code{cmdstanr::cmdstan_model()}
-to control model compilation.}
+to control model compilation. Used only when \code{compile} is \code{TRUE}
+or the executable is missing.}
 
-\item{...}{Named arguments passed via \code{cmdstanr::cmdstan_model()}
-to the \code{compile()} method of the CmdStan model object.}
+\item{...}{Named arguments passed to \code{cmdstanr::cmdstan_model()}.
+Used only when \code{compile} is \code{TRUE} or the executable is missing.}
 }
 \value{
 An \code{R6} Stan model object from the \code{cmdstanr} package.

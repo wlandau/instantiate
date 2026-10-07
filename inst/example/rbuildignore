@@ -7,3 +7,5 @@
 ^\.Rhistory$
 ^\.Rproj\.user$
 ^NOTICE$
+^src/stan/.*\.exe$
+^src/stan/.*\.cmdstanr\.json$

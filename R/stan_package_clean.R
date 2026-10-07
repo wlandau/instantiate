@@ -11,12 +11,12 @@
 #' stan_package_create(path = path)
 #' stan_package_configure(path = path)
 #' models <- stan_package_model_files(path)
-#' list.files(file.path(path, "inst", "stan"))
+#' list.files(file.path(path, "src", "stan"))
 #' stan_package_compile(models)
-#' list.files(file.path(path, "inst", "stan"))
+#' list.files(file.path(path, "src", "stan"))
 #' # Clean up the compiled Stan model files:
 #' stan_package_clean(models = models)
-#' list.files(file.path(path, "inst", "stan"))
+#' list.files(file.path(path, "src", "stan"))
 #' }
 stan_package_clean <- function(
   models = instantiate::stan_package_model_files()
@@ -32,5 +32,8 @@ stan_package_clean <- function(
   suppressWarnings(file.remove(base))
   suppressWarnings(file.remove(paste0(base, ".exe")))
   suppressWarnings(file.remove(paste0(base, ".EXE")))
+  record <- file.path(dirname(base), paste0(".", basename(base)))
+  suppressWarnings(file.remove(paste0(record, ".cmdstanr.json")))
+  suppressWarnings(file.remove(paste0(record, ".exe.cmdstanr.json")))
   invisible()
 }

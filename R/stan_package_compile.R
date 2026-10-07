@@ -38,9 +38,9 @@
 #' stan_package_create(path = path)
 #' stan_package_configure(path = path)
 #' models <- stan_package_model_files(path)
-#' list.files(file.path(path, "inst", "stan"))
+#' list.files(file.path(path, "src", "stan"))
 #' stan_package_compile(models)
-#' list.files(file.path(path, "inst", "stan"))
+#' list.files(file.path(path, "src", "stan"))
 #' }
 stan_package_compile <- function(
   models = instantiate::stan_package_model_files(),
@@ -133,7 +133,6 @@ stan_compile_model <- function(
   }
   cmdstanr("cmdstan_model")(
     stan_file = model,
-    compile = TRUE,
     quiet = quiet,
     pedantic = pedantic,
     include_paths = include_paths,

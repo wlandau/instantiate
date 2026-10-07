@@ -1,5 +1,7 @@
 # instantiate 0.2.3.9003 (development)
 
+* Support `cmdstanr` 1.0.
+* Point the example package's `.gitignore` at `src/stan/`.
 * Deprecate the `threads` argument of `stan_package_compile()`. `cmdstanr::cmdstan_model()` no longer accepts a `threads` argument in `cmdstanr >= 0.9.0`.
 
 # instantiate 0.2.3.9002 (development)

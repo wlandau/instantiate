@@ -17,6 +17,8 @@ stan_test("stan_package_compile() and stan_package_clean()", {
   expect_true(file.exists(exe))
   stan_package_clean()
   expect_false(file.exists(exe))
+  record <- file.path(dir, paste0(".", basename(exe), ".cmdstanr.json"))
+  expect_false(file.exists(record))
 })
 
 stan_test("stan_package_compile() on empty directory", {
