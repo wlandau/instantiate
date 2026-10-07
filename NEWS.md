@@ -1,4 +1,4 @@
-# instantiate 0.2.3.9003 (development)
+# instantiate 0.2.4
 
 * Support `cmdstanr` 1.0.
 * Point the example package's `.gitignore` at `src/stan/`.
