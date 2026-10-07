@@ -9,6 +9,8 @@
 ^.*\.Rout$
 ^.*\.Rproj$
 ^.*\.svg$
+^.*\.gcda$
+^.*\.gcno$
 ^\.DS_Store
 ^\.future$
 ^\.git$
@@ -29,6 +31,7 @@
 ^CODE_OF_CONDUCT.md$
 ^codemeta\.json$
 ^CONTRIBUTING.md$
+^covr$
 ^pkgdown$
 ^README\.md$
 ^README\.Rmd$

@@ -3,6 +3,8 @@
 *.Rout
 *.o
 *.so
+*.gcda
+*.gcno
 .gittargets
 .DS_Store
 .future
@@ -15,6 +17,7 @@ inst/doc
 vignettes/*.html
 revdep
 cmdstan
+covr
 *.dll
 Makevars
 Makevars.win

@@ -25,3 +25,13 @@ stan_test("stan_package_compile() on empty directory", {
   skip_cmdstan()
   expect_message(stan_package_compile(models = tempfile()))
 })
+
+stan_test("stan_package_compile() deprecates the threads argument", {
+  skip_cmdstan()
+  expect_warning(
+    expect_message(
+      stan_package_compile(models = tempfile(), threads = 1)
+    ),
+    class = "stan_deprecate"
+  )
+})
