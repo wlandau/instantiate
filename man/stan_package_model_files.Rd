@@ -26,10 +26,10 @@ stan_package_create(path = path)
 stan_package_model_files(path)
 }
 \seealso{
-Other packages: 
-\code{\link{stan_cmdstan_path}()},
-\code{\link{stan_package_clean}()},
-\code{\link{stan_package_compile}()},
-\code{\link{stan_package_configure}()}
+Other packages:
+\code{\link[=stan_cmdstan_path]{stan_cmdstan_path()}},
+\code{\link[=stan_package_clean]{stan_package_clean()}},
+\code{\link[=stan_package_compile]{stan_package_compile()}},
+\code{\link[=stan_package_configure]{stan_package_configure()}}
 }
 \concept{packages}

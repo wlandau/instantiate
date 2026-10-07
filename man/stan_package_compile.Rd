@@ -100,10 +100,10 @@ list.files(file.path(path, "src", "stan"))
 }
 }
 \seealso{
-Other packages: 
-\code{\link{stan_cmdstan_path}()},
-\code{\link{stan_package_clean}()},
-\code{\link{stan_package_configure}()},
-\code{\link{stan_package_model_files}()}
+Other packages:
+\code{\link[=stan_cmdstan_path]{stan_cmdstan_path()}},
+\code{\link[=stan_package_clean]{stan_package_clean()}},
+\code{\link[=stan_package_configure]{stan_package_configure()}},
+\code{\link[=stan_package_model_files]{stan_package_model_files()}}
 }
 \concept{packages}

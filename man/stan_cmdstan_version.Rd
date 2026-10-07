@@ -49,7 +49,7 @@ if (stan_cmdstan_exists()) {
 }
 }
 \seealso{
-Other cmdstan: 
-\code{\link{stan_cmdstan_exists}()}
+Other cmdstan:
+\code{\link[=stan_cmdstan_exists]{stan_cmdstan_exists()}}
 }
 \concept{cmdstan}

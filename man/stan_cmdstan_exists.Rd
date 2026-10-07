@@ -41,7 +41,7 @@ Check if \code{instantiate} can find CmdStanR and CmdStan.
 stan_cmdstan_exists()
 }
 \seealso{
-Other cmdstan: 
-\code{\link{stan_cmdstan_version}()}
+Other cmdstan:
+\code{\link[=stan_cmdstan_version]{stan_cmdstan_version()}}
 }
 \concept{cmdstan}

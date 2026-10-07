@@ -34,10 +34,10 @@ list.files(path)
 }
 }
 \seealso{
-Other packages: 
-\code{\link{stan_cmdstan_path}()},
-\code{\link{stan_package_clean}()},
-\code{\link{stan_package_compile}()},
-\code{\link{stan_package_model_files}()}
+Other packages:
+\code{\link[=stan_cmdstan_path]{stan_cmdstan_path()}},
+\code{\link[=stan_package_clean]{stan_package_clean()}},
+\code{\link[=stan_package_compile]{stan_package_compile()}},
+\code{\link[=stan_package_model_files]{stan_package_model_files()}}
 }
 \concept{packages}
